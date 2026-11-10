@@ -1,12 +1,15 @@
 import { Header } from "@/components/Header";
-import { WaterColumn } from "@/components/depth/WaterColumn";
-import { Hero } from "@/components/depth/Hero";
-import { Below } from "@/components/depth/Below";
+import { Film } from "@/components/film/Film";
+import { Hero } from "@/components/film/Hero";
+import { Below } from "@/components/film/Below";
 
 export default function Page() {
   return (
     <>
-      <WaterColumn />
+      <a href="#solutions" className="skip mono">
+        Skip the film
+      </a>
+      <Film />
       <Header />
       <main id="top">
         <Hero />

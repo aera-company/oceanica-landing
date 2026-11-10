@@ -57,8 +57,8 @@ a {
   font-feature-settings: "zero", "tnum";
 }
 
-/* ---------- water column ---------- */
-.water {
+/* ---------- film layer ---------- */
+.film {
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -66,19 +66,33 @@ a {
   overflow: hidden;
   pointer-events: none;
 }
-.water-layer {
+.film-layer {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  transition: opacity 900ms linear;
+  transition: opacity 1100ms linear;
 }
-.water-img {
+.film-img {
   object-fit: cover;
+  transition: none;
 }
 main {
   position: relative;
   z-index: 1;
+}
+.skip {
+  position: fixed;
+  z-index: 40;
+  left: var(--pad);
+  top: 12px;
+  padding: 10px 14px;
+  background: var(--mineral);
+  color: var(--abyss);
+  transform: translateY(-200%);
+}
+.skip:focus {
+  transform: none;
 }
 
 /* ---------- header ---------- */
@@ -149,7 +163,7 @@ main {
 /* ---------- hero ---------- */
 .hero {
   position: relative;
-  height: 440vh;
+  height: 620vh;
 }
 .hero-stage {
   position: sticky;
@@ -158,63 +172,20 @@ main {
   height: 100svh;
   overflow: hidden;
 }
-.hero-intro {
+/* legibility only where type sits: bottom-left and the top bar */
+.hero-scrim {
   position: absolute;
   inset: 0;
+  background:
+    linear-gradient(to top right, rgba(2, 8, 13, 0.78) 0%, rgba(2, 8, 13, 0.34) 32%, rgba(2, 8, 13, 0) 58%),
+    linear-gradient(to bottom, rgba(2, 8, 13, 0.62) 0%, rgba(2, 8, 13, 0.3) 24%, rgba(2, 8, 13, 0) 46%);
+  pointer-events: none;
 }
-.cut,
-.cut-in {
-  position: absolute;
-  inset: 0;
-  will-change: transform;
-}
-.cut {
-  overflow: hidden;
-}
-.hero-title {
-  position: absolute;
-  left: var(--pad);
-  bottom: 27vh;
-  margin: 0;
-  font-size: clamp(3.2rem, 12.4vw, 14rem);
-  font-weight: 500;
-  font-stretch: 104%;
-  line-height: 0.86;
-  letter-spacing: -0.048em;
-  color: var(--mineral);
-  margin-left: -0.05em;
-}
-/* the submerged part: displaced and dimmed, as through water */
-.hero-title-wet {
-  color: rgba(176, 232, 222, 0.42);
-  transform: translate3d(0.028em, 0, 0) skewX(-2.5deg);
-  transform-origin: 0 100%;
-  filter: blur(1.4px);
-}
-.hero-lede {
-  position: absolute;
-  left: var(--pad);
-  bottom: 9.5vh;
-  margin: 0;
-  max-width: 30ch;
-  font-size: clamp(1rem, 1.3vw, 1.3rem);
-  line-height: 1.32;
-  letter-spacing: -0.01em;
-  color: var(--mineral-70);
-}
-
-.beat {
-  position: absolute;
-  left: var(--pad);
-  top: 30vh;
-  max-width: min(72vw, 1100px);
-  will-change: transform, opacity;
-}
-.beat-mark {
+.slate {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 0 22px;
+  margin: 0 0 clamp(16px, 2.2vh, 26px);
   color: var(--mineral-70);
 }
 .tick {
@@ -223,122 +194,174 @@ main {
   height: 1px;
   background: var(--green-lit);
 }
+.hero-intro {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+/* the headline sits in the sky, so the vessel stays whole */
+.hero-head {
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  top: clamp(96px, 15vh, 150px);
+}
+.hero-foot {
+  position: absolute;
+  left: var(--pad);
+  bottom: clamp(64px, 11vh, 120px);
+}
+.hero-title {
+  margin: 0 0 0 -0.05em;
+  font-size: clamp(3rem, 9.6vw, 11rem);
+  font-weight: 500;
+  font-stretch: 104%;
+  line-height: 0.86;
+  letter-spacing: -0.048em;
+  color: var(--mineral);
+}
+.hero-lede {
+  margin: 0;
+  max-width: 32ch;
+  font-size: clamp(1.02rem, 1.35vw, 1.4rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--mineral);
+}
+.beat-meta {
+  margin: clamp(14px, 2.2vh, 24px) 0 0;
+  color: var(--mineral-45);
+}
+
+.beat {
+  position: absolute;
+  left: var(--pad);
+  bottom: clamp(64px, 11vh, 120px);
+  max-width: min(74vw, 1040px);
+  will-change: transform, opacity;
+}
 .beat-text {
   margin: 0;
-  max-width: 13ch;
-  font-size: clamp(2.5rem, 6.6vw, 7.4rem);
+  max-width: 15ch;
+  font-size: clamp(2.3rem, 5.6vw, 6.4rem);
   font-weight: 500;
-  line-height: 0.92;
+  font-stretch: 104%;
+  line-height: 0.93;
   letter-spacing: -0.042em;
   text-wrap: balance;
 }
 .beat-note {
-  margin: 28px 0 0;
-  max-width: 36ch;
-  font-size: clamp(1rem, 1.15vw, 1.2rem);
-  line-height: 1.38;
-  color: var(--mineral-70);
+  margin: clamp(16px, 2.6vh, 28px) 0 0;
+  max-width: 38ch;
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  line-height: 1.36;
+  color: var(--mineral);
 }
-
-.telemetry {
+/* shot 02 statement, cut by the waterline */
+.beat-cut,
+.cut,
+.cut-in {
   position: absolute;
-  left: var(--pad);
-  top: 92px;
-  margin: 0;
-  display: grid;
-  gap: 4px;
-  color: var(--mineral-45);
+  inset: 0;
 }
-.telemetry div {
-  display: grid;
-  grid-template-columns: 124px auto;
+.beat-cut {
+  will-change: opacity;
 }
-.telemetry dd {
-  margin: 0;
-  color: var(--mineral-70);
+.cut {
+  overflow: hidden;
+  will-change: transform;
+}
+.cut-in {
+  will-change: transform;
+}
+.beat-wet {
+  color: rgba(176, 232, 222, 0.5);
+  transform: translate3d(0.5vw, 0, 0) skewX(-2.5deg);
+  transform-origin: 0 100%;
+  filter: blur(1.3px);
+}
+.beat-wet .beat-note,
+.beat-wet .slate,
+.beat-wet .beat-meta {
+  color: inherit;
 }
 
-/* depth gauge */
-.gauge {
+/* shot index */
+.rail {
   position: absolute;
   right: var(--pad);
   top: 50%;
   transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: grid;
+  gap: 14px;
   justify-items: end;
-  gap: 18px;
 }
-.gauge-window {
-  position: relative;
-  width: 92px;
-  height: 42vh;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
-}
-.gauge-tape {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 100%;
-  height: 1500px;
-  will-change: transform;
-  background-image: repeating-linear-gradient(to bottom, var(--hair) 0 1px, transparent 1px 25px);
-  background-size: 9px 100%;
-  background-position: right top;
-  background-repeat: no-repeat;
-}
-.gauge-mark {
-  position: absolute;
-  right: 0;
-  padding-right: 26px;
-  transform: translateY(-50%);
-  font-size: 10px;
+.rail li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: var(--mineral-45);
+  transition: color 500ms var(--ease-heavy);
 }
-.gauge-mark::after {
+.rail li::after {
   content: "";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 18px;
+  width: 14px;
   height: 1px;
-  background: var(--mineral-45);
+  background: currentColor;
+  transition:
+    width 500ms var(--ease-heavy),
+    background-color 500ms var(--ease-heavy);
 }
-.gauge-pointer {
+.rail-l {
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity 500ms var(--ease-heavy),
+    transform 500ms var(--ease-heavy);
+}
+.rail li[data-state="on"] {
+  color: var(--mineral);
+}
+.rail li[data-state="on"]::after {
+  width: 34px;
+  background: var(--green-lit);
+}
+.rail li[data-state="on"] .rail-l {
+  opacity: 1;
+  transform: none;
+}
+
+/* depth read-out */
+.depth {
   position: absolute;
-  right: 0;
-  top: 50%;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to left, var(--green-lit) 0 34px, transparent 34px);
-}
-.gauge-read {
+  right: var(--pad);
+  bottom: clamp(64px, 11vh, 120px);
   display: grid;
   justify-items: end;
-  gap: 6px;
+  gap: 8px;
+  will-change: opacity;
 }
-.gauge-num {
-  font-size: clamp(1.5rem, 2.1vw, 2.2rem);
+.depth-num {
+  font-size: clamp(1.4rem, 1.9vw, 2rem);
   line-height: 1;
   letter-spacing: 0;
   color: var(--mineral);
 }
-.gauge-num i {
+.depth-num i {
   font-style: normal;
   font-size: 11px;
   margin-left: 6px;
   color: var(--mineral-45);
 }
-.gauge-zone {
-  color: var(--mineral-70);
-}
-.gauge-bar {
+.depth-bar {
   width: 92px;
   height: 1px;
   background: var(--hair);
 }
-.gauge-fill {
+.depth-fill {
   height: 100%;
   background: var(--green-lit);
   transform: scaleX(0);
@@ -348,7 +371,7 @@ main {
 .cue {
   position: absolute;
   left: var(--pad);
-  bottom: 26px;
+  bottom: 24px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -384,7 +407,7 @@ main {
 /* ---------- portrait / small screens: own composition ---------- */
 @media (max-width: 820px) {
   .hero {
-    height: 380vh;
+    height: 540vh;
   }
   .site-nav {
     display: none;
@@ -393,58 +416,69 @@ main {
     grid-template-columns: 1fr auto;
     padding: 16px var(--pad);
   }
+  .hero-scrim {
+    background:
+      linear-gradient(to top, rgba(2, 8, 13, 0.86) 0%, rgba(2, 8, 13, 0.5) 30%, rgba(2, 8, 13, 0) 56%),
+      linear-gradient(to bottom, rgba(2, 8, 13, 0.55) 0%, rgba(2, 8, 13, 0) 20%);
+  }
+  .hero-foot,
+  .beat {
+    bottom: 92px;
+  }
+  .hero-head {
+    top: 84px;
+  }
   .hero-title {
-    font-size: 17.4vw;
-    bottom: 28vh;
-  }
-  .hero-lede {
-    bottom: 15vh;
-    max-width: 26ch;
-  }
-  .telemetry {
-    top: 74px;
+    font-size: 16.6vw;
   }
   .beat {
-    top: 24vh;
     max-width: none;
     right: var(--pad);
   }
   .beat-text {
-    font-size: 12.6vw;
-    max-width: 11ch;
+    font-size: 11vw;
+    max-width: 13ch;
   }
   .cue {
     display: none;
   }
-  /* the gauge becomes a bottom instrument bar */
-  .gauge {
+  /* the shot index becomes five segments along the bottom edge */
+  .rail {
     left: var(--pad);
     right: var(--pad);
     top: auto;
-    bottom: 22px;
+    bottom: 26px;
     transform: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 6px;
     justify-items: stretch;
   }
-  .gauge-window {
+  .rail li {
+    display: block;
+    height: 2px;
+    background: var(--hair);
+    transition: background-color 500ms var(--ease-heavy);
+  }
+  .rail li::after,
+  .rail-n,
+  .rail-l {
     display: none;
   }
-  .gauge-read {
-    grid-template-columns: auto 1fr;
-    align-items: baseline;
-    justify-items: start;
-    gap: 10px 14px;
+  .rail li[data-state="on"],
+  .rail li[data-state="done"] {
+    background: var(--green-lit);
   }
-  .gauge-zone {
-    justify-self: end;
+  .depth {
+    bottom: 44px;
   }
-  .gauge-bar {
-    grid-column: 1 / -1;
-    width: 100%;
+  .depth-bar {
+    display: none;
   }
 }
 
 /* ---------- static tier and reduced motion: a readable page, no pinning ---------- */
-html[data-tier="static"] .water {
+html[data-tier="static"] .film {
   position: absolute;
   height: 100vh;
   height: 100svh;
@@ -455,14 +489,24 @@ html[data-tier="static"] .hero {
 html[data-tier="static"] .hero-stage {
   position: relative;
 }
-html[data-tier="static"] .beat,
-html[data-tier="static"] .cue {
+html[data-tier="static"] .hero-stage .beat,
+html[data-tier="static"] .beat-cut,
+html[data-tier="static"] .cue,
+html[data-tier="static"] .rail,
+html[data-tier="static"] .depth {
   display: none;
 }
 html[data-tier="static"] .hero-static {
   display: grid;
   gap: 14vh;
   padding: 16vh var(--pad) 4vh;
+  background: var(--abyss);
+}
+html[data-tier="static"] .hero-static .beat-text {
+  max-width: 16ch;
+}
+html[data-tier="static"] .below {
+  background: var(--abyss);
 }
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -474,11 +518,6 @@ html[data-tier="static"] .hero-static {
 }
 
 /* ---------- chapter 02: content ---------- */
-.below-lead {
-  position: relative;
-  display: grid;
-  gap: 8vh;
-}
 .plate {
   position: relative;
   margin: 0;
@@ -511,31 +550,14 @@ html[data-tier="static"] .hero-static {
 .plate[data-lit="on"] .plate-shade {
   transform: translate3d(70%, 0, 0);
 }
-.plate-rov {
-  margin-left: calc(var(--pad) * -1);
-  margin-right: calc(var(--pad) * -1);
-  background: transparent;
-}
-.plate-rov img {
-  -webkit-mask-image: radial-gradient(ellipse 74% 51% at 36% 50%, #000 30%, transparent 100%);
-  mask-image: radial-gradient(ellipse 74% 51% at 36% 50%, #000 30%, transparent 100%);
-}
-.plate-rov .plate-shade {
-  display: none;
-}
-.plate figcaption {
-  margin: -3vh var(--pad) 0;
-  text-align: right;
-  color: var(--mineral-45);
-  font-size: 10px;
-}
 .below-copy {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
   column-gap: clamp(32px, 6vw, 120px);
   align-items: end;
 }
-.below-copy .beat-mark {
+/* slate spans both columns */
+.below-copy .slate {
   grid-column: 1 / -1;
 }
 .below-title {
@@ -688,11 +710,6 @@ html[data-tier="static"] .hero-static {
   .below-title {
     font-size: 12.6vw;
   }
-  .plate-rov img {
-    height: 62vh;
-    object-fit: cover;
-    object-position: 38% 50%;
-  }
   .figures {
     grid-template-columns: 1fr 1fr;
     row-gap: 34px;
@@ -732,6 +749,7 @@ html[data-tier="static"] .hero-static {
     gap: 6px;
   }
 }
+
 
 /* ?still: picture only, used to render the fallback images */
 html[data-still] main,

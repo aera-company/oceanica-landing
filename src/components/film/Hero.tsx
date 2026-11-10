@@ -1,16 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { MAX_DEPTH, depthAt, pad4, scene, span, swell } from "@/lib/film";
-import { HERO, SHOTS } from "@/lib/copy";
+import { BEATS, MAX_DEPTH, SHOT_STARTS, depthAt, pad4, scene, span, swell } from "@/lib/film";
+import type { Dict } from "@/lib/i18n";
 
 /* One tall wrapper, one sticky stage. Scroll is the only clock.
    The picture is drawn by <Film/>; this component is the interface on top of it:
    real HTML, fixed positions, written through refs (no React state on scroll). */
 
-const SHOT_STARTS = [0, 0.21, 0.47, 0.72, 0.885];
-
-export function Hero() {
+export function Hero({ t, a11y, shots }: { t: Dict["hero"]; a11y: Dict["a11y"]; shots: string[] }) {
   const wrapRef = useRef<HTMLElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const beatRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -29,6 +27,8 @@ export function Hero() {
     if (!wrap) return;
     const root = document.documentElement;
     const stageEl = wrap.querySelector<HTMLElement>(".hero-stage");
+    /* first opaque section after the film: the manifesto in the light theme, the paper chapter in the dark one */
+    const covers = { light: document.getElementById("company"), dark: document.getElementById("services") };
     let filmEl: HTMLElement | null = null;
     let ticking = false;
     const last = { depth: -1, shot: -1 };
@@ -62,6 +62,9 @@ export function Hero() {
       const p = frozen || scrollable <= 0 ? 0 : Math.min(1, Math.max(0, -rect.top / scrollable));
       scene.p = p;
       scene.past = frozen ? 0 : Math.max(0, -rect.top - scrollable) / window.innerHeight;
+      const cover = covers[root.dataset.theme === "light" ? "light" : "dark"];
+      scene.idle = cover ? cover.getBoundingClientRect().top <= 0 : false;
+      if (scene.idle && scene.past > 1) return;
 
       if (root.dataset.tier !== "full") {
         const line = p < 0.36 ? -0.9 : -0.9 + Math.min(1, Math.max(0, (p - 0.38) / 0.14)) * 1.75;
@@ -75,7 +78,7 @@ export function Hero() {
       }
       if (cueRef.current) cueRef.current.style.opacity = String(1 - span(p, 0.01, 0.05));
 
-      HERO.beats.forEach((b, i) => {
+      BEATS.forEach((b, i) => {
         const el = beatRefs.current[i];
         if (!el) return;
         const a = span(p, b.in[0], b.in[1]);
@@ -112,27 +115,33 @@ export function Hero() {
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("oc:theme", onScroll);
     return () => {
       scene.onLine = null;
+      scene.idle = false;
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.removeEventListener("oc:theme", onScroll);
     };
   }, []);
 
-  const beatBody = (b: (typeof HERO.beats)[number], Tag: "h2" | "p") => (
-    <>
-      <p className="mono slate">
-        <span className="tick" />
-        {b.slate}
-      </p>
-      <Tag className="beat-text">{b.text}</Tag>
-      <p className="beat-note">{b.note}</p>
-      <p className="mono beat-meta">{b.meta}</p>
-    </>
-  );
+  const beatBody = (id: (typeof BEATS)[number]["id"], Tag: "h2" | "p") => {
+    const b = t.beats[id];
+    return (
+      <>
+        <p className="mono slate">
+          <span className="tick" />
+          {b.slate}
+        </p>
+        <Tag className="beat-text">{b.text}</Tag>
+        <p className="beat-note">{b.note}</p>
+        <p className="mono beat-meta">{b.meta}</p>
+      </>
+    );
+  };
 
   return (
-    <section ref={wrapRef} className="hero" aria-label="Oceânica, from the surface to three thousand metres">
+    <section ref={wrapRef} id="top" data-s className="hero s-film" aria-label={a11y.hero}>
       <div className="hero-stage">
         <div className="hero-scrim" aria-hidden="true" />
 
@@ -141,20 +150,20 @@ export function Hero() {
           <div className="hero-head">
             <p className="mono slate">
               <span className="tick" />
-              01 · Surface
+              01 · {shots[0]}
             </p>
             <h1 className="hero-title">
-              <span className="block">{HERO.title[0]}</span>
-              <span className="block">{HERO.title[1]}</span>
+              <span className="block">{t.title[0]}</span>
+              <span className="block">{t.title[1]}</span>
             </h1>
           </div>
           <div className="hero-foot">
-            <p className="hero-lede">{HERO.lede}</p>
-            <p className="mono beat-meta">{HERO.asset}</p>
+            <p className="hero-lede">{t.lede}</p>
+            <p className="mono beat-meta">{t.asset}</p>
           </div>
         </div>
 
-        {HERO.beats.map((b, i) =>
+        {BEATS.map((b, i) =>
           b.cut ? (
             /* dry above the waterline, refracted below it */
             <div
@@ -167,12 +176,12 @@ export function Hero() {
             >
               <div ref={dryRef} className="cut">
                 <div ref={dryInRef} className="cut-in">
-                  <div className="beat">{beatBody(b, "h2")}</div>
+                  <div className="beat">{beatBody(b.id, "h2")}</div>
                 </div>
               </div>
               <div ref={wetRef} className="cut" aria-hidden="true">
                 <div ref={wetInRef} className="cut-in">
-                  <div className="beat beat-wet">{beatBody(b, "p")}</div>
+                  <div className="beat beat-wet">{beatBody(b.id, "p")}</div>
                 </div>
               </div>
             </div>
@@ -182,17 +191,17 @@ export function Hero() {
               ref={(el) => {
                 beatRefs.current[i] = el;
               }}
-              className="beat"
+              className={`beat${b.side === "right" ? " beat-right" : ""}${b.busy ? " beat-busy" : ""}`}
               style={{ opacity: 0, visibility: "hidden" }}
             >
-              {beatBody(b, "h2")}
+              {beatBody(b.id, "h2")}
             </div>
           ),
         )}
 
         {/* shot index: where the film is, as a list */}
         <ol ref={railRef} className="rail mono" aria-hidden="true">
-          {SHOTS.map((s, i) => (
+          {shots.map((s, i) => (
             <li key={s}>
               <span className="rail-n">{String(i + 1).padStart(2, "0")}</span>
               <span className="rail-l">{s}</span>
@@ -213,15 +222,15 @@ export function Hero() {
 
         <div ref={cueRef} className="cue mono" aria-hidden="true">
           <span className="cue-line" />
-          {HERO.cue}
+          {t.cue}
         </div>
       </div>
 
       {/* reduced motion: the same story as plain reading content */}
       <div className="hero-static">
-        {HERO.beats.map((b) => (
+        {BEATS.map((b) => (
           <div key={b.id} className="hero-static-item">
-            {beatBody(b, "h2")}
+            {beatBody(b.id, "h2")}
           </div>
         ))}
       </div>

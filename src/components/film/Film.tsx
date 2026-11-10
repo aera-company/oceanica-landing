@@ -267,6 +267,11 @@ export function Film() {
     function frame(now: number) {
       raf = 0;
       if (!running) return;
+      if (scene.idle && shown) {
+        /* an opaque section covers the picture: keep the loop, skip the work */
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       if (now - lastDraw >= minDt) {
         if (!start) start = now;
         const t = (now - start) / 1000;
@@ -276,15 +281,14 @@ export function Film() {
         mouse.x += (mouse.tx - mouse.x) * 0.03;
         mouse.y += (mouse.ty - mouse.y) * 0.03;
         speed += (Math.min(1, Math.abs(dp) * 260) - speed) * 0.1;
-        const intro = ready.vessel ? Math.min(1, t / 1.8) : 0;
-        const f = draw(t, p, past, 1 - Math.pow(1 - intro, 3), vel, speed);
+        /* the poster still is already on screen, so the player fades in at full exposure */
+        const f = draw(t, p, past, ready.vessel ? 1 : 0, vel, speed);
         vel += (Math.min(1, Math.abs(f.line - lastLine) * 90) - vel) * 0.06;
         lastLine = f.line;
         scene.onLine?.(f.line, t);
         lastDraw = now;
         if (!shown && ready.vessel) {
           shown = true;
-          start = now; /* the intro fade starts when the first picture is in */
           setGlOn(true);
         }
 
@@ -350,7 +354,7 @@ export function Film() {
   const count = tier === "lite" ? STILL_POINTS.length : 1;
 
   return (
-    <div className="film" aria-hidden="true">
+    <div className="film" aria-hidden="true" data-on={glOn || images ? "1" : undefined}>
       {!images && <canvas ref={canvasRef} className="film-layer" style={{ opacity: glOn ? 1 : 0 }} />}
       {images &&
         Array.from({ length: count }, (_, i) => (

@@ -51,10 +51,12 @@ const CAMS: Record<"wide" | "tall", Record<Img, Key[]>> = {
       [0.48, [0.4, 0.5, 1.25]],
       [0.74, [0.37, 0.52, 1.5]],
     ],
+    /* the frame is a video grab: stay close enough to read the arm, never past what it resolves.
+       The pull-back leaves the vehicle on the left and open water on the right for the statement. */
     work: [
-      [0.72, [0.3, 0.6, 2.3]],
-      [0.88, [0.42, 0.5, 1.95]],
-      [1, [0.34, 0.5, 1.1]],
+      [0.72, [0.33, 0.56, 1.62]],
+      [0.88, [0.4, 0.5, 1.42]],
+      [1, [0.57, 0.5, 1.0]],
     ],
   },
   tall: {
@@ -71,8 +73,8 @@ const CAMS: Record<"wide" | "tall", Record<Img, Key[]>> = {
       [0.74, [0.53, 0.5, 1.2]],
     ],
     work: [
-      [0.72, [0.27, 0.62, 1.5]],
-      [0.88, [0.36, 0.5, 1.25]],
+      [0.72, [0.3, 0.6, 1.3]],
+      [0.88, [0.36, 0.5, 1.15]],
       [1, [0.36, 0.5, 1.0]],
     ],
   },
@@ -142,6 +144,8 @@ export const pad4 = (n: number) => String(Math.round(n)).padStart(4, "0");
 export const scene = {
   p: 0,
   past: 0,
+  /* true once an opaque section covers the picture: the player stops drawing */
+  idle: false,
   /* called every rendered frame with the eased waterline and shader time */
   onLine: null as ((line: number, time: number) => void) | null,
 };
@@ -150,3 +154,13 @@ export const scene = {
 export function swell(x: number, t: number) {
   return 0.011 * Math.sin(x * 4.6 + t * 0.85) + 0.006 * Math.sin(x * 10.3 - t * 1.3) + 0.003 * Math.sin(x * 22 + t * 2.1);
 }
+
+/* when each statement is on screen. Text comes from the dictionaries, by id. */
+export type BeatId = "operation" | "descent" | "workclass" | "intervention";
+export const BEATS: { id: BeatId; in: [number, number]; out: [number, number]; cut?: boolean; side?: "right"; busy?: boolean }[] = [
+  { id: "operation", in: [0.275, 0.315], out: [0.5, 0.54], cut: true },
+  { id: "descent", in: [0.56, 0.6], out: [0.67, 0.705] },
+  { id: "workclass", in: [0.79, 0.83], out: [0.865, 0.895], busy: true },
+  { id: "intervention", in: [0.925, 0.96], out: [1.2, 1.3], side: "right", busy: true },
+];
+export const SHOT_STARTS = [0, 0.21, 0.47, 0.72, 0.885];

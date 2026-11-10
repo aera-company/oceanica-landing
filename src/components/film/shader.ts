@@ -78,9 +78,13 @@ vec3 grade(vec3 c, float kind){
     c *= vec3(0.60, 0.88, 0.90);
     c = pow(max(c, 0.0), vec3(1.22));
   } else {                     /* work class, lit by its own lamps */
-    c = mix(vec3(l), c, 0.96);
-    c *= vec3(0.94, 1.02, 1.04) * 1.08;
-    c = pow(max(c, 0.0), vec3(1.06));
+    /* the grab's violet water goes to deep teal; yellows and steel keep their colour */
+    float sh = 1.0 - smoothstep(0.04, 0.30, l);
+    c = mix(c, vec3(l) * vec3(0.55, 0.95, 1.05), sh * 0.85);
+    c = mix(vec3(l), c, 1.04);
+    c *= vec3(0.96, 1.02, 1.03) * 1.10;
+    c = pow(max(c, 0.0), vec3(1.14));
+    c = c / (1.0 + max(l - 0.82, 0.0) * 0.9);   /* hold the lamp highlights */
   }
   return c;
 }
@@ -106,6 +110,13 @@ vec3 photo(sampler2D tex, vec2 iu, float kind){
   vec2 q = vec2(iu.x * persp * 5.0, persp * 8.0 + uTime * 0.32);
   vec2 d = vec2(noise(q) - 0.5, noise(q + 17.3) - 0.5) * 0.0032 * m;
   vec3 c = texture2D(tex, iu + d).rgb;
+  if (kind > 2.5) {
+    /* soft source: recover edge contrast against a small cross blur */
+    vec2 px = vec2(1.6 / 3800.0, 1.6 / 1622.0);
+    vec3 b = (texture2D(tex, iu + vec2(px.x, 0.0)).rgb + texture2D(tex, iu - vec2(px.x, 0.0)).rgb
+            + texture2D(tex, iu + vec2(0.0, px.y)).rgb + texture2D(tex, iu - vec2(0.0, px.y)).rgb) * 0.25;
+    c += (c - b) * 0.55;
+  }
   c *= 1.0 + (noise(q * 1.7 + uTime * 0.2) - 0.5) * 0.12 * m;
   return grade(c, kind);
 }
@@ -194,6 +205,13 @@ void main(){
       float rad = 0.10 + uReveal * 2.4;
       float lm = smoothstep(rad, rad * 0.30, length(uv - lp));
       ph *= lm;
+      /* water between the lens and the subject: backscatter that drifts, thicker away from the lamp */
+      float hz = fbm(uv * 1.7 + vec2(t * 0.022, -t * 0.016));
+      float far = smoothstep(0.15, 1.3, length(uv - lp));
+      ph += vec3(0.030, 0.085, 0.100) * hz * lm * (0.35 + far);
+      ph *= 1.0 - 0.34 * far * far;
+      /* fine grain reads as sensor, and hides what compression is left */
+      ph += (hash(gl_FragCoord.xy * 0.71 + fract(t * 7.3) * 53.0) - 0.5) * 0.045 * lm * (0.4 + dot(ph, vec3(0.33)));
       ph += vec3(0.55, 0.90, 0.86) * exp(-pow(length(uv - lp) - rad * 0.62, 2.0) * 60.0) * 0.05 * (1.0 - uReveal) * uReveal * 4.0;
       lit = lm;
     }

@@ -13,7 +13,7 @@ const MEDIA: Record<string, { src: string; w: number; h: number; shape: "wide" |
 
 export function Services({ t, a11y }: { t: Dict["services"]; a11y: Dict["a11y"] }) {
   return (
-    <section id="services" data-s className="services s-paper" aria-labelledby="services-title">
+    <section id="services" data-s className="services s-cap" aria-labelledby="services-title">
       <div className="wrap">
         <header className="lede-grid">
           <p className="mono slate" data-reveal>

@@ -17,9 +17,10 @@ uniform vec2  uMouse;
 uniform sampler2D uT;      // picture above the waterline
 uniform sampler2D uU;      // picture below it (also the dissolve target)
 uniform sampler2D uM;      // subject mask of the vessel picture
+uniform sampler2D uN;      // subject mask of the diver picture
 uniform float uTAsp, uUAsp;
 uniform vec3  uTCam, uUCam;  // focus x, focus y (up), zoom
-uniform float uTKind, uUKind; // 0 vessel, 1 deck, 2 rov, 3 work class
+uniform float uTKind, uUKind; // 0 vessel, 1 diver, 2 rov, 3 work class
 uniform float uDissolve, uFlare, uLine, uEmerge, uDark, uGlow, uReveal;
 uniform float uDepth, uTravel, uVel, uSpeed, uVeil, uIntro;
 
@@ -70,9 +71,11 @@ vec3 grade(vec3 c, float kind){
     c = mix(vec3(l), c, 1.10);
     c *= vec3(0.78, 0.86, 0.95) * 0.94;
     c = pow(max(c, 0.0), vec3(1.22));
-  } else if (kind < 1.5) {     /* deck at first light */
-    c *= vec3(0.92, 0.90, 0.94) * 0.90;
-    c = pow(max(c, 0.0), vec3(1.24));
+  } else if (kind < 1.5) {     /* diver in daylight: deeper, cooler sea so the helmet carries the frame */
+    float sea = smoothstep(0.08, 0.30, c.b - c.r);
+    c = mix(c, c * vec3(0.62, 0.86, 1.0) * 0.86, sea);
+    c = mix(vec3(l), c, 1.06);
+    c = pow(max(c, 0.0), vec3(1.16)) * 0.96;
   } else if (kind < 2.5) {     /* shallow-water blue pulled toward deep teal */
     c = mix(vec3(l), c, 0.74);
     c *= vec3(0.60, 0.88, 0.90);
@@ -97,8 +100,7 @@ float seaMask(vec2 iu, float kind){
     return (1.0 - smoothstep(0.12, 0.55, subject)) * smoothstep(0.235, 0.275, yd);
   }
   if (kind < 1.5) {
-    float hw = mix(0.05, 0.54, smoothstep(0.40, 0.74, yd));
-    return smoothstep(hw, hw + 0.06, abs(iu.x - 0.525)) * smoothstep(0.362, 0.40, yd);
+    return 1.0 - smoothstep(0.12, 0.55, texture2D(uN, iu).r);
   }
   return 0.0;
 }
@@ -108,7 +110,13 @@ vec3 photo(sampler2D tex, vec2 iu, float kind){
   float yd = 1.0 - iu.y;
   float persp = 1.0 / max(yd - 0.20, 0.05);
   vec2 q = vec2(iu.x * persp * 5.0, persp * 8.0 + uTime * 0.32);
-  vec2 d = vec2(noise(q) - 0.5, noise(q + 17.3) - 0.5) * 0.0032 * m;
+  float amp = 0.0032;
+  if (kind > 0.5 && kind < 1.5) {
+    /* close-up sea with no horizon: a flat, slow swell */
+    q = vec2(iu.x * 11.0 + uTime * 0.05, iu.y * 17.0 + uTime * 0.38);
+    amp = 0.0042;
+  }
+  vec2 d = vec2(noise(q) - 0.5, noise(q + 17.3) - 0.5) * amp * m;
   vec3 c = texture2D(tex, iu + d).rgb;
   if (kind > 2.5) {
     /* soft source: recover edge contrast against a small cross blur */
@@ -239,7 +247,7 @@ void main(){
     vec3 top = photo(uT, imgUV(s, uTAsp, uTCam), uTKind);
     if (uDissolve > 0.0) top = mix(top, photo(uU, iuU, uUKind), uDissolve);
     vec2 fc = uv - vec2(0.10, 0.10);
-    /* night falls on the vessel, first light comes up on the deck */
+    /* night falls on the vessel, daylight comes up on the diver */
     float ember = exp(-dot(fc, fc) * 5.0);
     top = top * (1.0 - 0.94 * uFlare) + vec3(0.90, 0.46, 0.16) * uFlare * ember * 0.10;
     top *= 1.0 - 0.50 * exp(-max(uv.y - wl, 0.0) * 64.0);

@@ -4,7 +4,7 @@ import { Ext } from "./Ext";
 /* Chapter 05: the institutional routes a real visitor comes for. */
 export function Company({ t, a11y }: { t: Dict["company"]; a11y: Dict["a11y"] }) {
   return (
-    <section id="institutional" data-s className="company s-inst" aria-labelledby="inst-title">
+    <section id="institutional" data-s className="company s-paper" aria-labelledby="inst-title">
       <div className="wrap">
         <header className="lede-grid">
           <p className="mono slate" data-reveal>
@@ -32,15 +32,6 @@ export function Company({ t, a11y }: { t: Dict["company"]; a11y: Dict["a11y"] })
                 <p className="row-body" data-reveal style={{ ["--i" as string]: 1 }}>
                   {r.body}
                 </p>
-                {r.id === "careers" && (
-                  <figure className="frame row-figure" data-reveal="frame">
-                    <div className="frame-clip">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="/media/people-training.webp" alt={t.alt} width={863} height={681} loading="lazy" decoding="async" />
-                    </div>
-                    <figcaption className="mono">{t.caption}</figcaption>
-                  </figure>
-                )}
               </div>
               <ul className="row-links mono" data-reveal style={{ ["--i" as string]: 2 }}>
                 {r.links.map((l) => (

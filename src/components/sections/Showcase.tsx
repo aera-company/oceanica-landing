@@ -147,10 +147,6 @@ export function Showcase({ t, a11y }: { t: Dict["showcase"]; a11y: Dict["a11y"] 
             <span className="sr">{item.alt}</span>
           </div>
           <div className="stage-side">
-            <figure className="loupe" aria-hidden="true">
-              <div style={{ backgroundImage: near ? `url(${a.src})` : undefined, backgroundPosition: `${a.loupe[0]}% ${a.loupe[1]}%` }} />
-              <figcaption className="mono">{t.detail}</figcaption>
-            </figure>
             <dl className="specs">
               {item.specs.map(([k, v]) => (
                 <div key={k}>

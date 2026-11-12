@@ -3,11 +3,11 @@
    which picture is on screen, where the camera is, how the light behaves.
    The shader only draws what this timeline says. */
 
-export type Img = "vessel" | "deck" | "rov" | "work";
+export type Img = "vessel" | "diver" | "rov" | "work";
 
 export const IMAGES: Record<Img, { src: string; asp: number; mask?: string }> = {
   vessel: { src: "/film/s1-vessel.jpg", asp: 2048 / 1526, mask: "/film/s1-vessel-mask.jpg" },
-  deck: { src: "/film/s2-deck.jpg", asp: 2200 / 1650 },
+  diver: { src: "/film/s2-diver.jpg", asp: 2560 / 1708, mask: "/film/s2-diver-mask.jpg" },
   rov: { src: "/film/s3-rov.jpg", asp: 1920 / 1080 },
   work: { src: "/film/s4-workclass.jpg", asp: 1900 / 811 },
 };
@@ -43,9 +43,10 @@ const CAMS: Record<"wide" | "tall", Record<Img, Key[]>> = {
       [0, [0.5, 0.43, 1.0]],
       [0.25, [0.57, 0.58, 1.3]],
     ],
-    deck: [
-      [0.16, [0.52, 0.38, 1.04]],
-      [0.5, [0.57, 0.6, 1.7]],
+    /* open on the diver and the sea, close in on the helmet as the water rises */
+    diver: [
+      [0.16, [0.5, 0.52, 1.0]],
+      [0.5, [0.52, 0.46, 1.42]],
     ],
     rov: [
       [0.48, [0.4, 0.5, 1.25]],
@@ -54,8 +55,8 @@ const CAMS: Record<"wide" | "tall", Record<Img, Key[]>> = {
     /* the frame is a video grab: stay close enough to read the arm, never past what it resolves.
        The pull-back leaves the vehicle on the left and open water on the right for the statement. */
     work: [
-      [0.72, [0.33, 0.56, 1.62]],
-      [0.88, [0.4, 0.5, 1.42]],
+      [0.72, [0.34, 0.56, 1.4]],
+      [0.88, [0.41, 0.5, 1.26]],
       [1, [0.57, 0.5, 1.0]],
     ],
   },
@@ -64,9 +65,10 @@ const CAMS: Record<"wide" | "tall", Record<Img, Key[]>> = {
       [0, [0.52, 0.5, 1.0]],
       [0.25, [0.62, 0.58, 1.22]],
     ],
-    deck: [
-      [0.16, [0.6, 0.42, 1.0]],
-      [0.5, [0.585, 0.6, 1.45]],
+    /* the helmet sits low in the frame, the statement takes the sea above it */
+    diver: [
+      [0.16, [0.56, 0.5, 1.0]],
+      [0.5, [0.58, 0.43, 1.2]],
     ],
     rov: [
       [0.48, [0.53, 0.5, 1.0]],
@@ -110,12 +112,12 @@ export function filmAt(p: number, tall: boolean, past = 0): FilmState {
   let under: Img;
   if (p < 0.26) {
     top = "vessel";
-    under = "deck";
+    under = "diver";
   } else if (p < 0.72) {
-    top = "deck";
+    top = "diver";
     under = "rov";
   } else {
-    top = "deck";
+    top = "diver";
     under = "work";
   }
 
@@ -124,7 +126,7 @@ export function filmAt(p: number, tall: boolean, past = 0): FilmState {
     under,
     topCam: cam(top),
     underCam: cam(under),
-    /* the cut hides in the dark: the vessel shot dims, the deck comes up at first light */
+    /* the cut hides in the dark: night falls on the vessel, daylight comes up on the diver */
     dissolve: p < 0.26 ? ease(span(p, 0.205, 0.235)) : 0,
     flare: Math.pow(Math.sin(Math.PI * span(p, 0.16, 0.28)), 1.3),
     line: p < 0.36 ? -0.9 : -0.9 + ease(span(p, 0.38, 0.52)) * 1.75,
@@ -156,9 +158,9 @@ export function swell(x: number, t: number) {
 }
 
 /* when each statement is on screen. Text comes from the dictionaries, by id. */
-export type BeatId = "operation" | "descent" | "workclass" | "intervention";
-export const BEATS: { id: BeatId; in: [number, number]; out: [number, number]; cut?: boolean; side?: "right"; busy?: boolean }[] = [
-  { id: "operation", in: [0.275, 0.315], out: [0.5, 0.54], cut: true },
+export type BeatId = "human" | "descent" | "workclass" | "intervention";
+export const BEATS: { id: BeatId; in: [number, number]; out: [number, number]; cut?: boolean; side?: "right"; busy?: boolean; place?: "top" }[] = [
+  { id: "human", in: [0.275, 0.315], out: [0.5, 0.54], cut: true, place: "top" },
   { id: "descent", in: [0.56, 0.6], out: [0.67, 0.705] },
   { id: "workclass", in: [0.79, 0.83], out: [0.865, 0.895], busy: true },
   { id: "intervention", in: [0.925, 0.96], out: [1.2, 1.3], side: "right", busy: true },

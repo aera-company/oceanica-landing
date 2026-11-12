@@ -9,6 +9,13 @@ import type { Dict } from "@/lib/i18n";
    real HTML, fixed positions, written through refs (no React state on scroll). */
 
 export function Hero({ t, a11y, shots }: { t: Dict["hero"]; a11y: Dict["a11y"]; shots: string[] }) {
+  /* the opening: lines rise from under a surface, one after the other */
+  const lines = (txt: string[]) =>
+    txt.map((l, i) => (
+      <span key={l} className="ln" style={{ ["--i" as string]: i }}>
+        <span>{l}</span>
+      </span>
+    ));
   const wrapRef = useRef<HTMLElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const beatRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -27,8 +34,8 @@ export function Hero({ t, a11y, shots }: { t: Dict["hero"]; a11y: Dict["a11y"]; 
     if (!wrap) return;
     const root = document.documentElement;
     const stageEl = wrap.querySelector<HTMLElement>(".hero-stage");
-    /* first opaque section after the film: the manifesto in the light theme, the paper chapter in the dark one */
-    const covers = { light: document.getElementById("company"), dark: document.getElementById("services") };
+    /* first opaque section after the film: the company chapter in the light theme, the people chapter in the dark one */
+    const covers = { light: document.getElementById("company"), dark: document.getElementById("people") };
     let filmEl: HTMLElement | null = null;
     let ticking = false;
     const last = { depth: -1, shot: -1 };
@@ -144,6 +151,7 @@ export function Hero({ t, a11y, shots }: { t: Dict["hero"]; a11y: Dict["a11y"]; 
     <section ref={wrapRef} id="top" data-s className="hero s-film" aria-label={a11y.hero}>
       <div className="hero-stage">
         <div className="hero-scrim" aria-hidden="true" />
+        <div className="hero-veil" aria-hidden="true" />
 
         {/* shot 01: the vessel */}
         <div ref={introRef} className="hero-intro">
@@ -152,14 +160,14 @@ export function Hero({ t, a11y, shots }: { t: Dict["hero"]; a11y: Dict["a11y"]; 
               <span className="tick" />
               01 · {shots[0]}
             </p>
-            <h1 className="hero-title">
-              <span className="block">{t.title[0]}</span>
-              <span className="block">{t.title[1]}</span>
-            </h1>
+            <h1 className="hero-title">{lines(t.title)}</h1>
           </div>
           <div className="hero-foot">
             <p className="hero-lede">{t.lede}</p>
             <p className="mono beat-meta">{t.asset}</p>
+            <a className="mono hero-link" href="#system">
+              {t.link} <span aria-hidden="true">↓</span>
+            </a>
           </div>
         </div>
 
@@ -176,12 +184,12 @@ export function Hero({ t, a11y, shots }: { t: Dict["hero"]; a11y: Dict["a11y"]; 
             >
               <div ref={dryRef} className="cut">
                 <div ref={dryInRef} className="cut-in">
-                  <div className="beat">{beatBody(b.id, "h2")}</div>
+                  <div className={b.place === "top" ? "beat beat-top" : "beat"}>{beatBody(b.id, "h2")}</div>
                 </div>
               </div>
               <div ref={wetRef} className="cut" aria-hidden="true">
                 <div ref={wetInRef} className="cut-in">
-                  <div className="beat beat-wet">{beatBody(b.id, "p")}</div>
+                  <div className={b.place === "top" ? "beat beat-top beat-wet" : "beat beat-wet"}>{beatBody(b.id, "p")}</div>
                 </div>
               </div>
             </div>

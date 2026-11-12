@@ -24,10 +24,12 @@
 :root,
 .s-film,
 .s-stage,
+.s-object,
 .s-close,
 .site-header[data-tone="dark"],
 html[data-menu="1"] .site-header,
 html:not([data-theme="light"]) .s-deep,
+html:not([data-theme="light"]) .s-cap,
 html:not([data-theme="light"]) .s-inst {
   --tone: dark;
   --fg: #e9eeec;
@@ -41,6 +43,8 @@ html:not([data-theme="light"]) .s-inst {
 /* light ink set: editorial ink on mineral papers, institutional green */
 html[data-theme="light"],
 .s-paper,
+.s-map,
+html[data-theme="light"] .s-cap,
 .site-header[data-tone="light"],
 html[data-theme="light"] .s-deep,
 html[data-theme="light"] .s-inst {
@@ -54,9 +58,9 @@ html[data-theme="light"] .s-inst {
   --accent-ink: #00783a;
 }
 
-/* surfaces per role and theme.
-   Dark : film > deep water > PAPER > black stage > navy > closing
-   Light: film > mineral > warm white > navy stage > mineral > closing */
+/* surfaces per role and theme (V04 order).
+   Dark : film > dark water > PAPER > dark stage > LIGHT MAP > navy > black stage > PAPER > closing
+   Light: film > mineral > warm paper > dark stage > light map > warm paper > navy stage > paper > closing */
 .s-film,
 .s-close {
   --bg: #02080d;
@@ -72,6 +76,21 @@ html[data-theme="light"] .s-inst {
 }
 .s-paper {
   --bg: #e6eae6;
+}
+.s-object {
+  --bg: #040d14;
+}
+.s-map {
+  --bg: #dce5e3;
+}
+.s-cap {
+  --bg: #06141d;
+}
+html[data-theme="light"] .s-map {
+  --bg: #e7eeec;
+}
+html[data-theme="light"] .s-cap {
+  --bg: #f6f5f0;
 }
 html[data-theme="light"] .s-stage {
   --bg: #061824;
@@ -867,6 +886,7 @@ html[data-still] .film {
    Sections after the film
    ============================================================ */
 .manifesto,
+.people,
 .services,
 .company {
   position: relative;
@@ -1011,8 +1031,8 @@ html[data-js] [data-reveal="frame"][data-in] figcaption {
 }
 
 /* ---------- 03 services, on paper ---------- */
-/* arriving from dark water: light spills down before the paper edge appears */
-html:not([data-theme="light"]) .services::before {
+/* arriving from dark water: daylight spills down before the paper edge appears */
+html:not([data-theme="light"]) .people::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1020,17 +1040,6 @@ html:not([data-theme="light"]) .services::before {
   bottom: 100%;
   height: 52vh;
   background: linear-gradient(to top, rgba(214, 236, 228, 0.2), rgba(214, 236, 228, 0.06) 42%, rgba(214, 236, 228, 0));
-  pointer-events: none;
-}
-/* leaving: the paper cools and darkens, as the first metres of water do */
-.services::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 34vh;
-  background: linear-gradient(to bottom, rgba(74, 108, 116, 0), rgba(74, 108, 116, 0.34));
   pointer-events: none;
 }
 .svc {
@@ -1972,5 +1981,847 @@ html:not([data-theme="light"]) .services::before {
   .btn {
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+/* ============================================================
+   V04
+   ============================================================ */
+
+/* ---------- hero: the opening ---------- */
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  background: #02080d;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-title .ln {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.hero-title .ln > span {
+  display: block;
+}
+html[data-js] .hero-veil {
+  animation: veil 1700ms var(--ease-soft) both;
+}
+html[data-js] .hero-title .ln > span {
+  animation: lineUp 1300ms var(--ease-heavy) both;
+  animation-delay: calc(250ms + var(--i, 0) * 130ms);
+}
+html[data-js] .hero-foot {
+  animation: fadeUp 1100ms var(--ease-soft) 700ms both;
+}
+@keyframes veil {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes lineUp {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+.hero-link {
+  display: inline-flex;
+  gap: 10px;
+  margin-top: 22px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--hair-2);
+  color: var(--fg);
+  transition: border-color 300ms var(--ease-soft);
+}
+.hero-link:hover {
+  border-bottom-color: var(--accent);
+}
+/* the diver statement sits in open sea, above the helmet line */
+.beat-top {
+  bottom: auto;
+  top: clamp(110px, 17vh, 170px);
+  max-width: min(42vw, 640px);
+}
+.beat-top .beat-text {
+  max-width: 11ch;
+}
+
+/* ---------- 03 people ---------- */
+.people-title {
+  margin-left: -0.05em;
+  max-width: 12ch;
+  font-size: clamp(3rem, 9.4vw, 11rem);
+  font-weight: 500;
+  font-stretch: 104%;
+  line-height: 0.88;
+  letter-spacing: -0.052em;
+  text-wrap: balance;
+}
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+  align-items: end;
+  margin-top: clamp(56px, 10vh, 120px);
+}
+.people-figure {
+  grid-column: 1 / span 7;
+}
+.people-figure .frame-clip {
+  aspect-ratio: 4 / 4.6;
+}
+.people-figure img {
+  object-position: 54% 42%;
+}
+.people-text {
+  grid-column: 9 / -1;
+}
+.people-body {
+  max-width: 34ch;
+  font-size: clamp(1.1rem, 1.5vw, 1.55rem);
+  line-height: 1.32;
+  letter-spacing: -0.012em;
+}
+.people-figures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+  margin-top: clamp(40px, 7vh, 80px);
+}
+.people-figures > div {
+  padding: 18px 0 22px;
+  border-top: 1px solid var(--hair-2);
+}
+.people-figures dd {
+  font-size: clamp(2rem, 3.6vw, 4rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+.people-figures dt {
+  margin-top: 10px;
+  max-width: 20ch;
+  color: var(--fg-3);
+}
+.bridge {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+  align-items: end;
+  margin-top: clamp(80px, 14vh, 160px);
+  padding-top: 24px;
+  border-top: 1px solid var(--hair-2);
+}
+.bridge-figure {
+  grid-column: 1 / span 3;
+}
+.bridge-figure .frame-clip {
+  aspect-ratio: 863 / 681;
+}
+.bridge-text {
+  grid-column: 5 / -1;
+}
+.bridge-mark {
+  color: var(--accent-ink);
+}
+.bridge-line {
+  margin-top: 16px;
+  max-width: 30ch;
+  font-size: clamp(1.5rem, 2.8vw, 3rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+
+/* ---------- 04 the machine ---------- */
+@property --lit {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+.machine {
+  position: relative;
+  height: 290vh;
+  background: var(--bg);
+  color: var(--fg);
+}
+.machine-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  min-height: 680px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 1fr auto;
+  column-gap: clamp(16px, 2vw, 32px);
+  padding: 104px var(--pad) 30px;
+  overflow: hidden;
+}
+/* a pool of light that opens as the vehicle comes down into it */
+.machine-stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: min(92vw, 1300px);
+  aspect-ratio: 1.5;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(120, 190, 200, calc(0.2 * var(--lit))), rgba(40, 90, 110, calc(0.1 * var(--lit))) 52%, rgba(4, 13, 20, 0));
+  pointer-events: none;
+}
+.machine-copy {
+  position: relative;
+  grid-column: 1 / span 4;
+  grid-row: 1;
+  align-self: start;
+  z-index: 2;
+}
+.machine-title {
+  font-size: clamp(2.3rem, 4.4vw, 5.2rem);
+  font-weight: 500;
+  font-stretch: 104%;
+  line-height: 0.93;
+  letter-spacing: -0.045em;
+  max-width: 11ch;
+  text-wrap: balance;
+}
+.machine-body {
+  margin-top: 24px;
+  max-width: 32ch;
+  color: var(--fg-2);
+  font-size: clamp(0.98rem, 1.1vw, 1.12rem);
+  line-height: 1.45;
+}
+.machine-object {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: min(86svh, 50vw);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  padding-top: 72px;
+  pointer-events: none;
+}
+.machine-rig {
+  position: relative;
+  width: 100%;
+  will-change: transform;
+}
+.machine-rig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.5));
+}
+/* the named part is lit; the rest of the vehicle steps back */
+.machine-rig::after {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle at calc(10% + var(--px) * 0.8333) calc(10% + var(--py) * 0.8333), rgba(4, 13, 20, 0) 0, rgba(4, 13, 20, 0) 13%, rgba(4, 13, 20, 0.42) 34%);
+  pointer-events: none;
+  transition: background 700ms var(--ease-soft);
+}
+.machine-dot {
+  position: absolute;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 1px solid var(--fg);
+  border-radius: 50%;
+  opacity: 0.45;
+  transition:
+    opacity 500ms var(--ease-soft),
+    transform 600ms var(--ease-heavy),
+    background-color 500ms var(--ease-soft);
+}
+.machine-dot i {
+  display: none;
+}
+.machine-dot[data-on] {
+  opacity: 1;
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.35);
+  box-shadow: 0 0 0 7px rgba(25, 194, 103, 0.18);
+}
+.machine-parts {
+  position: relative;
+  z-index: 2;
+  grid-column: 9 / -1;
+  grid-row: 1;
+  align-self: center;
+}
+.machine-parts-label {
+  color: var(--fg-3);
+  margin-bottom: 14px;
+}
+.machine-parts ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.machine-parts li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 10px;
+  padding: 13px 0 14px;
+  border-top: 1px solid var(--hair);
+  color: var(--fg-3);
+  transition: color 500ms var(--ease-soft);
+}
+.machine-n {
+  padding-top: 0.25em;
+}
+.machine-pname {
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+.machine-ptext {
+  grid-column: 2;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: var(--fg-2);
+  font-size: 0.94rem;
+  line-height: 1.42;
+  transition:
+    max-height 700ms var(--ease-heavy),
+    opacity 500ms var(--ease-soft),
+    margin 700ms var(--ease-heavy);
+}
+.machine-parts li[data-on] {
+  color: var(--fg);
+}
+.machine-parts li[data-on] .machine-n {
+  color: var(--accent);
+}
+.machine-parts li[data-on] .machine-ptext {
+  max-height: 8em;
+  opacity: 1;
+  margin-top: 8px;
+}
+.machine-fleet {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: end;
+  gap: clamp(20px, 4vw, 64px);
+  padding-top: 18px;
+  border-top: 1px solid var(--hair);
+}
+.machine-fleet .machine-parts-label {
+  margin: 0 auto 4px 0;
+}
+.machine-fleet dl {
+  display: flex;
+  gap: clamp(24px, 4vw, 72px);
+}
+.machine-fleet dd {
+  font-size: clamp(1.6rem, 2.6vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.machine-fleet dd i {
+  font-style: normal;
+  font-size: 0.4em;
+  margin-left: 0.3em;
+  color: var(--fg-2);
+}
+.machine-fleet dt {
+  margin-top: 8px;
+  color: var(--fg-3);
+}
+.machine-source {
+  align-self: end;
+  margin-bottom: 4px;
+  max-width: 22ch;
+  color: var(--fg-3);
+  font-size: 10px;
+}
+
+/* ---------- 05 the system ---------- */
+.system {
+  position: relative;
+  background: var(--bg);
+  color: var(--fg);
+  padding: clamp(110px, 20vh, 220px) 0 clamp(60px, 10vh, 110px);
+}
+.system-head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+  align-items: end;
+}
+.system-head .slate {
+  grid-column: 1 / -1;
+}
+.system-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: clamp(48px, 8vh, 90px);
+  margin-bottom: 18px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chips button {
+  padding: 9px 14px 8px;
+  background: none;
+  border: 1px solid var(--hair-2);
+  border-radius: 999px;
+  color: var(--fg-2);
+  cursor: pointer;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition:
+    background-color 300ms var(--ease-soft),
+    border-color 300ms var(--ease-soft),
+    color 300ms var(--ease-soft);
+}
+.chips button:hover {
+  border-color: var(--fg);
+  color: var(--fg);
+}
+.chips button[aria-pressed="true"] {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+.chips sup {
+  margin-left: 6px;
+  font-size: 9px;
+  opacity: 0.7;
+}
+.tour {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg-2);
+}
+.tour-label {
+  margin-right: 6px;
+}
+.tour button,
+.map-card-nav button {
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: 1px solid var(--hair-2);
+  cursor: pointer;
+  transition:
+    background-color 240ms var(--ease-soft),
+    color 240ms var(--ease-soft),
+    border-color 240ms var(--ease-soft);
+}
+.tour button:hover,
+.map-card-nav button:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+.tour-count {
+  min-width: 5.4em;
+  text-align: center;
+}
+.system-frame {
+  position: relative;
+  margin: 0 var(--pad);
+}
+.map-view {
+  position: relative;
+  aspect-ratio: 4500 / 2280;
+  overflow: hidden;
+  background: #7fb5b8;
+  outline-offset: 6px;
+}
+.map-world {
+  position: absolute;
+  inset: 0 0 auto 0;
+  aspect-ratio: 4500 / 2500;
+  margin-top: -4%;
+  transform-origin: 0 0;
+  transition: transform 1250ms var(--ease-heavy);
+  will-change: transform;
+}
+.map-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* the whole field steps back a little while one point is examined */
+.system-frame[data-zoomed] .map-media {
+  filter: saturate(0.85);
+}
+.pin {
+  position: absolute;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0;
+  cursor: pointer;
+  transform: scale(calc(var(--z, 1) * 0));
+  transition:
+    transform 700ms var(--ease-heavy),
+    opacity 400ms var(--ease-soft),
+    background-color 300ms var(--ease-soft);
+  transition-delay: calc(var(--i) * 45ms), 0s, 0s;
+  box-shadow: 0 0 0 0 rgba(0, 156, 72, 0.5);
+}
+.map-world[data-seen] .pin {
+  transform: scale(var(--z, 1));
+}
+html:not([data-js]) .pin {
+  transform: none;
+}
+.map-world[data-seen] .pin {
+  animation: pulse 2800ms var(--ease-soft) infinite;
+  animation-delay: calc(1400ms + var(--i) * 190ms);
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 156, 72, 0.5);
+  }
+  60%,
+  100% {
+    box-shadow: 0 0 0 12px rgba(0, 156, 72, 0);
+  }
+}
+.pin:hover,
+.pin:focus-visible,
+.pin[data-sel] {
+  background: #fff;
+  color: #02080d;
+  z-index: 3;
+}
+.pin[data-sel] {
+  animation: none;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.35);
+}
+.pin[data-dim] {
+  opacity: 0.22;
+  animation: none;
+  pointer-events: none;
+}
+.pin-label {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  padding: 7px 10px 6px;
+  background: #02080d;
+  color: #e9eeec;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 240ms var(--ease-soft),
+    transform 240ms var(--ease-soft);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .pin:hover .pin-label {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.pin:focus-visible .pin-label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.pin[data-sel] .pin-label {
+  display: none;
+}
+.map-card {
+  position: absolute;
+  left: clamp(14px, 2vw, 28px);
+  bottom: clamp(14px, 2vw, 28px);
+  z-index: 4;
+  max-width: 420px;
+  pointer-events: none;
+}
+.map-card-in {
+  padding: 22px 24px 20px;
+  background: rgba(2, 8, 13, 0.9);
+  color: #e9eeec;
+  pointer-events: auto;
+  animation: rise 700ms var(--ease-heavy) both;
+  backdrop-filter: blur(6px);
+}
+.map-card-n {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: #19c267;
+}
+.map-card-tags {
+  display: flex;
+  gap: 10px;
+  color: rgba(233, 238, 236, 0.56);
+}
+.map-card-name {
+  margin-top: 14px;
+  font-size: clamp(1.4rem, 1.9vw, 2rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.map-card-text {
+  margin-top: 12px;
+  font-size: 0.96rem;
+  line-height: 1.45;
+  color: rgba(233, 238, 236, 0.78);
+}
+.map-card-nav {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+  --hair-2: rgba(233, 238, 236, 0.34);
+  --fg: #e9eeec;
+  --bg: #02080d;
+}
+.map-close {
+  width: auto !important;
+  padding: 0 14px;
+  margin-left: auto;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+.map-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 9px;
+  background: rgba(2, 8, 13, 0.72);
+  color: #e9eeec;
+}
+.system-caption {
+  margin-top: 14px;
+  color: var(--fg-3);
+}
+
+/* ---------- V04 small screens ---------- */
+@media (max-width: 820px) {
+  .beat-top {
+    top: 96px;
+    max-width: none;
+  }
+  /* on a phone the statement sits over the helmet: give it its own shade */
+  .beat-top::before {
+    content: "";
+    position: absolute;
+    inset: -40px calc(var(--pad) * -1) -60px;
+    z-index: -1;
+    background: linear-gradient(to bottom, rgba(2, 8, 13, 0.72), rgba(2, 8, 13, 0.5) 70%, rgba(2, 8, 13, 0));
+    pointer-events: none;
+  }
+  .people-title {
+    font-size: 13.4vw;
+  }
+  .people-grid,
+  .bridge {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 30px;
+  }
+  .people-figure,
+  .people-text,
+  .bridge-figure,
+  .bridge-text {
+    grid-column: 1 / -1;
+  }
+  .people-figure .frame-clip {
+    aspect-ratio: 4 / 4.4;
+  }
+  .bridge-figure {
+    max-width: 260px;
+  }
+
+  .machine {
+    height: auto;
+  }
+  .machine-stage {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    display: block;
+    padding: clamp(96px, 16vh, 140px) var(--pad) 40px;
+  }
+  .machine-stage::before {
+    top: 44%;
+    --lit: 1;
+  }
+  .machine-object {
+    position: relative;
+    left: auto;
+    width: 100%;
+    max-width: 440px;
+    margin: 32px auto 0;
+    transform: none;
+    padding-top: 0;
+  }
+  .machine-rig::after {
+    display: none;
+  }
+  .machine-dot {
+    opacity: 1;
+  }
+  .machine-dot i {
+    display: block;
+    position: absolute;
+    left: 16px;
+    top: -4px;
+    font-style: normal;
+    font-family: var(--font-mono), monospace;
+    font-size: 10px;
+    color: var(--fg);
+  }
+  .machine-parts {
+    margin-top: 30px;
+  }
+  .machine-parts li {
+    color: var(--fg);
+  }
+  .machine-parts li .machine-ptext {
+    max-height: none;
+    opacity: 1;
+    margin-top: 6px;
+  }
+  .machine-fleet {
+    display: block;
+    margin-top: 40px;
+  }
+  .machine-fleet dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .machine-source {
+    margin-top: 18px;
+    max-width: none;
+  }
+
+  .system-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .system-head > * {
+    grid-column: 1 / -1;
+  }
+  .system-bar {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+  .system-bar > * {
+    min-width: 0;
+  }
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 calc(var(--pad) * -1);
+    padding: 0 var(--pad);
+  }
+  .chips button {
+    flex: none;
+  }
+  .tour {
+    justify-content: space-between;
+  }
+  .system-frame {
+    margin: 0;
+  }
+  .map-view {
+    aspect-ratio: auto;
+    height: min(62svh, 520px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .map-view::-webkit-scrollbar {
+    display: none;
+  }
+  .map-world {
+    position: relative;
+    inset: auto;
+    height: 108%;
+    width: calc(min(62svh, 520px) * 1.08 * 1.8);
+    margin-top: calc(min(62svh, 520px) * -0.06);
+    transform: none !important;
+  }
+  .map-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    max-width: none;
+    margin: 0;
+  }
+  .map-card-in {
+    backdrop-filter: none;
+  }
+  .map-hint {
+    width: 100%;
+  }
+  .system-caption {
+    padding-top: 0;
+  }
+}
+
+/* reduced motion: every scene readable at rest */
+@media (prefers-reduced-motion: reduce) {
+  .machine {
+    height: auto;
+  }
+  .machine-stage {
+    position: relative;
+  }
+  .machine-parts li .machine-ptext {
+    max-height: none;
+    opacity: 1;
+    margin-top: 6px;
+  }
+  .machine-parts li {
+    color: var(--fg);
+  }
+  .machine-rig::after {
+    display: none;
+  }
+  .map-world {
+    transition: none;
   }
 }

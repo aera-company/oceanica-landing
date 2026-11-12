@@ -5,6 +5,9 @@ import { Film } from "@/components/film/Film";
 import { Hero } from "@/components/film/Hero";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { Services } from "@/components/sections/Services";
+import { People } from "@/components/sections/People";
+import { Machine } from "@/components/sections/Machine";
+import { System } from "@/components/sections/System";
 import { Showcase } from "@/components/sections/Showcase";
 import { Company } from "@/components/sections/Company";
 import { Closing } from "@/components/sections/Closing";
@@ -24,6 +27,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <main>
         <Hero t={t.hero} a11y={t.a11y} shots={t.shots} />
         <Manifesto t={t.manifesto} />
+        <People t={t.people} />
+        <Machine t={t.machine} />
+        <System t={t.system} />
         <Services t={t.services} a11y={t.a11y} />
         <Showcase t={t.showcase} a11y={t.a11y} />
         <Company t={t.company} a11y={t.a11y} />

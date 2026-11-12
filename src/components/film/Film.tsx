@@ -14,8 +14,8 @@ import { IMAGES, filmAt, scene, type Img } from "@/lib/film";
 
 export type Tier = "full" | "lite" | "static";
 export const STILL_POINTS = [0.06, 0.34, 0.62, 0.82, 0.97];
-const KIND: Record<Img, number> = { vessel: 0, deck: 1, rov: 2, work: 3 };
-const ORDER: Img[] = ["vessel", "deck", "rov", "work"];
+const KIND: Record<Img, number> = { vessel: 0, diver: 1, rov: 2, work: 3 };
+const ORDER: Img[] = ["vessel", "diver", "rov", "work"];
 
 type Nav = Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
 
@@ -94,13 +94,14 @@ export function Film() {
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
     const names = [
-      "uRes", "uTime", "uMouse", "uT", "uU", "uM", "uTAsp", "uUAsp", "uTCam", "uUCam", "uTKind", "uUKind",
+      "uRes", "uTime", "uMouse", "uT", "uU", "uM", "uN", "uTAsp", "uUAsp", "uTCam", "uUCam", "uTKind", "uUKind",
       "uDissolve", "uFlare", "uLine", "uEmerge", "uDark", "uGlow", "uReveal", "uDepth", "uTravel", "uVel", "uSpeed", "uVeil", "uIntro",
     ] as const;
     const u = Object.fromEntries(names.map((n) => [n, gl.getUniformLocation(prog, n)])) as Record<(typeof names)[number], WebGLUniformLocation | null>;
     gl.uniform1i(u.uT, 0);
     gl.uniform1i(u.uU, 1);
     gl.uniform1i(u.uM, 2);
+    gl.uniform1i(u.uN, 3);
 
     /* textures: a 1px dark placeholder until the photograph arrives */
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
@@ -115,12 +116,12 @@ export function Film() {
       return tex;
     };
     const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE) as number;
-    const tex = {} as Record<Img | "mask", WebGLTexture>;
-    const ready = {} as Record<Img | "mask", boolean>;
+    const tex = {} as Record<Img | "mask" | "dmask", WebGLTexture>;
+    const ready = {} as Record<Img | "mask" | "dmask", boolean>;
     let alive = true;
     let pendingLoads = 0;
 
-    const load = (key: Img | "mask", src: string) =>
+    const load = (key: Img | "mask" | "dmask", src: string) =>
       new Promise<void>((resolve) => {
         pendingLoads++;
         const img = new Image();
@@ -150,10 +151,10 @@ export function Film() {
         img.src = src;
       });
 
-    for (const k of [...ORDER, "mask"] as (Img | "mask")[]) tex[k] = makeTex();
+    for (const k of [...ORDER, "mask", "dmask"] as (Img | "mask" | "dmask")[]) tex[k] = makeTex();
     /* the first shot loads first; the rest follow while the visitor reads the headline */
     const first = Promise.all([load("vessel", IMAGES.vessel.src), load("mask", IMAGES.vessel.mask!)]);
-    const rest = first.then(() => Promise.all([load("deck", IMAGES.deck.src), load("rov", IMAGES.rov.src), load("work", IMAGES.work.src)]));
+    const rest = first.then(() => Promise.all([load("diver", IMAGES.diver.src), load("dmask", IMAGES.diver.mask!), load("rov", IMAGES.rov.src), load("work", IMAGES.work.src)]));
 
     const touch = window.matchMedia("(pointer: coarse)").matches;
     const minDt = touch ? 1000 / 30 - 2 : 0;
@@ -181,6 +182,8 @@ export function Film() {
       gl.bindTexture(gl.TEXTURE_2D, tex[f.under]);
       gl.activeTexture(gl.TEXTURE2);
       gl.bindTexture(gl.TEXTURE_2D, tex.mask);
+      gl.activeTexture(gl.TEXTURE3);
+      gl.bindTexture(gl.TEXTURE_2D, tex.dmask);
       gl.uniform2f(u.uRes, canvas.width, canvas.height);
       gl.uniform1f(u.uTime, t);
       gl.uniform2f(u.uMouse, mouse.x, mouse.y);

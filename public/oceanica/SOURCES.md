@@ -39,3 +39,13 @@ Same conditions: public site, internal study, not cleared. `{U}` = `https://cdn-
 | ../film/s4-workclass.jpg | rov-work-class.jpg treated by scripts/enhance-workclass.py |
 
 Files ending in `-m.webp` are 1100 px copies of the same pictures for small screens.
+
+## V04 (added 2026-11-11)
+
+Originals are kept in `media-src/`; every derived file is produced by `scripts/prepare-v04-media.py`.
+
+| File | Source | Note |
+|---|---|---|
+| ../film/s2-diver.jpg, ../media/people-diver.webp | {U}/2021/09/shutterstock_721276657-1_Easy-Resize.com_.jpg, supplied again by the client | **Stock photograph.** Licence terms for this use unknown. Never captioned as an Oceânica diver |
+| ../media/rov-hero.webp, rov-launch.webp | supplied by the client; same scene as {U}/2021/09/HOME-PREVENCAO-I_Easy-Resize.com_.jpg | Cut out with a local Apple Vision mask |
+| ../media/system.mp4, system.webp | https://www.oceanica.com.br/wp-content/themes/mziq_oceanica_2021/img/assets/render_1920-1.mp4 | Oceânica's own render, re-encoded to 2560 and 1440 px, no audio |

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Concept 3 · A linha</title>
+<link rel="stylesheet" href="base.css">
+<style>
+body { background: #f1f0ea; color: #0a1a22; }
+.ink { color: #0a1a22; }
+.title { position: absolute; font-weight: 500; font-stretch: 104%; letter-spacing: -.05em; line-height: .9; z-index: 20; }
+.eyebrow { position: absolute; z-index: 20; color: rgba(10,26,34,.66); }
+.lede { position: absolute; font-size: 19px; line-height: 1.34; letter-spacing: -.01em; color: rgba(10,26,34,.8); z-index: 20; }
+.plate { position: absolute; overflow: hidden; z-index: 5; }
+.plate img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gline { position: absolute; width: 2px; background: #009c48; z-index: 8; }
+.gdot { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #009c48; box-shadow: 0 0 0 6px rgba(0,156,72,.18); z-index: 9; }
+.col { position: absolute; z-index: 4; }
+.mark { position: absolute; left: 40px; height: 1px; z-index: 6; }
+.mark span { position: absolute; left: 0; top: -22px; white-space: nowrap; }
+.big { position: absolute; left: 36px; font-weight: 500; font-stretch: 100%; letter-spacing: -.055em; line-height: .8; z-index: 20; font-variant-numeric: tabular-nums; }
+.big i { font-style: normal; font-size: .28em; letter-spacing: -.02em; margin-left: .15em; }
+.cut { position: absolute; z-index: 10; }
+.f { display: none; } body[data-f="1"] .f1, body[data-f="2"] .f2, body[data-f="3"] .f3, body[data-f="4"] .f4, body[data-f="m"] .fm { display: block; }
+.head .cta { border-color: rgba(10,26,34,.4); }
+</style></head>
+<body class="grain">
+<header class="head mono"><img src="assets/logo.png" alt=""><nav class="nav"><span>Serviços</span><span>Ativos</span><span>ESG</span><span>Investidores</span><span>Carreiras</span></nav><div class="r"><span>PT / EN</span><span>◐</span><span class="cta">Contato</span></div></header>
+
+<!-- F1 · entry: paper. The fleet seen from high above, small in a big sea. One green line leaves the vessel -->
+<section class="f f1 fill">
+  <p class="eyebrow mono" style="left:42px;top:118px"><span class="tick" style="background:#009c48"></span>Oceânica · desde 1978</p>
+  <h1 class="title" style="left:38px;top:150px;font-size:112px;width:760px">Tudo o que está lá embaixo começa aqui.</h1>
+  <p class="lede" style="left:42px;bottom:96px;width:420px">Mergulhadores, ROVs Work Class e frota própria a serviço da energia offshore. Da superfície a três mil metros.</p>
+  <div class="plate" style="left:880px;top:100px;width:520px;height:640px"><img src="assets/astern.webp" style="object-position:50% 38%;filter:saturate(.92) contrast(1.05)"></div>
+  <div class="gdot" style="left:1140px;top:380px"></div>
+  <div class="gline" style="left:1139px;top:380px;height:520px"></div>
+  <p class="mono abs" style="left:880px;top:752px;color:rgba(10,26,34,.6)">Superfície · 0 m</p>
+  <p class="mono abs" style="left:1160px;bottom:30px;color:rgba(10,26,34,.6)">Role · 0 → 3000 m</p>
+</section>
+
+<!-- F2 · the turn: the aerial plate lies down and becomes the sea surface; the section of the ocean opens under it -->
+<section class="f f2 fill">
+  <div class="plate" style="left:880px;top:20px;width:520px;height:640px;transform:perspective(1100px) rotateX(70deg);transform-origin:50% 100%;box-shadow:0 30px 40px -20px rgba(10,26,34,.25)"><img src="assets/astern.webp" style="object-position:50% 38%"></div>
+  <div class="col" style="left:880px;top:660px;width:520px;height:240px;background:linear-gradient(180deg,#2b8496,#145466)"></div>
+  <div class="gdot" style="left:1140px;top:620px"></div>
+  <div class="gline" style="left:1139px;top:620px;height:280px"></div>
+  <div class="mark" style="top:660px;width:820px;background:rgba(10,26,34,.25)"><span class="mono" style="color:rgba(10,26,34,.6)">0 m · Superfície</span></div>
+  <p class="eyebrow mono" style="left:42px;top:118px"><span class="tick" style="background:#009c48"></span>01 · Superfície</p>
+  <h1 class="title" style="left:38px;top:150px;font-size:112px;width:760px;color:rgba(10,26,34,.14)">Tudo o que está lá embaixo começa aqui.</h1>
+</section>
+
+<!-- F3 · the section: one line through the water column, real things at their real depths -->
+<section class="f f3 fill" style="background:linear-gradient(180deg,#f1f0ea 0%,#e7e9e5 55%,#c9d1cf 100%)">
+  <div class="col" style="left:960px;top:0;width:360px;height:900px;background:linear-gradient(180deg,#1f7183 0%,#0f4757 35%,#082a36 70%,#04151c 100%)"></div>
+  <div class="gline" style="left:1139px;top:0;height:900px"></div>
+  <div class="mark" style="top:150px;width:920px;background:rgba(10,26,34,.18)"><span class="mono" style="color:rgba(10,26,34,.6)">50 m · Mergulho, 13 sistemas até 50 m</span></div>
+  <img class="cut" src="assets/diver-cut.webp" style="left:1098px;top:96px;width:120px;filter:brightness(.7) saturate(.7)">
+  <div class="mark" style="top:380px;width:920px;background:rgba(10,26,34,.45)"><span class="mono" style="color:#0a1a22">300 m · Limite do mergulho</span></div>
+  <div class="big" style="top:420px;font-size:250px">300<i>m</i></div>
+  <p class="lede" style="left:42px;top:640px;width:420px">Abaixo daqui, o trabalho é das máquinas. Quem mergulha aprende a pilotá-las.</p>
+  <div class="mark" style="top:610px;left:520px;width:440px;background:rgba(10,26,34,.18)"><span class="mono" style="color:rgba(10,26,34,.6)">1000 m · ROVs de observação</span></div>
+  <img class="cut" src="assets/lynx-cut.webp" style="left:1092px;top:578px;width:96px;filter:brightness(.8)">
+  <div class="mark" style="top:860px;left:520px;width:440px;background:rgba(10,26,34,.18)"><span class="mono" style="color:rgba(10,26,34,.6)">3000 m ↓</span></div>
+  <p class="mono abs" style="left:1340px;top:84px;color:rgba(10,26,34,.55);writing-mode:vertical-rl">Escala logarítmica</p>
+  <p class="eyebrow mono" style="left:42px;top:96px"><span class="tick" style="background:#009c48"></span>02 · Seção</p>
+</section>
+
+<!-- F4 · exit: the paper has turned to ink. The line ends at the seabed, on the vehicle that works there -->
+<section class="f f4 fill dark" style="background:#050d13">
+  <div class="col" style="left:960px;top:0;width:360px;height:900px;background:linear-gradient(180deg,#04151c 0%,#020a0e 70%,#010507 100%)"></div>
+  <div class="col" style="left:960px;top:820px;width:360px;height:80px;background:linear-gradient(180deg,#1b1f1f,#0b0e0e);z-index:5"></div>
+  <div class="gline" style="left:1139px;top:0;height:470px"></div>
+  <div class="fill" style="background:radial-gradient(20% 30% at 79% 68%, rgba(150,210,220,.16), rgba(0,0,0,0) 70%);z-index:6"></div>
+  <img class="cut" src="assets/rov-hero.webp" style="left:1010px;top:330px;width:290px;filter:brightness(.85) contrast(1.15)">
+  <div class="big" style="top:300px;font-size:250px;color:#e9eeec">3000<i>m</i></div>
+  <p class="lede" style="left:42px;top:530px;width:440px;color:rgba(233,238,236,.82)">Embarcações com ROVs Work Class de 150 a 250 HP operam até três mil metros. A única empresa brasileira contratada em toda essa faixa.</p>
+  <p class="eyebrow mono" style="left:42px;top:96px;color:rgba(233,238,236,.7)"><span class="tick"></span>03 · Leito marinho</p>
+  <p class="mono abs" style="left:42px;bottom:34px;color:rgba(233,238,236,.5)">↓ Continua: o sistema</p>
+</section>
+
+<!-- mobile 390 · entry -->
+<section class="f fm fill">
+  <p class="eyebrow mono" style="left:20px;top:92px"><span class="tick" style="background:#009c48"></span>Oceânica · desde 1978</p>
+  <h1 class="title" style="left:18px;top:122px;font-size:50px;width:350px">Tudo o que está lá embaixo começa aqui.</h1>
+  <div class="plate" style="left:20px;top:420px;width:350px;height:330px"><img src="assets/astern.webp" style="object-position:50% 40%"></div>
+  <div class="gdot" style="left:195px;top:575px"></div>
+  <div class="gline" style="left:194px;top:575px;height:270px"></div>
+  <p class="mono abs" style="left:20px;top:760px;color:rgba(10,26,34,.6)">Superfície · 0 m</p>
+</section>
+
+<div class="label">Conceito 3 · A linha · preview, não implementação</div>
+<script>
+const f = new URLSearchParams(location.search).get("f") || "1";
+document.body.dataset.f = f;
+if (f === "4") { document.body.classList.add("dark"); }
+if (f === "m") { document.documentElement.classList.add("m"); document.querySelector(".nav").style.display = "none"; document.querySelector(".r").innerHTML = "<span>PT / EN</span><span>☰</span>"; }
+</script>
+</body></html>

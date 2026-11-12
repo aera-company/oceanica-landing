@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Reveals } from "@/components/Reveals";
-import { Film } from "@/components/film/Film";
-import { Hero } from "@/components/film/Hero";
+import { HeroRov } from "@/components/hero/HeroRov";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { Services } from "@/components/sections/Services";
 import { People } from "@/components/sections/People";
@@ -22,10 +21,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <a href="#company" className="skip mono">
         {t.a11y.skip}
       </a>
-      <Film />
       <Header t={t} locale={locale} />
       <main>
-        <Hero t={t.hero} a11y={t.a11y} shots={t.shots} />
+        <HeroRov t={t.hero} />
         <Manifesto t={t.manifesto} />
         <People t={t.people} />
         <Machine t={t.machine} />

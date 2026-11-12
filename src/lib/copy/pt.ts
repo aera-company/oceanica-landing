@@ -6,7 +6,7 @@ import type { Dict } from "./en";
 
 export const pt: Dict = {
   meta: {
-    title: "Oceânica · De zero a três mil metros",
+    title: "Oceânica · Nossas mãos a três mil metros",
     description:
       "Desde 1978 a Oceânica inspeciona, mantém e repara ativos de energia offshore com mergulhadores, ROVs Work Class e frota própria. Prevenção, contingenciamento e engenharia de 0 a 3000 metros.",
   },
@@ -32,39 +32,20 @@ export const pt: Dict = {
   ],
   contact: "Contato",
   themeNames: { dark: "Escuro", light: "Claro" },
-  shots: ["Superfície", "Mergulho", "Descida", "Work Class", "Intervenção"],
   hero: {
-    title: ["De zero a três", "mil metros."],
-    lede: "Mergulhadores, ROVs Work Class e frota própria a serviço da energia offshore, desde 1978.",
-    asset: "OCEANICASUB VI · MPSV · 2 ROVs Work Class · guindaste submarino de 100 t",
-    link: "Veja o sistema inteiro",
+    title: ["Nossas mãos", "a três mil metros."],
+    eyebrow: "ROV Work Class",
+    eyebrowSub: "Lançamento a partir de uma embarcação da Oceânica",
+    statements: [
+      "Abaixo de 300 metros, o trabalho é das máquinas.",
+      "Quem as guia é uma pessoa, no convés.",
+    ],
+    at3000: "Profundidade de operação das embarcações com ROV Work Class",
+    closing: "Veículos Work Class de 150 a 250 HP, com manipuladores de sete funções. O piloto trabalha do convés.",
+    markings: "Marcações no veículo: PERRY XLX 142 · 3000M · 200 HP",
+    depth: "Profundidade",
     cue: "Role para descer",
-    beats: {
-      human: {
-        slate: "02 · Mergulho",
-        text: "Toda descida começa com uma pessoa.",
-        note: "Mais de 300 mergulhadores profissionais e 13 sistemas de mergulho para operar até 50 metros.",
-        meta: "Capacete de mergulho comercial, antes da entrada",
-      },
-      descent: {
-        slate: "03 · Descida",
-        text: "Abaixo de 300 metros, o trabalho é das máquinas.",
-        note: "O mergulho para ali, e quem mergulha aprende a pilotar o que segue: 56 ROVs, mais de 250 pilotos.",
-        meta: "Seaeye Lynx · classe observação · até 1000 m",
-      },
-      workclass: {
-        slate: "04 · Work Class",
-        text: "Feitos para executar, não para observar.",
-        note: "Manipuladores de sete funções, até 250 HP e ferramentas projetadas em casa desde 2010.",
-        meta: "Frota de ROVs Work Class · até 4000 m",
-      },
-      intervention: {
-        slate: "05 · Intervenção",
-        text: "Mãos humanas. Alcance de máquina. Três mil metros abaixo.",
-        note: "A única empresa brasileira com contratos de inspeção e intervenção em toda essa faixa.",
-        meta: "ROV Work Class em equipamento submarino",
-      },
-    },
+    alt: "ROV Work Class com a marca Oceânica, suspenso sob o sistema de gerenciamento do umbilical",
   },
   manifesto: {
     mark: "02 · A empresa",

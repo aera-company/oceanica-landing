@@ -3,7 +3,7 @@
 
 export const en = {
   meta: {
-    title: "Oceânica · Zero to three thousand metres",
+    title: "Oceânica · Our hands at three thousand metres",
     description:
       "Since 1978 Oceânica inspects, maintains and repairs offshore energy assets with divers, Work Class ROVs and its own fleet. Prevention, contingency and engineering from 0 to 3000 metres.",
   },
@@ -29,39 +29,20 @@ export const en = {
   ],
   contact: "Contact",
   themeNames: { dark: "Dark", light: "Light" },
-  shots: ["Surface", "Diver", "Descent", "Work Class", "Intervention"],
   hero: {
-    title: ["Zero to three", "thousand metres."],
-    lede: "Divers, Work Class ROVs and our own fleet, working for offshore energy since 1978.",
-    asset: "OCEANICASUB VI · MPSV · 2 Work Class ROVs · 100 t subsea crane",
-    link: "See the whole system",
+    title: ["Our hands at", "three thousand metres."],
+    eyebrow: "Work Class ROV",
+    eyebrowSub: "Launched from an Oceânica vessel",
+    statements: [
+      "Below 300 metres, the work belongs to machines.",
+      "A person guides them, from the deck.",
+    ],
+    at3000: "Working depth of the vessels with Work Class ROVs",
+    closing: "Work Class vehicles of 150 to 250 HP, with seven-function manipulators. The pilot works from the deck.",
+    markings: "Markings on the vehicle: PERRY XLX 142 · 3000M · 200 HP",
+    depth: "Depth",
     cue: "Scroll to descend",
-    beats: {
-      human: {
-        slate: "02 · Diver",
-        text: "Every descent starts with a person.",
-        note: "More than 300 professional divers, and 13 diving systems for work down to 50 metres.",
-        meta: "Commercial diving helmet, before entry",
-      },
-      descent: {
-        slate: "03 · Descent",
-        text: "Below 300 metres, the work belongs to machines.",
-        note: "Divers stop there, and they are trained to fly what goes on: 56 ROVs, more than 250 pilots.",
-        meta: "Seaeye Lynx · observation class · rated 1000 m",
-      },
-      workclass: {
-        slate: "04 · Work Class",
-        text: "Built to do the work, not to watch it.",
-        note: "Seven-function manipulators, up to 250 HP, tooling designed in-house since 2010.",
-        meta: "Work Class ROV fleet · rated to 4000 m",
-      },
-      intervention: {
-        slate: "05 · Intervention",
-        text: "Human hands. Machine reach. Three thousand metres down.",
-        note: "The only Brazilian company contracted for inspection and intervention across the full range.",
-        meta: "Work Class ROV on subsea equipment",
-      },
-    },
+    alt: "Work Class ROV with Oceânica markings, hanging under its tether management system",
   },
   manifesto: {
     mark: "02 · The company",

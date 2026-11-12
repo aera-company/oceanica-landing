@@ -42,9 +42,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: t.description,
       locale: locale === "pt" ? "pt_BR" : "en_US",
       alternateLocale: locale === "pt" ? "en_US" : "pt_BR",
-      images: [{ url: "/film/still-1.webp", width: 1440, height: 900 }],
+      images: [{ url: "/og.jpg", width: 1440, height: 900 }],
     },
-    twitter: { card: "summary_large_image", title: t.title, description: t.description, images: ["/film/still-1.webp"] },
+    twitter: { card: "summary_large_image", title: t.title, description: t.description, images: ["/og.jpg"] },
     robots: INDEXABLE ? { index: true, follow: true } : { index: false, follow: false },
   };
 }
@@ -63,8 +63,8 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={HTML_LANG[locale]} className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
-        <link rel="preload" as="image" href="/film/still-1.webp" media="(min-aspect-ratio: 3/4)" />
-        <link rel="preload" as="image" href="/film/still-1-portrait.webp" media="(max-aspect-ratio: 3/4)" />
+        <link rel="preload" as="image" href="/media/rov-hero.webp" media="(min-width: 821px)" />
+        <link rel="preload" as="image" href="/media/rov-hero-m.webp" media="(max-width: 820px)" />
       </head>
       <body>
         <SmoothScroll />

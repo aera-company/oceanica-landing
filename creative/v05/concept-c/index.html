@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Conceito C · O sistema</title>
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+body { background: #efeee8; color: #13262e; }
+.paper::before { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(120% 90% at 30% 10%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%); }
+.cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; z-index: 2; }
+.world { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.world * { vector-effect: non-scaling-stroke; }
+.ink { color: #13262e; }
+.h { color: #0f2129; font-stretch: 100%; }
+.cap { color: rgba(19,38,46,.66); }
+.meter { background: rgba(19,38,46,.14); }
+.head .cta { border-color: rgba(19,38,46,.45); }
+/* numbered markers on the drawing and the photograph plates they open */
+.mk { position: absolute; z-index: 15; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: #efeee8; border: 1px solid #13262e; font: 500 9px/18px "IBM Plex Mono", monospace; text-align: center; color: #13262e; }
+.mk.on { background: #009c48; border-color: #009c48; color: #fff; box-shadow: 0 0 0 6px rgba(0,156,72,.16); }
+.plateph { position: absolute; z-index: 14; background: #fff; padding: 5px 5px 22px; box-shadow: 0 1px 0 rgba(19,38,46,.12), 0 18px 34px -18px rgba(19,38,46,.45); }
+.plateph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.plateph b { position: absolute; left: 6px; right: 6px; bottom: 5px; font: 400 9px/1.2 "IBM Plex Mono", monospace; letter-spacing: .06em; text-transform: uppercase; color: rgba(19,38,46,.72); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gl { position: absolute; z-index: 13; height: 1px; background: #009c48; transform-origin: 0 50%; }
+.scale { position: absolute; right: 26px; z-index: 12; font: 400 10px/1 "IBM Plex Mono", monospace; letter-spacing: .06em; color: rgba(19,38,46,.7); text-align: right; }
+.scale i { position: absolute; right: -14px; top: 4px; width: 8px; height: 1px; background: #13262e; }
+.modes { position: absolute; z-index: 20; display: flex; gap: 0; border: 1px solid rgba(19,38,46,.35); }
+.modes span { padding: 11px 16px 10px; border-right: 1px solid rgba(19,38,46,.2); }
+.modes span:last-child { border-right: 0; }
+.modes .on { background: #13262e; color: #efeee8; }
+.dim .el { opacity: .22; }
+.dim .el.hi { opacity: 1; stroke: #009c48; }
+.big { position: absolute; z-index: 16; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(10,20,26,.6); }
+.big img { position: absolute; display: block; }
+</style></head>
+<body class="paper grain">
+<header class="head mono ink"><img src="../assets/logo.png" alt=""><nav class="nav"><span>Serviços</span><span>Ativos</span><span>ESG</span><span>Investidores</span><span>Carreiras</span></nav><div class="r"><span>PT / EN</span><span>◐</span><span class="cta">Contato</span></div></header>
+<div class="meter"><i></i></div>
+
+<!-- F1 · 0 % · the whole field on one page. Everything Oceânica does sits at its own depth on one drawing; five numbered points are real photographs -->
+<section class="f f1 fill">
+  <div class="cam" data-world style="transform:translateY(40px)"></div>
+  <p class="cap mono" style="left:42px;top:96px"><span class="tick" style="background:#009c48"></span>Oceânica · Engenharia submarina desde 1978</p>
+  <h1 class="h" style="left:38px;top:126px;font-size:74px;width:1000px;line-height:.92">O offshore é um sistema.<br>Nós cuidamos dele.</h1>
+  <p class="lead" style="left:900px;top:134px;width:330px;color:rgba(19,38,46,.8)">Embarcações, ROVs, mergulhadores e engenharia trabalhando juntos, da superfície a três mil metros.</p>
+  <div data-scale></div>
+  <div data-marks="1"></div>
+  <p class="cap mono" style="left:42px;bottom:30px">Profundidade em escala comprimida · desenho esquemático</p>
+  <p class="cap mono" style="right:40px;bottom:30px;text-align:right">Role para entrar no sistema</p>
+</section>
+
+<!-- F2 · 55 % · the camera has travelled into point 03. The drawing scales up around the vehicle and the photograph opens from its marker: the plan becomes the real thing -->
+<section class="f f2 fill">
+  <div class="cam" data-world style="transform:translate(-1067px,-1227px) scale(2.5)"></div>
+  <div class="fill" style="z-index:3;background:linear-gradient(90deg, rgba(239,238,232,.94) 0%, rgba(239,238,232,.72) 24%, rgba(239,238,232,0) 33%)"></div>
+  <div class="big" style="left:720px;top:150px;width:680px;height:520px"><img src="../assets/workclass-seabed.webp" style="height:100%;left:-300px;top:0;filter:contrast(1.08)"></div>
+  <span class="gl" style="left:500px;top:556px;width:220px"></span>
+  <span class="mk on" style="left:500px;top:556px">03</span>
+  <p class="cap mono" style="left:42px;top:96px"><span class="tick" style="background:#009c48"></span>03 · Intervenção em águas profundas</p>
+  <h2 class="h" style="left:38px;top:132px;font-size:60px;width:620px;line-height:.94">Cada ponto do desenho é uma operação real.</h2>
+  <p class="lead" style="left:42px;top:300px;width:330px;color:rgba(19,38,46,.82)">Um veículo Work Class deixa a embarcação dentro do seu sistema de gerenciamento do umbilical e trabalha no equipamento submarino, com o piloto no convés.</p>
+  <p class="cap mono" style="left:720px;top:126px;width:680px">ROV Work Class em equipamento submarino · quadro de vídeo publicado pela Oceânica</p>
+  <div class="modes mono" style="left:42px;bottom:40px"><span>Visão geral</span><span class="on">Prevenção</span><span>Contingenciamento</span><span>Engenharia</span></div>
+</section>
+
+<!-- F3 · 100 % · back to the whole field, now as a tool. One mode lit: contingency, the pipelines and the vehicles that repair them. This is the doorway to the Universe chapter -->
+<section class="f f3 fill">
+  <div class="cam dim" data-world style="transform:translateY(40px)" data-hi="el-pipe el-wc el-mpsv el-risers"></div>
+  <p class="cap mono" style="left:42px;top:96px"><span class="tick" style="background:#009c48"></span>Modo · Contingenciamento</p>
+  <h2 class="h" style="left:38px;top:126px;font-size:52px;width:760px;line-height:.94">Quando algo falha no fundo do mar, a resposta já está no sistema.</h2>
+  <p class="lead" style="left:900px;top:134px;width:340px;color:rgba(19,38,46,.82)">Coordenação de reparo de dutos, ferramentas de contingência projetadas pela própria Oceânica e embarcações com ROV Work Class.</p>
+  <div data-scale></div>
+  <div class="plateph" style="left:42px;top:600px;width:200px;height:250px"><img src="../assets/contingency-tool.webp"><b>Ferramenta de contingência · Oceânica</b></div>
+  <span class="gl" style="left:242px;top:690px;width:400px;transform:rotate(-0.5deg)"></span>
+  <span class="mk on" style="left:650px;top:688px">03</span>
+  <div class="modes mono" style="left:300px;bottom:40px"><span>Visão geral</span><span>Prevenção</span><span class="on">Contingenciamento</span><span>Engenharia</span></div>
+  <p class="cap mono" style="right:40px;bottom:30px;text-align:right">↓ O universo Oceânica</p>
+</section>
+
+<!-- mobile 390 · entry: a vertical slice of the same drawing through the MPSV and its vehicle -->
+<section class="f fm fill">
+  <div class="cam" data-world style="transform:translate(-470px,40px) scale(1)"></div>
+  <p class="cap mono" style="left:20px;top:86px"><span class="tick" style="background:#009c48"></span>Oceânica · desde 1978</p>
+  <h1 class="h" style="left:18px;top:114px;font-size:44px;width:360px;line-height:.92">O offshore é um sistema. Nós cuidamos dele.</h1>
+  <span class="mk on" style="left:130px;top:776px">03</span>
+  <p class="cap mono" style="left:20px;bottom:30px">Toque nos pontos · desenho esquemático</p>
+</section>
+
+<div class="concept">Conceito C · O sistema · desenho original, fotos reais</div>
+<script src="world.js"></script>
+<script src="../shared/frames.js"></script>
+<script>
+document.querySelectorAll("[data-world]").forEach((c) => {
+  c.innerHTML = WORLD.svg();
+  const hi = (c.dataset.hi || "").split(" ").filter(Boolean);
+  hi.forEach((k) => c.querySelectorAll("." + k).forEach((e) => e.classList.add("hi")));
+});
+document.querySelectorAll("[data-scale]").forEach((el) => {
+  el.outerHTML = [[0, "0 m"], [50, "50 m"], [300, "300 m"], [1000, "1000 m"], [3000, "3000 m"]]
+    .map(([d, t]) => `<div class="scale" style="top:${WORLD.Y(d) + 34}px">${t}<i></i></div>`).join("");
+});
+// F1 · numbered points and their photograph plates
+const OY = 40;
+const marks = [
+  { n: "01", x: 713, y: 300 + OY, ph: "fleet-vi.webp", t: "OCEANICASUB VI · MPSV · 2 ROVs Work Class", px: 384, py: 452, w: 168, h: 104 },
+  { n: "02", x: 300, y: WORLD.Y(40) + 12 + OY },
+  { n: "03", x: 615, y: WORLD.bedAt(650) - 27 + OY, ph: "workclass-seabed.webp", t: "Work Class · intervenção submarina", px: 712, py: 548, w: 196, h: 116 },
+  { n: "04", x: 1012, y: WORLD.Y(14) + OY, ph: "lynx-water.webp", t: "ROV de observação · casco de FPSO", px: 950, py: 560, w: 160, h: 96 },
+  { n: "05", x: 1160, y: 334 + OY },
+];
+const host = document.querySelector('[data-marks="1"]');
+if (host) host.outerHTML = marks.map((m) => {
+  const cx = m.px + m.w / 2, cy = m.py + (m.y > m.py ? m.h + 22 : 0), dx = m.x - cx, dy = m.y - cy, len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx) * 180 / Math.PI;
+  if (!m.ph) return `<span class="mk" style="left:${m.x}px;top:${m.y}px">${m.n}</span>`;
+  return `<span class="gl" style="left:${cx}px;top:${cy}px;width:${len}px;transform:rotate(${ang}deg);opacity:.75"></span>` +
+    `<span class="mk${m.n === "01" ? " on" : ""}" style="left:${m.x}px;top:${m.y}px">${m.n}</span>` +
+    `<div class="plateph" style="left:${m.px}px;top:${m.py}px;width:${m.w}px;height:${m.h + 22}px"><img src="../assets/${m.ph}" style="height:${m.h}px"><b>${m.n} · ${m.t}</b></div>`;
+}).join("");
+</script>
+</body></html>

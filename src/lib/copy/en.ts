@@ -3,7 +3,7 @@
 
 export const en = {
   meta: {
-    title: "Oceânica · Our hands at three thousand metres",
+    title: "Oceânica · Engineering at the scale of the sea",
     description:
       "Since 1978 Oceânica inspects, maintains and repairs offshore energy assets with divers, Work Class ROVs and its own fleet. Prevention, contingency and engineering from 0 to 3000 metres.",
   },
@@ -30,19 +30,18 @@ export const en = {
   contact: "Contact",
   themeNames: { dark: "Dark", light: "Light" },
   hero: {
-    title: ["Our hands at", "three thousand metres."],
-    eyebrow: "Work Class ROV",
-    eyebrowSub: "Launched from an Oceânica vessel",
-    statements: [
-      "Below 300 metres, the work belongs to machines.",
-      "A person guides them, from the deck.",
-    ],
-    at3000: "Working depth of the vessels with Work Class ROVs",
-    closing: "Work Class vehicles of 150 to 250 HP, with seven-function manipulators. The pilot works from the deck.",
-    markings: "Markings on the vehicle: PERRY XLX 142 · 3000M · 200 HP",
-    depth: "Depth",
-    cue: "Scroll to descend",
-    alt: "Work Class ROV with Oceânica markings, hanging under its tether management system",
+    eyebrow: "Oceânica · Subsea engineering since 1978",
+    title: ["Engineering at the", "scale of the sea."],
+    lede: "Vessels, ROVs, divers and engineering in service of offshore energy. From the surface to three thousand metres.",
+    notes: ["Production unit · FPSO", "Work Class ROV on deck, ready for launch"],
+    caption: "Deck, ROV and, on the horizon, the production unit they serve.",
+    horizon: ["Production on the horizon.", "On deck, the people who keep it running."],
+    alongside: "Right alongside production.",
+    alongsideBody: "Inspection, maintenance and repair of the structures offshore energy depends on. Prevention, contingency and engineering.",
+    alongsideCaption: "An Oceânica vessel alongside a production unit, seen from the unit's deck",
+    index: ["01 · Deck", "02 · Horizon", "03 · Alongside"],
+    cue: "Scroll to approach",
+    alt: "The aft deck of an Oceânica vessel at dawn, with a Work Class ROV in its launch system and, on the horizon, a production unit and a tanker",
   },
   manifesto: {
     mark: "02 · The company",

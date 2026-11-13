@@ -6,7 +6,7 @@ import type { Dict } from "./en";
 
 export const pt: Dict = {
   meta: {
-    title: "Oceânica · Nossas mãos a três mil metros",
+    title: "Oceânica · Engenharia do tamanho do mar",
     description:
       "Desde 1978 a Oceânica inspeciona, mantém e repara ativos de energia offshore com mergulhadores, ROVs Work Class e frota própria. Prevenção, contingenciamento e engenharia de 0 a 3000 metros.",
   },
@@ -33,19 +33,18 @@ export const pt: Dict = {
   contact: "Contato",
   themeNames: { dark: "Escuro", light: "Claro" },
   hero: {
-    title: ["Nossas mãos", "a três mil metros."],
-    eyebrow: "ROV Work Class",
-    eyebrowSub: "Lançamento a partir de uma embarcação da Oceânica",
-    statements: [
-      "Abaixo de 300 metros, o trabalho é das máquinas.",
-      "Quem as guia é uma pessoa, no convés.",
-    ],
-    at3000: "Profundidade de operação das embarcações com ROV Work Class",
-    closing: "Veículos Work Class de 150 a 250 HP, com manipuladores de sete funções. O piloto trabalha do convés.",
-    markings: "Marcações no veículo: PERRY XLX 142 · 3000M · 200 HP",
-    depth: "Profundidade",
-    cue: "Role para descer",
-    alt: "ROV Work Class com a marca Oceânica, suspenso sob o sistema de gerenciamento do umbilical",
+    eyebrow: "Oceânica · Engenharia submarina desde 1978",
+    title: ["Engenharia do", "tamanho do mar."],
+    lede: "Embarcações, ROVs, mergulhadores e engenharia a serviço da energia offshore. Da superfície a três mil metros.",
+    notes: ["Unidade de produção · FPSO", "ROV Work Class no convés, pronto para lançamento"],
+    caption: "Convés, ROV e, no horizonte, a unidade de produção que eles atendem.",
+    horizon: ["No horizonte, a produção.", "No convés, quem a mantém."],
+    alongside: "Ao lado de quem produz.",
+    alongsideBody: "Inspeção, manutenção e reparo das estruturas das quais a energia offshore depende. Prevenção, contingenciamento e engenharia.",
+    alongsideCaption: "Embarcação da Oceânica ao lado de uma unidade de produção, vista do convés da unidade",
+    index: ["01 · Convés", "02 · Horizonte", "03 · Ao lado"],
+    cue: "Role para se aproximar",
+    alt: "Convés de popa de uma embarcação da Oceânica ao amanhecer, com um ROV Work Class no sistema de lançamento e, no horizonte, uma unidade de produção e um navio-tanque",
   },
   manifesto: {
     mark: "02 · A empresa",

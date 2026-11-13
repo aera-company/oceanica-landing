@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Reveals } from "@/components/Reveals";
-import { HeroRov } from "@/components/hero/HeroRov";
+import { HeroScale } from "@/components/hero/HeroScale";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { Services } from "@/components/sections/Services";
 import { People } from "@/components/sections/People";
@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       </a>
       <Header t={t} locale={locale} />
       <main>
-        <HeroRov t={t.hero} />
+        <HeroScale t={t.hero} />
         <Manifesto t={t.manifesto} />
         <People t={t.people} />
         <Machine t={t.machine} />

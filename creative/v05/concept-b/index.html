@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Conceito B · Acima e abaixo</title>
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+body { background: #02080b; color: #eef1ee; }
+.plate { position: absolute; display: block; }
+.grade { position: absolute; inset: 0; pointer-events: none; }
+.above, .below { position: absolute; left: 0; right: 0; overflow: hidden; }
+.above { top: 0; }
+.below { bottom: 0; background: linear-gradient(180deg, #0d5a68 0%, #08404c 18%, #04242d 46%, #021218 74%, #01080b 100%); }
+.shafts { position: absolute; inset: 0; mix-blend-mode: screen;
+  background: conic-gradient(from 172deg at 46% -30%, rgba(170,240,235,0) 0deg, rgba(170,240,235,.10) 4deg, rgba(170,240,235,0) 8deg, rgba(170,240,235,.06) 13deg, rgba(170,240,235,0) 17deg, rgba(170,240,235,.09) 23deg, rgba(170,240,235,0) 28deg, rgba(170,240,235,.05) 33deg, rgba(170,240,235,0) 38deg);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%); mask-image: linear-gradient(180deg, #000 0%, transparent 70%); }
+.line { position: absolute; left: 0; right: 0; height: 2px; z-index: 12; background: linear-gradient(90deg, rgba(225,250,245,.4), rgba(240,255,252,.95) 50%, rgba(225,250,245,.4)); box-shadow: 0 0 18px rgba(170,240,235,.45); }
+.mirror { position: absolute; left: 0; right: 0; overflow: hidden; opacity: .42; filter: blur(6px) saturate(.6); mix-blend-mode: screen; -webkit-mask-image: linear-gradient(180deg, #000, transparent); mask-image: linear-gradient(180deg, #000, transparent); }
+.cable { position: absolute; width: 1.5px; background: linear-gradient(180deg, rgba(225,240,236,.85), rgba(225,240,236,.25)); z-index: 6; }
+.snow i { position: absolute; width: 1px; background: rgba(200,240,235,.45); border-radius: 1px; }
+.pool { position: absolute; -webkit-mask-image: radial-gradient(closest-side, #000 52%, transparent 100%); mask-image: radial-gradient(closest-side, #000 52%, transparent 100%); }
+/* the headline is cut by the waterline: crisp above, refracted below */
+.split { position: absolute; z-index: 20; font-weight: 500; letter-spacing: -.05em; line-height: .9; font-stretch: 100%; }
+.split .dry, .split .wet { position: absolute; left: 0; top: 0; white-space: nowrap; }
+.split .dry { color: #f3f4f0; }
+.split .wet { color: rgba(150,225,222,.78); transform: translate(5px, 3px) skewX(-2deg); filter: blur(.9px); }
+.cap { color: rgba(238,241,238,.72); }
+.leader { color: #eef1ee; }
+.pin { color: #eef1ee; }
+.depth { position: absolute; right: 40px; z-index: 20; text-align: right; }
+.depth b { display: block; font-family: "IBM Plex Mono", monospace; font-weight: 400; font-size: 28px; letter-spacing: 0; color: #eef1ee; margin-bottom: 4px; }
+</style></head>
+<body class="dark grain">
+<header class="head mono"><img src="../assets/logo.png" alt=""><nav class="nav"><span>Serviços</span><span>Ativos</span><span>ESG</span><span>Investidores</span><span>Carreiras</span></nav><div class="r"><span>PT / EN</span><span>◐</span><span class="cta">Contato</span></div></header>
+<div class="meter"><i></i></div>
+
+<!-- F1 · 0 % · the page is cut at the waterline. Above: our vessel heading out. Below: the start of the column, the umbilical already in the water. The headline is cut by the same line -->
+<section class="f f1 fill">
+  <div class="above" style="height:560px">
+    <img class="plate" src="../assets/astern-open-sea.webp" style="width:2400px;left:-40px;top:-420px;filter:contrast(1.08) saturate(.9) brightness(.92)">
+    <div class="grade" style="background:linear-gradient(180deg, rgba(2,8,11,.78) 0%, rgba(2,8,11,0) 26%, rgba(2,8,11,0) 80%, rgba(2,8,11,.25) 100%)"></div>
+  </div>
+  <div class="below" style="height:340px">
+    <div class="mirror" style="top:0;height:120px"><img class="plate" src="../assets/astern-open-sea.webp" style="width:2400px;left:-40px;top:-930px;transform:scaleY(-1)"></div>
+    <div class="shafts"></div>
+    <div class="snow fill" id="snow1"></div>
+  </div>
+  <div class="line" style="top:559px"></div>
+  <div class="cable" style="left:1092px;top:540px;height:360px"></div>
+
+  <p class="cap mono" style="left:42px;top:96px"><span class="tick"></span>Oceânica · Engenharia submarina desde 1978</p>
+  <div class="split" style="left:38px;top:326px;font-size:104px;height:320px;width:900px">
+    <span class="dry" style="clip-path:inset(0 0 calc(100% - 233px) 0)">Abaixo da<br>linha d'água,<br>uma operação inteira.</span>
+    <span class="wet" style="clip-path:inset(233px 0 0 0)">Abaixo da<br>linha d'água,<br>uma operação inteira.</span>
+  </div>
+
+  <p class="cap mono" style="left:1170px;top:150px;width:220px">Embarcação da Oceânica seguindo para mar aberto</p>
+  <div class="depth mono" style="bottom:30px"><b>0000 m</b>Linha d'água</div>
+  <p class="cap mono" style="left:42px;bottom:30px">Role para descer</p>
+</section>
+
+<!-- F2 · 50 % · the camera has gone under. The line is now near the top; the vessel is a strip of light above it. Mid-water: the observation ROV on its tether, a real frame from Oceânica footage -->
+<section class="f f2 fill">
+  <div class="above" style="height:132px">
+    <img class="plate" src="../assets/astern-open-sea.webp" style="width:1440px;top:-480px;filter:brightness(.7) saturate(.7) blur(1px)">
+  </div>
+  <div class="below" style="height:768px">
+    <div class="mirror" style="top:0;height:90px"><img class="plate" src="../assets/astern-open-sea.webp" style="width:1440px;top:-560px;transform:scaleY(-1)"></div>
+    <div class="shafts" style="opacity:.9"></div>
+    <img class="plate pool" src="../assets/lynx-water.webp" style="width:1220px;left:420px;top:40px;filter:saturate(.8) brightness(.9) hue-rotate(-6deg)">
+    <div class="grade" style="background:linear-gradient(180deg, rgba(2,18,24,0) 40%, rgba(1,8,11,.85) 100%)"></div>
+    <div class="snow fill" id="snow2"></div>
+  </div>
+  <div class="line" style="top:131px;opacity:.75"></div>
+
+  <p class="cap mono" style="left:42px;top:176px"><span class="tick"></span>02 · Coluna d'água</p>
+  <h2 class="h" style="left:38px;top:212px;font-size:76px;width:600px;line-height:.92">Mergulhadores até 50 metros. ROVs até 3000.</h2>
+  <p class="lead" style="left:42px;top:470px;width:340px;color:rgba(238,241,238,.84)">A mesma equipe opera nos dois lados da linha: mergulho raso, ROVs de observação e veículos Work Class.</p>
+  <span class="pin" style="left:1034px;top:430px"></span>
+  <span class="leader" style="left:1034px;top:430px;height:300px;width:1px"></span>
+  <p class="cap mono" style="left:1048px;top:716px;width:300px">ROV de observação Seaeye Lynx, classificado para 1000 m · quadro de vídeo publicado pela Oceânica</p>
+  <div class="depth mono" style="bottom:30px"><b>↓</b>Descendo</div>
+</section>
+
+<!-- F3 · 90 % · the bottom. No surface left, only the vehicle's own lamps on the structure it works on -->
+<section class="f f3 fill" style="background:#010507">
+  <div class="grade" style="background:radial-gradient(60% 40% at 50% -10%, rgba(40,110,120,.25), rgba(0,0,0,0) 70%)"></div>
+  <img class="plate pool" src="../assets/workclass-seabed.webp" style="width:1640px;left:180px;top:150px;filter:contrast(1.1) brightness(.95) saturate(.85)">
+  <div class="snow fill" id="snow3" style="opacity:.6"></div>
+  <p class="cap mono" style="left:42px;top:96px"><span class="tick"></span>03 · Leito marinho</p>
+  <h2 class="h" style="left:38px;top:132px;font-size:80px;width:600px;line-height:.92">O trabalho que ninguém vê é o que mantém tudo de pé.</h2>
+  <span class="pin" style="left:1120px;top:640px"></span>
+  <span class="leader" style="left:1120px;top:640px;height:120px;width:1px"></span>
+  <p class="cap mono" style="left:1134px;top:752px;width:240px">ROV Work Class intervindo em equipamento submarino</p>
+  <p class="cap mono" style="right:40px;bottom:30px;text-align:right">↓ 02 · A escala da operação</p>
+</section>
+
+<!-- mobile 390 · entry -->
+<section class="f fm fill">
+  <div class="above" style="height:470px">
+    <img class="plate" src="../assets/astern-open-sea.webp" style="height:560px;left:-300px;top:-60px;filter:contrast(1.08) saturate(.9) brightness(.92)">
+    <div class="grade" style="background:linear-gradient(180deg, rgba(2,8,11,.8) 0%, rgba(2,8,11,0) 30%)"></div>
+  </div>
+  <div class="below" style="height:374px"><div class="shafts"></div><div class="snow fill" id="snowm"></div></div>
+  <div class="line" style="top:469px"></div>
+  <div class="cable" style="left:262px;top:300px;height:544px;opacity:.6"></div>
+  <p class="cap mono" style="left:20px;top:86px"><span class="tick"></span>Oceânica · desde 1978</p>
+  <div class="split" style="left:18px;top:362px;font-size:52px;height:200px;width:360px">
+    <span class="dry" style="clip-path:inset(0 0 calc(100% - 107px) 0)">Abaixo da linha<br>d'água, uma<br>operação inteira.</span>
+    <span class="wet" style="clip-path:inset(107px 0 0 0)">Abaixo da linha<br>d'água, uma<br>operação inteira.</span>
+  </div>
+  <p class="cap mono" style="left:20px;bottom:60px">0000 m · Linha d'água</p>
+</section>
+
+<div class="concept">Conceito B · Acima e abaixo · fotos reais, água desenhada</div>
+<script src="../shared/frames.js"></script>
+<script>
+let seed = 11; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+for (const [id, n, w, h] of [["snow1", 50, 1440, 340], ["snow2", 120, 1440, 768], ["snow3", 90, 1440, 900], ["snowm", 40, 390, 374]]) {
+  const el = document.getElementById(id); if (!el) continue;
+  for (let i = 0; i < n; i++) { const e = document.createElement("i"); const near = rnd() > .85;
+    e.style.left = rnd() * w + "px"; e.style.top = rnd() * h + "px"; e.style.height = (near ? 18 + rnd() * 26 : 3 + rnd() * 8) + "px";
+    e.style.opacity = near ? .22 : .15 + rnd() * .45; if (near) { e.style.width = "2px"; e.style.filter = "blur(1.4px)"; } el.appendChild(e); }
+}
+</script>
+</body></html>

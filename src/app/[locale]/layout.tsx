@@ -63,8 +63,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={HTML_LANG[locale]} className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
-        <link rel="preload" as="image" href="/media/rov-hero.webp" media="(min-width: 821px)" />
-        <link rel="preload" as="image" href="/media/rov-hero-m.webp" media="(max-width: 820px)" />
+        <link rel="preload" as="image" href="/media/hero-sea.webp" media="(min-width: 821px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/media/hero-sea-m.webp" media="(max-width: 820px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/media/hero-deck.webp" media="(min-width: 821px)" />
+        <link rel="preload" as="image" href="/media/hero-deck-m.webp" media="(max-width: 820px)" />
       </head>
       <body>
         <SmoothScroll />

@@ -49,3 +49,13 @@ Originals are kept in `media-src/`; every derived file is produced by `scripts/p
 | ../film/s2-diver.jpg, ../media/people-diver.webp | {U}/2021/09/shutterstock_721276657-1_Easy-Resize.com_.jpg, supplied again by the client | **Stock photograph.** Licence terms for this use unknown. Never captioned as an Oceânica diver |
 | ../media/rov-hero.webp, rov-launch.webp | supplied by the client; same scene as {U}/2021/09/HOME-PREVENCAO-I_Easy-Resize.com_.jpg | Cut out with a local Apple Vision mask |
 | ../media/system.mp4, system.webp | https://www.oceanica.com.br/wp-content/themes/mziq_oceanica_2021/img/assets/render_1920-1.mp4 | Oceânica's own render, re-encoded to 2560 and 1440 px, no audio |
+
+## V05 hero (added 2026-11-13)
+
+Same conditions: public site, internal study, not cleared. Every derived file is produced by `scripts/prepare-v05-hero.py`.
+
+| File | Source | Note |
+|---|---|---|
+| ../media/hero-sea.webp, hero-sky.webp, hero-deck.webp, hero-deck-b.webp (and `-m`) | {U}/2021/10/HEADER-pagina-Ativos-1-scaled.jpg, kept as `media-src/deck-dawn.jpg` | Cut into depth planes with a local Apple Vision mask plus two hand-traced container outlines. Behind the deck the water is rebuilt by mirroring the sea on either side of it, row by row: no generative tool, no equipment added |
+| ../media/svc-prevention.webp (reused as the arrival frame) | {U}/2021/10/Apoio-em-FPSO-1.jpg | Also used by the prevention card in Services |
+| ../og.jpg | Rendered from the hero's first frame | |

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rota A · Porte</title>
+<link rel="stylesheet" href="../shared/kv.css">
+<style>
+  /* ROTA A — PORTE. Luz do dia, verde de casco, tipografia larga como letreiro de embarcação. */
+  .disp{font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:.86}
+  .grade{position:absolute;inset:0;pointer-events:none}
+
+  /* Quadro 01 — o casco não cabe no quadro */
+  #a1 .ph{background-image:url(../assets/fleet-x.webp);background-size:262%;background-position:74% 66%;filter:contrast(1.08) saturate(1.06)}
+  #a1 .grade{background:linear-gradient(180deg,rgba(3,18,30,.55) 0%,rgba(3,18,30,0) 22%,rgba(3,18,30,0) 52%,rgba(2,14,24,.78) 100%)}
+  #a1 h1{position:absolute;left:40px;bottom:74px;font-size:132px;z-index:5}
+  #a1 h1 span{display:block}
+  #a1 .sub{position:absolute;right:40px;bottom:86px;width:330px;font-family:'IBM Plex Sans Condensed';font-size:19px;line-height:1.35;letter-spacing:0;text-transform:none;z-index:5}
+  #a1 .tag{position:absolute;left:40px;top:104px;z-index:5;display:flex;gap:14px;align-items:center}
+  #a1 .tag i{width:36px;height:1px;background:#fff;display:block}
+  #a1 .scroll{position:absolute;left:40px;bottom:40px;z-index:5;opacity:.8}
+
+  /* Quadro 02 — recuo: o navio inteiro, a cota de comprimento, o rastro */
+  #a2 .ph{background-image:url(../assets/fleet-x.webp);background-size:112%;background-position:46% 52%;filter:contrast(1.06) saturate(1.04)}
+  #a2 .grade{background:linear-gradient(180deg,rgba(3,18,30,.5) 0%,rgba(3,18,30,0) 20%,rgba(3,18,30,0) 70%,rgba(2,14,24,.6) 100%)}
+  #a2 .dim{position:absolute;left:104px;top:452px;width:1222px;height:1px;background:rgba(255,255,255,.7);transform:rotate(5.6deg);transform-origin:0 0;z-index:5}
+  #a2 .dim:before,#a2 .dim:after{content:"";position:absolute;top:-7px;width:1px;height:15px;background:#fff}
+  #a2 .dim:before{left:0}#a2 .dim:after{right:0}
+  #a2 .dimlabel{position:absolute;left:112px;top:418px;transform:rotate(5.6deg);transform-origin:0 0;z-index:6;background:rgba(2,14,24,.55);padding:4px 8px}
+  #a2 h2{position:absolute;left:40px;bottom:64px;font-size:54px;z-index:5;width:620px}
+  #a2 .spec{position:absolute;right:40px;bottom:64px;z-index:5;text-align:right;line-height:2}
+  #a2 .spec b{font-weight:500;color:#fff}
+  #a2 .idx{position:absolute;right:40px;top:104px;z-index:5;font-family:'Archivo';font-stretch:125%;font-weight:800;font-size:15px;letter-spacing:.08em}
+
+  /* Quadro 03 — recuo final: a embarcação é uma peça ao lado da unidade. Entrada do ato 02 */
+  #a3 .ph{background-image:url(../assets/svc-prevention.webp);background-size:104%;background-position:40% 60%;filter:contrast(1.05) saturate(1.02)}
+  #a3 .grade{background:linear-gradient(90deg,rgba(2,14,40,0) 38%,rgba(2,14,40,.82) 78%),linear-gradient(180deg,rgba(2,14,40,.5) 0%,rgba(2,14,40,0) 20%)}
+  #a3 .act{position:absolute;right:40px;top:150px;width:480px;z-index:5}
+  #a3 .act .n{font-family:'Archivo';font-stretch:125%;font-weight:800;font-size:210px;line-height:.8;letter-spacing:-.04em}
+  #a3 .act .u{font-family:'Archivo';font-stretch:125%;font-weight:700;font-size:26px;text-transform:uppercase;margin-top:18px;line-height:1.05}
+  #a3 .act p{font-family:'IBM Plex Sans Condensed';font-size:19px;line-height:1.4;margin-top:22px;max-width:400px;text-transform:none;letter-spacing:0}
+  #a3 .callout{position:absolute;left:286px;top:262px;z-index:5}
+  #a3 .callout i{display:block;width:1px;height:74px;background:#fff;margin:6px 0 0 4px}
+  #a3 .row{position:absolute;right:40px;bottom:56px;z-index:5;display:flex;gap:26px;opacity:.9}
+  #a3 .row span{border-top:1px solid rgba(255,255,255,.5);padding-top:8px;width:92px}
+  #a3 .row span:first-child{border-top:2px solid #fff}
+
+  /* Mobile — composição própria: o casco em vertical, tipografia empilhada */
+  #am .ph{background-image:url(../assets/fleet-x.webp);background-size:auto 150%;background-position:71% 50%;filter:contrast(1.08)}
+  #am .grade{background:linear-gradient(180deg,rgba(3,18,30,.6) 0%,rgba(3,18,30,0) 20%,rgba(3,18,30,0) 46%,rgba(2,14,24,.9) 82%)}
+  #am h1{position:absolute;left:20px;bottom:150px;font-size:39px;z-index:5}
+  #am .sub{position:absolute;left:20px;right:20px;bottom:70px;font-family:'IBM Plex Sans Condensed';font-size:16px;line-height:1.35;z-index:5}
+  #am .nav{padding:0 20px}#am .nav .links{display:none}
+</style>
+</head>
+<body data-route="Rota A · Porte">
+
+<section class="stage" id="a1" data-f="1" data-note="abertura · escala maior que o quadro">
+  <div class="ph"></div><div class="grade"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span></nav>
+  <div class="tag mono"><span>Oceanicasub X</span><i></i><span>AHTS · ROV Work Class</span></div>
+  <h1 class="disp"><span>Engenharia</span><span>de grande</span><span>porte.</span></h1>
+  <p class="sub">Há 48 anos a Oceânica projeta, opera e mantém o que sustenta a produção offshore. Da superfície a 3.000 metros.</p>
+  <div class="scroll mono">Role para recuar ↓</div>
+</section>
+
+<section class="stage" id="a2" data-f="2" data-note="scroll 45% · a câmera recua, o texto vira legenda">
+  <div class="ph"></div><div class="grade"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span></nav>
+  <div class="idx">01 — PRESENÇA</div>
+  
+  <h2 class="disp">Um navio inteiro é só uma das peças.</h2>
+  <div class="spec mono"><div><b>Oceanicasub X</b></div><div>AHTS · adquirida em 2023</div><div>ROV Work Class · até 3.000 m</div><div>Comprimento · [validar na ficha técnica]</div></div>
+</section>
+
+<section class="stage" id="a3" data-f="3" data-note="scroll 100% · o recuo entrega o ato 02 · Escala">
+  <div class="ph"></div><div class="grade"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span></nav>
+  <div class="callout mono">Apoio a FPSO · embarcação a contrabordo<i></i></div>
+  <div class="act">
+    <div class="mono" style="margin-bottom:26px">02 — Escala</div>
+    <div class="n">18</div>
+    <div class="u">embarcações na frota<br><span style="font-family:'IBM Plex Mono';font-weight:400;font-size:11px;letter-spacing:.14em">Release 1T26 · validar antes de publicar</span></div>
+    <p>Ao lado de uma unidade de produção, o navio que não cabia na tela passa a ser uma peça. É nessa proporção que a Oceânica trabalha.</p>
+  </div>
+  <div class="row mono"><span>Frota</span><span>Pessoas</span><span>ROVs</span><span>48 anos</span></div>
+</section>
+
+<section class="stage" id="am" data-f="m" data-note="composição vertical própria">
+  <div class="ph"></div><div class="grade"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><span>Menu</span></nav>
+  <h1 class="disp">Engenharia<br>de grande<br>porte.</h1>
+  <p class="sub">Há 48 anos a Oceânica projeta, opera e mantém o que sustenta a produção offshore.</p>
+</section>
+
+<script src="../shared/kv.js"></script>
+</body>
+</html>

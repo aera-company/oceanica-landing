@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A1 · Monumental Realism</title>
+<link rel="stylesheet" href="../shared/anim.css">
+<style>
+  /* A1 — MONUMENTAL REALISM. Cor natural, luz de dia, tipografia fixa embaixo à esquerda. A interface não se move: só o mundo. */
+  .page{position:absolute;inset:0;background:var(--paper);color:var(--ink)}
+  .film{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;transform-origin:0 0;background:#000}
+  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,16,26,.5) 0%,rgba(4,16,26,0) 18%,rgba(4,16,26,0) 50%,rgba(3,12,20,.72) 100%)}
+  .disp{font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'opsz' 96;font-weight:500;letter-spacing:-.035em;line-height:.94}
+  .eyebrow{position:absolute;left:48px;bottom:318px;z-index:20;display:flex;gap:12px;align-items:center}
+  .eyebrow i{width:28px;height:1px;background:#fff}
+  h1{position:absolute;left:44px;bottom:84px;font-size:112px;z-index:20;transform-origin:0 100%;text-shadow:0 2px 40px rgba(0,10,20,.35)}
+  .sub{position:absolute;right:48px;bottom:92px;width:330px;font-family:'IBM Plex Sans';font-weight:300;font-size:17px;line-height:1.5;z-index:20}
+  .cue{position:absolute;left:48px;bottom:44px;z-index:20;opacity:.8}
+  .ladder{position:absolute;right:48px;top:330px;z-index:20;text-align:right;line-height:2.5;font-size:12px}
+  .ladder div{opacity:.42;transition:none}.ladder div.on{opacity:1}
+  .ladder div.on:before{content:"";display:inline-block;width:26px;height:1px;background:#fff;vertical-align:middle;margin-right:10px}
+  .cap{position:absolute;right:48px;top:100px;z-index:20;text-align:right;line-height:1.9}
+
+  /* F04 — o filme vira um objeto na página clara; a prova entra */
+  .p-col{position:absolute;left:48px;top:118px;width:520px}
+  .p-col .k{color:#3d4a52}
+  .p-col .lead{font-size:40px;margin-top:22px;color:var(--ink)}
+  .p-col .n{font-family:'Bricolage Grotesque';font-variation-settings:'opsz' 96;font-weight:300;font-size:300px;line-height:.8;letter-spacing:-.06em;margin:54px 0 0 -14px}
+  .p-col .u{font-size:30px;margin-top:22px}
+  .p-col .src{margin-top:18px;line-height:1.9;color:#3d4a52}
+  .p-col .flag{display:inline-block;margin-top:14px;color:#b24a00;border:1px solid #b24a00;padding:5px 9px;border-radius:2px}
+  .p-cap{position:absolute;left:624px;top:634px;width:928px;display:flex;justify-content:space-between;color:#3d4a52}
+  .fleet{position:absolute;left:624px;top:706px;width:928px}
+  .fleet .row{display:flex;gap:0;justify-content:space-between;align-items:flex-end;height:44px;border-bottom:1px solid #9aa6ab}
+  .fleet .row i{display:block;width:2px;height:22px;background:#9aa6ab}
+  .fleet .row i.on{height:44px;width:3px;background:var(--green)}
+  .fleet .row i.site{background:#3d4a52}
+  .fleet .leg{display:flex;justify-content:space-between;margin-top:12px;color:#3d4a52}
+  .p-nav{position:absolute;left:48px;bottom:56px;display:flex;gap:26px;color:#3d4a52}
+  .p-nav span{border-top:1px solid #9aa6ab;padding-top:9px;width:96px}
+  .p-nav span:first-child{border-top:2px solid var(--ink);color:var(--ink)}
+  body.light .nav{color:var(--ink)}body.light .nav img{filter:none}body.light .nav .cta{border-color:var(--ink)}
+  body.light .stamp,body.light .fid{background:rgba(0,0,0,.72)}
+
+  body.m h1{left:18px;bottom:168px;font-size:54px}
+  body.m .eyebrow{left:20px;bottom:296px;font-size:9px}
+  body.m .sub{left:20px;right:20px;width:auto;bottom:74px;font-size:15px}
+  body.m .cue{left:20px;bottom:38px}
+  body.m .ladder,body.m .cap{display:none}
+  body.m .shade{background:linear-gradient(180deg,rgba(4,16,26,.55) 0%,rgba(4,16,26,0) 16%,rgba(4,16,26,0) 42%,rgba(3,12,20,.9) 78%)}
+</style>
+</head>
+<body data-title="A1 · Monumental Realism" data-dur="14" data-frames="0,.40,.74,1" data-mobile-p="0">
+
+<div class="stage">
+  <div class="page">
+    <div class="p-col" data-vis=".93-1" data-fade=".05">
+      <div class="mono k">02 — Escala</div>
+      <div class="disp lead">Esta era uma.</div>
+      <div class="n">18</div>
+      <div class="disp u">embarcações na frota</div>
+      <div class="mono src">Fonte: RI · release 1T26 · publicado em 13/05/2026<br>Posição de março de 2026</div>
+      <div class="mono flag">Divergência · o site lista 11 · validar antes de publicar</div>
+    </div>
+    <div class="mono p-cap" data-vis=".95-1" data-fade=".04"><span>Esta é a parte visível.</span><span>Apoio a unidade de produção · embarcação a contrabordo</span></div>
+    <div class="fleet" data-vis=".95-1" data-fade=".04">
+      <div class="row"><i class="on"></i><i class="site"></i><i class="site"></i><i class="site"></i><i class="site"></i><i class="site"></i><i class="site"></i><i class="site"></i><i class="site"></i><i class="site"></i><i class="site"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="mono leg"><span>A que você acabou de ver</span><span>11 nomeadas no site · 18 no RI</span></div>
+    </div>
+    <div class="mono p-nav" data-vis=".96-1" data-fade=".03"><span>Frota</span><span>Pessoas</span><span>ROVs</span><span>Anos</span></div>
+  </div>
+
+  <div class="film" id="film">
+    <img class="shot" src="../plates/a1-hull.jpg" data-vis="0-.452" data-fade=".012"
+         data-cam="0:.585,.705,3.9|.05:.585,.705,3.9|.40:.45,.5,1.12|.452:.47,.5,1.06"
+         data-cam-m="0:.705,.62,1.55">
+    <img class="shot" src="../plates/a1-field.jpg" data-vis=".44-1" data-fade=".012"
+         data-cam=".44:.40,.66,2.1|.74:.36,.56,1.22|.80:.5,.5,1.0">
+    <div class="shade"></div>
+  </div>
+
+  <nav class="nav mono"><img src="../../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span><span class="menu">Menu</span></nav>
+
+  <div class="eyebrow mono" data-vis="0-.46"><span>Oceânica</span><i></i><span>Engenharia offshore e subsea · desde 1978</span></div>
+  <h1 class="disp" data-vis="0-.8">Esta é a parte<br>visível.</h1>
+  <p class="sub" data-vis="0-.34">Embarcações, mergulho, ROVs e engenharia própria em uma só operação, da superfície a 3.000 metros de profundidade.</p>
+  <div class="cue mono" data-vis="0-.1">Role para recuar ↓</div>
+
+  <div class="cap mono" data-vis=".3-.44">Oceanicasub X · AHTS<br>ROV Work Class a bordo</div>
+  <div class="cap mono" data-vis=".56-.8">Apoio a unidade de produção<br>Embarcação a contrabordo</div>
+  <div class="ladder mono" id="ladder" data-vis="0-.82"><div>Casco</div><div>Embarcação</div><div>Operação</div><div>Empresa</div></div>
+</div>
+
+<script>
+  const h1 = document.querySelector('h1'), eb = document.querySelector('.eyebrow'), film = document.getElementById('film'), rungs = [...document.querySelectorAll('#ladder div')];
+  window.tick = (p, { mobile, sm, cl }) => {
+    const step = p < .2 ? 0 : p < .47 ? 1 : p < .84 ? 2 : 3;
+    rungs.forEach((r, i) => r.classList.toggle('on', i === step));
+    // último recuo: sai-se do próprio filme. O quadro vira um objeto na página do ato 02.
+    const u = mobile ? 0 : sm(cl((p - .80) / .2, 0, 1)), s = 1 - .42 * u;
+    film.style.transform = `translate(${624 * u}px,${96 * u}px) scale(${s})`;
+    document.body.classList.toggle('light', u > .55);
+    // quando a operação entra em quadro, o título cede espaço: encolhe e vira legenda
+    const h = mobile ? 0 : sm(cl((p - .47) / .22, 0, 1));
+    h1.style.transform = `scale(${1 - .46 * h})`;
+  };
+</script>
+<script src="../shared/anim.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>V4 · estudos tipográficos</title>
+<!-- Três estudos para "Esta é a parte visível." sobre quadros reais em janela (abertura).
+     ?st=A|B|C  estilo · ?k=1 primeiro momento ("Esta é") · ?k=2 frase inteira · ?m=1 mobile 720×1280 -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Instrument+Serif:ital@0;1&display=block" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0b0d0e;overflow:hidden}
+  body{width:1920px;height:1080px;position:relative;color:#f2f1ec;-webkit-font-smoothing:antialiased;font-family:'Archivo',sans-serif}
+  body.m{width:720px;height:1280px}
+  .logo{position:absolute;left:72px;top:60px;height:22px;filter:brightness(0) invert(1);opacity:.92;z-index:5}
+  body.m .logo{left:36px;top:44px;height:18px}
+  .ap{position:absolute;background-repeat:no-repeat;z-index:3}
+  .t{position:absolute;white-space:nowrap;z-index:4}
+  .behind{z-index:2}
+  .note{position:absolute;left:72px;bottom:28px;font:400 11px/1 'Archivo';letter-spacing:.08em;text-transform:uppercase;opacity:.45;z-index:5}
+  body.m .note{left:36px;bottom:20px;font-size:9px}
+  /* A · monumental editorial: grotesca expandida, caixa alta, maior que a janela */
+  .A{font-weight:780;font-stretch:125%;text-transform:uppercase;letter-spacing:-.025em;line-height:.86}
+  /* B · cinematic minimal: serifada fina, pequena, muito espaço */
+  .B{font-family:'Instrument Serif',serif;font-weight:400;letter-spacing:-.005em;line-height:1.05}
+  .B i{font-style:italic;opacity:.55}
+  /* C · spatial: serifada grande atrás da janela, a imagem fica entre as palavras */
+  .C{font-family:'Instrument Serif',serif;letter-spacing:-.02em;line-height:1}
+</style>
+</head>
+<body>
+<img class="logo" src="../../../assets/logo-oceanica.png" alt="Oceânica">
+<div class="ap" id="ap"></div>
+<div class="note">Estudo tipográfico · quadro do vídeo “Oceânica 47 anos” (YouTube) · não liberado</div>
+<script>
+const q = new URLSearchParams(location.search), st = q.get('st') || 'A', k = +(q.get('k') || 1), m = q.get('m') === '1';
+if (m) document.body.classList.add('m');
+const plate = k === 1 ? '../plates/claw.png' : '../plates/arm.png';
+// janela: retângulo na tela, escala e centro no quadro de origem (1920×1012)
+const src = k === 1 ? [1090, 506] : [1000, 506];
+const ap = m ? {x: 150, y: 260, w: 420, h: 620, s: .8} : {x: 660, y: 130, w: 600, h: 820, s: 1};
+const a = document.getElementById('ap');
+Object.assign(a.style, {left: ap.x + 'px', top: ap.y + 'px', width: ap.w + 'px', height: ap.h + 'px',
+  backgroundImage: `url(${plate})`, backgroundSize: `${1920 * ap.s}px ${1012 * ap.s}px`,
+  backgroundPosition: `${-(src[0] * ap.s - ap.w / 2)}px ${-(src[1] * ap.s - ap.h / 2)}px`});
+const T = (cls, html, css) => { const d = document.createElement('div'); d.className = 't ' + cls; d.innerHTML = html; Object.assign(d.style, css); document.body.appendChild(d); return d; };
+const D = {
+  A: {
+    d1: [['A', 'Esta é', {left: '96px', top: '300px', fontSize: '220px'}]],
+    d2: [['A', 'Esta é', {left: '96px', top: '300px', fontSize: '220px', opacity: .35}],
+         ['A', 'a parte<br>visível.', {right: '96px', bottom: '96px', fontSize: '220px', textAlign: 'right'}]],
+    m1: [['A', 'Esta é', {left: '36px', top: '940px', fontSize: '120px'}]],
+    m2: [['A', 'Esta é', {left: '36px', top: '120px', fontSize: '104px', opacity: .35}],
+         ['A', 'a parte<br>visível.', {left: '36px', top: '920px', fontSize: '104px'}]]
+  },
+  B: {
+    d1: [['B', 'Esta é', {left: '1340px', top: '470px', fontSize: '64px'}]],
+    d2: [['B', '<i>Esta é</i><br>a parte visível.', {left: '1340px', top: '440px', fontSize: '64px'}]],
+    m1: [['B', 'Esta é', {left: '150px', top: '920px', fontSize: '48px'}]],
+    m2: [['B', '<i>Esta é</i><br>a parte visível.', {left: '150px', top: '920px', fontSize: '48px'}]]
+  },
+  C: {
+    d1: [['C behind', 'Esta é', {right: '1220px', top: '420px', fontSize: '250px'}]],
+    d2: [['C behind', '<span style="opacity:.4">Esta é</span> a parte', {right: '1220px', top: '420px', fontSize: '250px'}],
+         ['C behind', 'visível.', {left: '1220px', top: '420px', fontSize: '250px'}]],
+    m1: [['C behind', 'Esta é', {left: '36px', top: '130px', fontSize: '150px'}]],
+    m2: [['C behind', 'a parte', {left: '36px', top: '120px', fontSize: '150px'}],
+         ['C behind', 'visível.', {right: '36px', top: '860px', fontSize: '150px'}]]
+  }
+}[st][(m ? 'm' : 'd') + k];
+for (const [c, h, css] of D) T(c, h, css);
+</script>
+</body>
+</html>

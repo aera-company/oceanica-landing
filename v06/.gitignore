@@ -1,0 +1,4 @@
+# Cópias integrais dos vídeos do YouTube: os originais ficam em ~/Downloads.
+# O institucional passa do limite de 100 MB do GitHub.
+creative/assets/reference/*.mp4
+.DS_Store

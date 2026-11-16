@@ -1,0 +1,31 @@
+/* Hero refinement · animatic e keyframes. Palco fixo 1600×900 (mobile 390×844 com ?f=m). */
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=block');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#00a04a;--ink:#06131d;--paper:#eef1ee;--foam:#f4f6f4;--flag:#ff7a1a}
+html,body{height:100%;background:#0b0d0f;color:var(--foam);font-family:'IBM Plex Mono',monospace;-webkit-font-smoothing:antialiased;overflow:hidden}
+.wrap{position:absolute;left:0;top:0;transform-origin:0 0}
+.stage{position:relative;width:1600px;height:900px;overflow:hidden;background:#000}
+body.m .stage{width:390px;height:844px}
+.shot{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform,opacity;max-width:none}
+.layer{position:absolute;inset:0;pointer-events:none}
+.grain{position:absolute;inset:0;background:url(../plates/grain.png);mix-blend-mode:overlay;opacity:.16;pointer-events:none;z-index:40}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.nav{position:absolute;left:0;right:0;top:0;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;z-index:30}
+.nav img{height:21px;filter:brightness(0) invert(1)}
+.nav .links{display:flex;gap:30px;opacity:.86}
+.nav .cta{border:1px solid rgba(255,255,255,.55);padding:9px 15px;border-radius:2px}
+body.m .nav{padding:0 20px;height:56px}body.m .nav .links,body.m .nav .cta{display:none}
+body.m .nav .menu{display:block}.nav .menu{display:none}
+.stamp{position:absolute;right:14px;bottom:10px;z-index:60;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(0,0,0,.5);padding:4px 7px;border-radius:2px}
+.fid{position:absolute;left:14px;bottom:10px;z-index:60;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(0,0,0,.5);padding:4px 7px;border-radius:2px}
+body.m .fid{display:none}body.m .stamp{left:8px;right:8px;bottom:6px;font-size:7.5px}
+[data-vis]{opacity:0}
+.d-only{display:block}.m-only{display:none}body.m .d-only{display:none}body.m .m-only{display:block}
+
+/* Player (só no modo de visualização) */
+.bar{position:fixed;left:0;right:0;bottom:0;height:54px;display:flex;align-items:center;gap:14px;padding:0 18px;background:#0b0d0f;border-top:1px solid #23272b;z-index:99;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#aeb6bb}
+.bar button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:#e8ecee;background:#1a1e22;border:1px solid #30363b;border-radius:3px;padding:7px 10px;cursor:pointer}
+.bar button.on{background:#e8ecee;color:#0b0d0f}
+.bar input[type=range]{flex:1;accent-color:#00a04a}
+.bar .t{width:92px;text-align:right;font-variant-numeric:tabular-nums}
+body.still .bar{display:none}

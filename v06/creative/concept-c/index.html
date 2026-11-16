@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rota C · Uma Só Operação</title>
+<link rel="stylesheet" href="../shared/kv.css">
+<style>
+  /* ROTA C — UMA SÓ OPERAÇÃO. Um instante, várias frentes, uma linha física que liga todas. Grotesca condensada de prancha técnica. */
+  .cond{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:500;letter-spacing:-.02em;line-height:.92}
+  .line{position:absolute;background:var(--green);z-index:9}
+  .node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--green);border:2px solid #fff;z-index:10}
+
+  /* Quadro 01 — o convés ao amanhecer; a linha parte do convés e sai do quadro */
+  #c1 .ph{background-image:url(../assets/deck-dawn.jpg);background-size:cover;background-position:50% 58%;filter:contrast(1.05) saturate(1.05)}
+  #c1 .grade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,24,.62) 0%,rgba(6,14,24,.05) 34%,rgba(6,14,24,0) 60%,rgba(4,10,18,.8) 100%)}
+  #c1 h1{position:absolute;left:40px;top:118px;font-size:124px;z-index:10;width:1000px}
+  #c1 .sub{position:absolute;left:40px;top:372px;width:400px;font-family:'IBM Plex Sans Condensed';font-size:19px;line-height:1.4;z-index:10}
+  #c1 .line.v{left:936px;top:486px;width:2px;height:414px}
+  #c1 .node{left:930px;top:480px}
+  #c1 .lbl{position:absolute;left:958px;top:478px;z-index:10}
+  #c1 .fronts{position:absolute;right:40px;bottom:64px;z-index:10;text-align:right;line-height:2}
+  #c1 .fronts b{font-weight:500;color:#fff;border-bottom:2px solid var(--green);padding-bottom:2px}
+
+  /* Quadro 02 — o quadro se abre em frentes simultâneas, ligadas pela mesma linha */
+  #c2{background:#06101a}
+  #c2 .p{position:absolute;overflow:hidden;background-size:cover}
+  #c2 .p:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,10,18,.5),rgba(4,10,18,0) 34%,rgba(4,10,18,0) 60%,rgba(4,10,18,.75))}
+  #c2 .p .t{position:absolute;left:16px;top:14px;z-index:3}
+  #c2 .p .b{position:absolute;left:16px;right:16px;bottom:14px;z-index:3;font-family:'IBM Plex Sans Condensed';font-size:21px;line-height:1.1;font-weight:500}
+  #c2 .p1{left:40px;top:96px;width:470px;height:420px;background-image:url(../assets/deck-dawn.jpg);background-position:50% 70%}
+  #c2 .p2{left:524px;top:96px;width:330px;height:420px;background-image:url(../assets/rov-launch.webp);background-position:50% 40%}
+  #c2 .p3{left:868px;top:96px;width:692px;height:420px;background-image:url(../assets/rov-work-class.jpg);background-position:20% 50%}
+  #c2 .p4{left:40px;top:530px;width:330px;height:290px;background-image:url(../assets/people-training.webp);background-position:60% 30%}
+  #c2 .p5{left:384px;top:530px;width:300px;height:290px;background-image:url(../assets/svc-contingency.webp);background-position:50% 30%}
+  #c2 .p6{left:698px;top:530px;width:480px;height:290px;background-image:url(../assets/svc-prevention.webp);background-position:40% 60%}
+  #c2 .say{position:absolute;left:1206px;top:540px;width:354px;z-index:10}
+  #c2 .say h2{font-size:50px}
+  #c2 .say p{font-family:'IBM Plex Sans Condensed';font-size:17px;line-height:1.4;margin-top:16px;opacity:.9}
+  #c2 .line.h1{left:275px;top:522px;width:940px;height:2px}
+  #c2 .line.h2{left:205px;top:522px;width:2px;height:8px}
+
+  /* Quadro 03 — as frentes viram pontos de um mesmo corte: entrada do Oceânica Universe */
+  #c3{background:linear-gradient(180deg,#dfe7e6 0%,#dfe7e6 31%,#0d3550 31%,#06182a 100%);color:#0b1a26}
+  #c3 .nav img{filter:none}
+  #c3 .nav{color:#0b1a26}
+  #c3 .nav .cta{border-color:#0b1a26}
+  #c3 svg{position:absolute;inset:0;z-index:5}
+  #c3 .thumb{position:absolute;width:150px;height:96px;background-size:cover;border:2px solid #fff;z-index:8;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  #c3 .cap{position:absolute;z-index:9;color:#fff;line-height:1.7}
+  #c3 .cap b{display:block;font-family:'IBM Plex Sans Condensed';font-size:20px;font-weight:500;letter-spacing:0;text-transform:none}
+  #c3 .head{position:absolute;left:40px;top:98px;z-index:10;width:620px}
+  #c3 .head h2{font-size:64px;margin-top:12px}
+  #c3 .tabs{position:absolute;right:40px;top:116px;z-index:10;display:flex;gap:10px}
+  #c3 .tabs span{border:1px solid #0b1a26;padding:9px 14px;border-radius:2px}
+  #c3 .tabs span:first-child{background:#0b1a26;color:#fff}
+
+  #cm .ph{background-image:url(../assets/deck-dawn.jpg);background-size:cover;background-position:52% 50%}
+  #cm .grade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,24,.7) 0%,rgba(6,14,24,0) 40%,rgba(4,10,18,.85) 100%)}
+  #cm h1{position:absolute;left:20px;right:20px;top:96px;font-size:58px;z-index:10}
+  #cm .line.v{left:196px;top:470px;width:2px;height:374px}#cm .node{left:190px;top:464px}
+  #cm .sub{position:absolute;left:20px;right:150px;bottom:70px;font-family:'IBM Plex Sans Condensed';font-size:16px;line-height:1.35;z-index:10}
+  #cm .nav{padding:0 20px}#cm .nav .links{display:none}
+</style>
+</head>
+<body data-route="Rota C · Uma Só Operação">
+
+<section class="stage" id="c1" data-f="1" data-note="abertura · a linha nasce no convés">
+  <div class="ph"></div><div class="grade"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span></nav>
+  <h1 class="cond">Tudo isto é uma só operação.</h1>
+  <p class="sub">Convés, ponte, sala de controle, fundo do mar e base em terra trabalham ao mesmo tempo. A Oceânica é o que liga todos eles.</p>
+  <div class="node"></div><div class="line v"></div><div class="lbl mono">Convés · lançamento de ROV</div>
+  <div class="fronts mono"><div><b>Convés</b></div><div>Controle</div><div>Fundo</div><div>Base</div><div>Engenharia</div></div>
+</section>
+
+<section class="stage" id="c2" data-f="2" data-note="scroll 50% · o plano se abre em frentes simultâneas">
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span></nav>
+  <div class="p p1"><div class="t mono">01 · Convés</div><div class="b">A embarcação é a base de tudo o que desce.</div></div>
+  <div class="p p2"><div class="t mono">02 · Lançamento</div><div class="b">O ROV deixa o convés.</div></div>
+  <div class="p p3"><div class="t mono">03 · Fundo · até 3.000 m</div><div class="b">A intervenção, pilotada da superfície.</div></div>
+  <div class="p p4"><div class="t mono">04 · Treinamento · Rio das Ostras</div><div class="b">Quem opera é formado em casa.</div></div>
+  <div class="p p5"><div class="t mono">05 · Ferramentas</div><div class="b">Projetadas e construídas pela Oceânica.</div></div>
+  <div class="p p6"><div class="t mono">06 · Cliente</div><div class="b">A unidade que não pode parar.</div></div>
+  <div class="line h1"></div>
+  <div class="node" style="left:268px;top:516px"></div><div class="node" style="left:682px;top:516px"></div><div class="node" style="left:1208px;top:516px"></div>
+  <div class="say"><h2 class="cond">Seis frentes. O mesmo instante.</h2><p>Cada janela é um lugar real da operação. A linha verde é física: umbilical, cabo, rota, turno.</p></div>
+</section>
+
+<section class="stage" id="c3" data-f="3" data-note="scroll 100% · as frentes viram pontos do corte · entrada do Universe" data-stamp="Estudo de composição · corte esquemático conceitual, fora de escala · miniaturas: fotografia oficial não liberada">
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span></nav>
+  <div class="head"><div class="mono">04 — Oceânica Universe</div><h2 class="cond">Siga a linha. Cada ponto é uma capacidade.</h2></div>
+  <div class="tabs mono"><span>Prevenção</span><span>Contingenciamento</span><span>Engenharia</span></div>
+  <svg viewBox="0 0 1600 900" fill="none">
+    <line x1="0" y1="279" x2="1600" y2="279" stroke="#fff" stroke-width="1"/>
+    <path d="M0 640 C260 640 330 800 620 812 C900 824 1100 790 1600 800 L1600 900 L0 900Z" fill="#04101c"/>
+    <!-- unidade de produção e embarcação, silhuetas esquemáticas -->
+    <path d="M1060 279 v-50 h40 v-44 h14 v44 h120 v-70 h10 v70 h70 v50z" fill="#0b1a26"/>
+    <path d="M520 279 l-12 -22 h150 v-26 h50 v26 h60 l-20 22z" fill="#009c48"/>
+    <!-- a linha -->
+    <path d="M150 262 C300 262 420 262 600 262 M640 279 V560 C640 700 760 760 900 770 M900 770 C1010 778 1120 700 1180 520 V279" stroke="#009c48" stroke-width="2.5"/>
+    <g fill="#009c48" stroke="#fff" stroke-width="2"><circle cx="150" cy="262" r="7"/><circle cx="640" cy="262" r="7"/><circle cx="640" cy="470" r="7"/><circle cx="900" cy="770" r="7"/><circle cx="1180" cy="520" r="7"/><circle cx="1180" cy="262" r="9" fill="#fff" stroke="#009c48"/></g>
+  </svg>
+  <div class="thumb" style="left:76px;top:296px;background-image:url(../assets/people-training.webp)"></div>
+  <div class="cap mono" style="left:76px;top:402px">Base<b>Formação e ferramentas</b></div>
+  <div class="thumb" style="left:668px;top:296px;background-image:url(../assets/rov-launch.webp);background-position:50% 55%"></div>
+  <div class="cap mono" style="left:668px;top:402px">Convés<b>Lançamento</b></div>
+  <div class="cap mono" style="left:440px;top:452px;text-align:right;width:180px">− 300 m<b>Limite do mergulho</b></div>
+  <div class="thumb" style="left:826px;top:646px;background-image:url(../assets/rov-work-class.jpg);background-position:25% 50%"></div>
+  <div class="cap mono" style="left:994px;top:716px">Fundo<b>Intervenção com ROV</b></div>
+  <div class="cap mono" style="left:1206px;top:500px">Riser<b>Inspeção</b></div>
+  <div class="cap mono" style="left:1330px;top:296px">Cliente<b>Unidade de produção</b></div>
+</section>
+
+<section class="stage" id="cm" data-f="m" data-note="a linha vira o trilho do polegar">
+  <div class="ph"></div><div class="grade"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><span>Menu</span></nav>
+  <h1 class="cond">Tudo isto é uma só operação.</h1>
+  <div class="node"></div><div class="line v"></div>
+  <p class="sub">Siga a linha: convés, controle, fundo, base.</p>
+</section>
+
+<script src="../shared/kv.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hero · Engineering Revealed · storyboard de produção</title>
+<link rel="stylesheet" href="../hero-refinement/shared/anim.css">
+<style>
+  /* A2 — ENGINEERING REVEALED. Mundo em cinza de aço; só o verde da marca e o amarelo do equipamento guardam cor.
+     A folha de desenho (moldura e carimbo) fica parada; a fotografia se move dentro dela. Toda anotação está presa a um ponto real da imagem. */
+  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,20,.5) 0%,rgba(6,14,20,0) 16%,rgba(6,14,20,0) 44%,rgba(6,14,20,.7) 100%)}
+  .sheet{position:absolute;inset:22px;border:1px solid rgba(255,255,255,.34);z-index:18;pointer-events:none}
+  .nav{top:22px;padding:0 46px}
+  .disp{font-family:'Big Shoulders Display',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:.84}
+  h1{position:absolute;left:818px;bottom:48px;font-size:126px;white-space:nowrap;z-index:20}
+  .sub{position:absolute;left:890px;bottom:352px;width:330px;font-family:'IBM Plex Sans';font-weight:300;font-size:16px;line-height:1.5;z-index:20}
+
+  /* carimbo: canto inferior direito, como em uma prancha */
+  .stampblock{position:absolute;left:22px;bottom:22px;width:548px;z-index:22;background:rgba(6,16,23,.9);border-right:1px solid rgba(255,255,255,.34);border-top:1px solid rgba(255,255,255,.34);font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+  .stampblock .r{display:grid;border-bottom:1px solid rgba(255,255,255,.2)}
+  .stampblock .r:last-child{border-bottom:0}
+  .stampblock .c{padding:10px 14px;border-right:1px solid rgba(255,255,255,.2);line-height:1.5}
+  .stampblock .c:last-child{border-right:0}
+  .stampblock small{display:block;font-size:8.5px;opacity:.6;margin-bottom:3px}
+  .stampblock b{font-weight:500}
+  .r2{grid-template-columns:1.25fr 1fr}.r3{grid-template-columns:1fr 1fr 1fr}.r4{grid-template-columns:.9fr 1fr 1fr 1.25fr}
+  .lvl i{display:inline-block;width:18px;height:3px;background:rgba(255,255,255,.28);margin-right:3px;vertical-align:middle}
+  .lvl i.on{background:#fff}
+  .proof{overflow:hidden}
+  .proof .big{font-family:'Big Shoulders Display';font-weight:700;font-size:44px;letter-spacing:0;line-height:1}
+  .proof .alt{color:var(--flag)}
+  .flagrow{color:var(--flag)}
+
+  /* anotações */
+  .pin{position:absolute;left:0;top:0;width:0;height:0;z-index:19}
+  .pin .dot{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border:1px solid #fff;border-radius:50%;background:rgba(6,16,23,.5)}
+  .pin .ln{position:absolute;left:0;top:0;height:1px;background:rgba(255,255,255,.85);transform-origin:0 0}
+  .pin .lb{position:absolute;white-space:nowrap;font-size:11px;letter-spacing:.13em;text-transform:uppercase;line-height:1.6;padding:5px 10px;margin-left:6px;background:rgba(6,16,23,.74);transform:translateY(-50%)}
+  .pin .lb.l{margin-left:-6px;transform:translate(-100%,-50%);text-align:right}
+  .pin .lb b{display:block;font-family:'Big Shoulders Display';font-weight:600;font-size:40px;letter-spacing:.02em;line-height:1.05}
+  .pin .lb small{opacity:.7;font-size:9px}
+  .dim{position:absolute;left:0;top:0;height:1px;background:rgba(255,255,255,.85);transform-origin:0 0;z-index:19}
+  .dim:before,.dim:after{content:"";position:absolute;top:-6px;width:1px;height:13px;background:#fff}
+  .dim:before{left:0}.dim:after{right:0}
+  .dim span{position:absolute;left:50%;top:-22px;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;background:rgba(6,16,23,.72);padding:2px 7px}
+  .dim.v span{transform:translateX(-50%) rotate(180deg);top:10px}
+  .dim.dash{background:none;border-top:1px dashed rgba(255,255,255,.8)}
+  .dim.dash:before,.dim.dash:after{display:none}
+
+  body.m .sheet{inset:10px}body.m .nav{top:10px}
+  body.m h1{left:22px;bottom:124px;font-size:56px}
+  body.m .sub{display:none}
+  body.m .stampblock{left:10px;right:10px;bottom:38px;width:auto;border-right:1px solid rgba(255,255,255,.34)}
+  body.m .stampblock .hide-m,body.m .pin,body.m .dim,body.m .stampblock .r2,body.m .stampblock .r3{display:none!important}
+  body.m .proof .r4{grid-template-columns:1fr 1fr 1.25fr}body.m .proof .r4 .c:first-child{display:none}body.m .proof .big{font-size:34px}body.m .flagrow{font-size:8.5px}
+</style>
+</head>
+<body data-title="Hero · storyboard de produção" data-dur="14" data-frames="0,.36,.70,1" data-mobile-p=".36"
+      data-stamp="Estudo de direção · fotografia oficial do site, não liberada · cor tratada · céu e mar estendidos à direita no plano do ROV · movimento = simulação digital">
+
+<div class="stage">
+  <img class="shot" id="rov" src="../hero-refinement/plates/a2-rov.jpg" data-vis="0-.435" data-fade=".012"
+       data-cam="0:.292,.575,3.3|.05:.292,.575,3.3|.36:.47,.5,1.07|.435:.5,.5,1"
+       data-cam-m="0:.292,.575,2.1|.05:.292,.575,2.1|.36:.287,.50,1.0|.435:.287,.5,1">
+  <img class="shot" id="deck" src="../hero-refinement/plates/a2-deck.jpg" data-vis=".428-1" data-fade=".012"
+       data-cam=".428:.59,.545,3.1|.70:.50,.575,2.15|1:.5,.47,1"
+       data-cam-m=".428:.594,.55,2.4|.70:.585,.56,1.5|1:.61,.47,1">
+  <div class="shade"></div>
+  <div class="sheet"></div>
+
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span><span class="menu">Menu</span></nav>
+
+  <!-- F01 · uma anotação só: o que está escrito na própria máquina -->
+  <div class="pin" data-shot="rov" data-at=".338,.546" data-to="250,-190" data-vis=".0-.16"><b>3000 M</b>Profundidade nominal<br><small>Como impresso no equipamento</small></div>
+
+  <!-- F02 · o conjunto -->
+  <div class="pin" data-shot="rov" data-at=".15,.115" data-to="560,70" data-vis=".28-.42">LARS<br><small>Lançamento e recuperação</small></div>
+  <div class="pin keep-m" data-shot="rov" data-at=".33,.36" data-to="300,0" data-vis=".28-.42">TMS<br><small>Gerenciamento do umbilical</small></div>
+  <div class="pin" data-shot="rov" data-at=".40,.63" data-to="230,-120" data-vis=".28-.42">ROV Work Class<br><small>Perry XLX 142 · 200 HP</small></div>
+  <div class="dim v" data-shot="rov" data-pts=".455,.205,.455,.775" data-vis=".3-.42"><span>Altura do conjunto · — m · ficha técnica</span></div>
+
+  <!-- F03 · o sistema no convés -->
+  <div class="pin" data-shot="deck" data-at=".594,.548" data-to="200,-150" data-vis=".56-.80">Sistema de ROV no convés<br><small>O mesmo tipo de equipamento, a bordo</small></div>
+
+  <!-- F04 · o campo -->
+  <div class="dim dash" data-shot="deck" data-pts=".594,.548,.60,.356" data-vis=".88-1"></div>
+  <div class="pin" data-shot="deck" data-at=".60,.352" data-to="-170,-120" data-vis=".88-1" data-side="l">Unidade de produção<br><small>No horizonte · distância não medida</small></div>
+
+  <h1 class="disp" data-vis="0-.86">Esta é a parte<br>visível.</h1>
+
+  <div class="stampblock">
+    <div class="r proof" id="proof">
+      <div class="r r4" style="border-bottom:1px solid rgba(255,255,255,.2)">
+        <div class="c"><small>Folha 02</small><b>Escala oceânica</b></div>
+        <div class="c"><small>Frota</small><span class="big">18</span><br>RI · 1T26<br><span class="alt">Site: 11</span></div>
+        <div class="c"><small>ROVs</small><span class="big">55</span><br>RI · 1T26<br><span class="alt">Site: 56</span></div>
+        <div class="c"><small>Pessoas</small><span class="big">2.378</span><br>RI · 1T26<br>Site: “+ 2.300”</div>
+      </div>
+      <div class="c flagrow">Divergências entre site (16/11/2026) e RI (13/05/2026) · validar antes de publicar</div>
+    </div>
+    <div class="r"><div class="c"><small>Escopo</small>Inspeção, reparo e resposta a emergências · de 0 a 3.000 m · desde 1978</div></div>
+    <div class="r r2"><div class="c"><small>Projeto</small><b>Oceânica</b> · Engenharia offshore e subsea</div><div class="c hide-m"><small>Folha</small><b id="folha">01 · Presença</b></div></div>
+    <div class="r r3"><div class="c"><small>Assunto</small><b id="subj">ROV Work Class</b></div><div class="c lvl"><small>Nível</small><span id="lv"><i></i><i></i><i></i><i></i></span> <b id="lvn">1/4</b></div><div class="c hide-m"><small>Enquadramento</small><b id="frm">Equipamento</b></div></div>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const shots = { rov: $('rov'), deck: $('deck') };
+  // monta as linhas de chamada
+  const pins = [...document.querySelectorAll('.pin')].map(el => {
+    const [dx, dy] = el.dataset.to.split(',').map(Number), len = Math.hypot(dx, dy), left = el.dataset.side === 'l';
+    const html = el.innerHTML; el.innerHTML = '';
+    const ln = Object.assign(document.createElement('i'), { className: 'ln' }); ln.style.width = len + 'px'; ln.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+    const lb = Object.assign(document.createElement('div'), { className: 'lb' + (left ? ' l' : ''), innerHTML: html }); lb.style.left = dx + 'px'; lb.style.top = dy + 'px';
+    el.append(Object.assign(document.createElement('i'), { className: 'dot' }), ln, lb);
+    return { el, shot: shots[el.dataset.shot], at: el.dataset.at.split(',').map(Number) };
+  });
+  const dims = [...document.querySelectorAll('.dim')].map(el => ({ el, shot: shots[el.dataset.shot], p: el.dataset.pts.split(',').map(Number) }));
+  const levels = [['ROV Work Class', 'Equipamento'], ['ROV · TMS · LARS', 'Sistema'], ['Convés de trabalho', 'Embarcação'], ['Embarcação e unidade', 'Campo']];
+  const proof = $('proof');
+  window.tick = (p, { mobile, sm, cl }) => {
+    for (const a of pins) { const [x, y] = project(a.shot, a.at[0], a.at[1]); a.el.style.transform = `translate(${x}px,${y}px)`; }
+    for (const d of dims) {
+      const [x1, y1] = project(d.shot, d.p[0], d.p[1]), [x2, y2] = project(d.shot, d.p[2], d.p[3]);
+      d.el.style.width = Math.hypot(x2 - x1, y2 - y1) + 'px';
+      d.el.style.transform = `translate(${x1}px,${y1}px) rotate(${Math.atan2(y2 - y1, x2 - x1)}rad)`;
+    }
+    const n = p < .2 ? 0 : p < .435 ? 1 : p < .84 ? 2 : 3;
+    $('subj').textContent = levels[n][0]; $('frm').textContent = levels[n][1]; $('lvn').textContent = (n + 1) + '/4';
+    [...$('lv').children].forEach((i, k) => i.classList.toggle('on', k <= n));
+    // entrega para o ato 02: o carimbo abre e a prova entra, com a fonte de cada número
+    const u = sm(cl((p - .86) / .12, 0, 1));
+    proof.style.maxHeight = (mobile ? 200 : 150) * u + 'px'; proof.style.opacity = u; proof.style.borderBottomWidth = u > 0 ? '1px' : 0;
+    $('folha').textContent = u > .5 ? '02 · Escala →' : '01 · Presença';
+  };
+</script>
+<script src="../hero-refinement/shared/anim.js"></script>
+</body>
+</html>

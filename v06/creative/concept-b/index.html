@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rota B · Cota Zero</title>
+<link rel="stylesheet" href="../shared/kv.css">
+<style>
+  /* ROTA B — COTA ZERO. A linha d'água é uma linha fixa de desenho técnico. Serifa editorial + cotas em mono. */
+  .serif{font-family:'Instrument Serif',serif;font-weight:400;letter-spacing:-.015em;line-height:.96}
+  .water{position:absolute;left:0;right:0;bottom:0;background:
+    radial-gradient(120% 60% at 50% 0%,rgba(40,140,170,.55) 0%,rgba(10,60,95,.35) 30%,rgba(2,10,20,0) 70%),
+    linear-gradient(180deg,#0b4a68 0%,#07304a 22%,#041c30 55%,#020a14 100%)}
+  .rays{position:absolute;left:0;right:0;top:0;height:70%;opacity:.5;mix-blend-mode:screen;background:
+    repeating-linear-gradient(98deg,rgba(160,230,240,0) 0 60px,rgba(160,230,240,.10) 80px,rgba(160,230,240,0) 130px);
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent)}
+  .wl{position:absolute;left:0;right:0;height:1px;background:#fff;z-index:8}
+  .wl span{position:absolute;top:-22px;left:40px}
+  .wl em{position:absolute;top:8px;right:40px;font-style:normal}
+  .umb{position:absolute;width:1px;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.35));z-index:7}
+  .tick{position:absolute;left:40px;z-index:9;display:flex;align-items:center;gap:12px}
+  .tick i{display:block;width:26px;height:1px;background:rgba(255,255,255,.7)}
+
+  /* Quadro 01 — linha a 58%. Acima: operação. Abaixo: a maior parte. */
+  #b1 .ph{bottom:42%;background-image:url(../assets/closing-vessel.webp);background-size:cover;background-position:50% 30%;filter:saturate(.92) contrast(1.04)}
+  #b1 .sky{position:absolute;left:0;right:0;top:0;height:30%;background:linear-gradient(180deg,rgba(4,20,34,.55),rgba(4,20,34,0))}
+  #b1 .water{height:42%}
+  #b1 .wl{top:58%}
+  #b1 .umb{left:50.2%;top:58%;height:42%}
+  #b1 h1{position:absolute;left:40px;top:124px;font-size:104px;width:860px;z-index:10}
+  #b1 h1 i{font-style:italic}
+  #b1 .sub{position:absolute;right:40px;top:140px;width:300px;font-family:'IBM Plex Sans Condensed';font-size:18px;line-height:1.4;z-index:10;text-transform:none;letter-spacing:0}
+  #b1 .below{position:absolute;left:40px;bottom:60px;z-index:10;width:560px}
+  #b1 .below .big{font-family:'Instrument Serif';font-size:46px;line-height:1}
+  #b1 .scale{position:absolute;right:40px;bottom:60px;z-index:10;text-align:right;line-height:1.9}
+
+  /* Quadro 02 — a linha subiu. O navio é uma marca. Escala real da coluna. */
+  #b2 .water{top:0;height:100%}
+  #b2 .strip{position:absolute;left:0;right:0;top:0;height:92px;background-image:url(../assets/closing-vessel.webp);background-size:cover;background-position:50% 42%;filter:saturate(.8) brightness(.8)}
+  #b2 .wl{top:92px}
+  #b2 .umb{left:50.2%;top:92px;height:808px}
+  #b2 .ship{position:absolute;left:calc(50.2% - 28px);top:80px;width:56px;height:12px;background:#fff;z-index:9;clip-path:polygon(0 0,82% 0,100% 55%,92% 100%,6% 100%)}
+  #b2 .shiplabel{position:absolute;left:calc(50.2% + 44px);top:104px;z-index:9}
+  #b2 .mark{position:absolute;left:calc(50.2% - 5px);width:11px;height:11px;border:1px solid #fff;border-radius:50%;z-index:9;background:#041c30}
+  #b2 .ctr{position:absolute;left:calc(50.2% + 60px);top:300px;z-index:10;width:560px}
+  #b2 .ctr .d{font-family:'Instrument Serif';font-size:200px;line-height:.82}
+  #b2 .ctr .d small{font-size:54px;margin-left:10px}
+  #b2 .ctr p{font-family:'Instrument Serif';font-size:34px;line-height:1.08;margin-top:22px}
+  #b2 .note{position:absolute;left:calc(50.2% + 60px);bottom:96px;width:420px;font-family:'IBM Plex Sans Condensed';font-size:16px;line-height:1.4;z-index:10;opacity:.85;text-transform:none;letter-spacing:0}
+
+  /* Quadro 03 — fundo. O ROV Work Class em intervenção. Entrada do ato 03 */
+  #b3{background:#020a14}
+  #b3 .ph{background-image:url(../assets/rov-work-class.jpg);background-size:118%;background-position:0% 62%;filter:contrast(1.06)}
+  #b3 .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,10,20,0) 34%,rgba(2,10,20,.86) 66%),linear-gradient(180deg,rgba(2,10,20,.9) 0%,rgba(2,10,20,0) 26%)}
+  #b3 .wl{top:64px;opacity:.5}
+  #b3 .umb{left:27%;top:64px;height:190px;opacity:.7}
+  #b3 .ctr{position:absolute;right:40px;top:230px;width:520px;z-index:10}
+  #b3 .ctr .d{font-family:'Instrument Serif';font-size:190px;line-height:.82}
+  #b3 .ctr .d small{font-size:52px;margin-left:10px}
+  #b3 .ctr p{font-family:'Instrument Serif';font-size:36px;line-height:1.08;margin-top:22px}
+  #b3 .ctr .m{margin-top:30px;line-height:1.9;opacity:.85}
+
+  #bm .ph{bottom:50%;background-image:url(../assets/closing-vessel.webp);background-size:auto 150%;background-position:50% 30%}
+  #bm .water{height:50%}#bm .wl{top:50%}#bm .wl span{left:20px}#bm .wl em{right:20px}
+  #bm .umb{left:50%;top:50%;height:50%}
+  #bm h1{position:absolute;left:20px;right:20px;top:96px;font-size:50px;z-index:10}
+  #bm .below{position:absolute;left:20px;right:20px;bottom:64px;z-index:10;font-family:'Instrument Serif';font-size:26px;line-height:1.05}
+  #bm .nav{padding:0 20px}#bm .nav .links{display:none}
+</style>
+</head>
+<body data-route="Rota B · Cota Zero">
+
+<section class="stage" id="b1" data-f="1" data-note="abertura · a linha d'água a 58% do quadro" data-stamp="Estudo de composição · foto oficial acima da linha · água abaixo da linha é ilustração conceitual">
+  <div class="ph"></div><div class="sky"></div>
+  <div class="water"><div class="rays"></div></div>
+  <div class="wl mono"><span>Cota 0 m · linha d'água</span></div>
+  <div class="umb"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span></nav>
+  <h1 class="serif">A operação continua <i>abaixo da linha.</i></h1>
+  <p class="sub">Engenharia, embarcações, mergulho e robótica submarina em uma única coluna de trabalho, de 0 a 3.000 metros.</p>
+  <div class="below"><div class="mono" style="margin-bottom:14px">Abaixo da linha</div><div class="big">Aqui está a maior parte do que mantém a produção offshore em pé.</div></div>
+  <div class="scale mono"><div>0 → 3.000 m</div><div>Role para descer ↓</div></div>
+</section>
+
+<section class="stage" id="b2" data-f="2" data-note="scroll 40% · a linha sobe e trava no topo; a coluna em escala" data-stamp="Estudo de composição · coluna d'água é ilustração conceitual · limite de 300 m citado no site oficial">
+  <div class="water"><div class="rays" style="height:40%"></div></div>
+  <div class="strip"></div>
+  <div class="wl mono"><em style="top:10px">Cota 0 m</em></div>
+  <div class="ship"></div><div class="shiplabel mono">Embarcação · em escala</div>
+  <div class="umb"></div>
+  <div class="mark" style="top:286px"></div>
+  <div class="tick mono" style="top:119px"><i></i>− 50 m · sistemas de mergulho raso</div>
+  <div class="tick mono" style="top:286px"><i></i>− 300 m</div>
+  <div class="tick mono" style="top:753px"><i></i>− 1.000 m</div>
+  <div class="ctr"><div class="d">300<small>m</small></div><p>Limite do mergulho humano. Daqui em diante, o trabalho é feito por ROVs pilotados da superfície.</p></div>
+  <p class="note">A marca branca no topo é a embarcação, na mesma escala da coluna (1 px = 1,5 m; comprimento a validar). O fundo ainda está dois quadros abaixo.</p>
+</section>
+
+<section class="stage" id="b3" data-f="3" data-note="scroll 100% · chegada ao fundo · entrega o ato 03 · Capacidade">
+  <div class="ph"></div><div class="veil"></div>
+  <div class="wl"></div><div class="umb"></div>
+  <nav class="nav mono" style="opacity:.7"><img src="../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>Cota 0 m ↑</span></div><span class="cta">Fale com a operação</span></nav>
+  <div class="ctr">
+    <div class="mono" style="margin-bottom:24px">03 — Capacidade</div>
+    <div class="d">3.000<small>m</small></div>
+    <p>Onde ninguém vê, a intervenção acontece com a mesma precisão da superfície.</p>
+    <div class="m mono"><div>ROV Work Class · manipuladores de 7 funções</div><div>Ferramentas projetadas pela própria Oceânica</div></div>
+  </div>
+</section>
+
+<section class="stage" id="bm" data-f="m" data-note="a linha no meio da tela; polegar desce a coluna" data-stamp="Estudo · água é ilustração conceitual">
+  <div class="ph"></div><div class="water"><div class="rays"></div></div>
+  <div class="wl mono"><span>Cota 0 m</span></div><div class="umb"></div>
+  <nav class="nav mono"><img src="../assets/logo-oceanica.png" alt="Oceânica"><span>Menu</span></nav>
+  <h1 class="serif">A operação continua <i>abaixo da linha.</i></h1>
+  <div class="below">De 0 a 3.000 metros, a mesma engenharia.</div>
+</section>
+
+<script src="../shared/kv.js"></script>
+</body>
+</html>

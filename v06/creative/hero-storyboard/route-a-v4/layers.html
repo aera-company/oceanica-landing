@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>V4 · camadas de texto</title>
+<!-- Uma camada por renderização, fundo transparente. ?l=nome · ?m=1 mobile 720×1280.
+     Camadas: logo, note, scroll, esta, parte, visivel, sig -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Instrument+Serif:ital@0;1&display=block" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:transparent;overflow:hidden}
+  body{width:1920px;height:1080px;position:relative;color:#f2f1ec;-webkit-font-smoothing:antialiased;font-family:'Archivo',sans-serif}
+  body.m{width:720px;height:1280px}
+  .x{position:absolute;white-space:nowrap}
+  .serif{font-family:'Instrument Serif',serif;letter-spacing:-.02em;line-height:1}
+  .small{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+  .logo{height:22px;filter:brightness(0) invert(1);opacity:.92}
+  body.m .logo{height:18px}
+  .note{font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.42}
+  .sig b{font-weight:600}
+  .sig span{opacity:.6}
+  .line{display:inline-block;width:1px;height:38px;background:rgba(242,241,236,.6);vertical-align:middle;margin-bottom:10px}
+</style>
+</head>
+<body>
+<script>
+const q = new URLSearchParams(location.search), l = q.get('l'), m = q.get('m') === '1';
+if (m) document.body.classList.add('m');
+const D = m ? {
+  logo: ['<img class="logo" src="../../assets/logo-oceanica.png">', {left: '36px', top: '44px'}],
+  note: ['Estudo · vídeos da Oceânica no YouTube · não liberados', {left: '36px', bottom: '20px'}, 'note small'],
+  scroll: ['<span class="line"></span><br>Role', {left: '50%', bottom: '64px', transform: 'translateX(-50%)', textAlign: 'center'}, 'small'],
+  esta: ['Esta é', {left: '36px', top: '120px', fontSize: '150px'}, 'serif'],
+  parte: ['a parte', {left: '36px', top: '110px', fontSize: '150px'}, 'serif'],
+  visivel: ['visível.', {right: '36px', top: '868px', fontSize: '150px'}, 'serif'],
+  sig: ['<b>Oceânica</b><br><span>Engenharia offshore e subsea · desde 1978</span>', {left: '36px', top: '1030px', lineHeight: '2'}, 'small sig']
+} : {
+  logo: ['<img class="logo" src="../../assets/logo-oceanica.png">', {left: '72px', top: '60px'}],
+  note: ['Estudo · trechos de vídeos da Oceânica no YouTube · não liberados · cor tratada', {right: '72px', bottom: '28px'}, 'note small'],
+  scroll: ['<span class="line"></span><br>Role', {left: '50%', bottom: '44px', transform: 'translateX(-50%)', textAlign: 'center'}, 'small'],
+  esta: ['Esta é', {right: '1220px', top: '420px', fontSize: '250px'}, 'serif'],
+  parte: ['a parte', {right: '1220px', top: '420px', fontSize: '250px'}, 'serif'],
+  visivel: ['visível.', {left: '1220px', top: '420px', fontSize: '250px'}, 'serif'],
+  sig: ['<b>Oceânica</b> <span>&nbsp;·&nbsp; Engenharia offshore e subsea &nbsp;·&nbsp; desde 1978</span>', {left: '72px', top: '948px'}, 'small sig']
+};
+const [h, css, cls] = D[l];
+const d = document.createElement('div'); d.className = 'x ' + (cls || ''); d.innerHTML = h; Object.assign(d.style, css); document.body.appendChild(d);
+</script>
+</body>
+</html>

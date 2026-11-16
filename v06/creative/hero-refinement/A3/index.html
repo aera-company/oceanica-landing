@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A3 · The Bigger Picture</title>
+<link rel="stylesheet" href="../shared/anim.css">
+<style>
+  /* A3 — THE BIGGER PICTURE. A imagem conta sozinha: reflexo → navio → cais → mar aberto.
+     Quase sem texto até o último quadro. Um único corte seco, do abrigo para o oceano. */
+  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,22,30,.42) 0%,rgba(2,22,30,0) 15%,rgba(2,22,30,0) 70%,rgba(2,16,26,.5) 100%)}
+  .serif{font-family:'Fraunces',serif;font-variation-settings:'opsz' 144;font-weight:300;letter-spacing:-.025em;line-height:.98}
+  .eyebrow{position:absolute;left:48px;bottom:48px;z-index:20;display:flex;gap:12px;align-items:center}
+  .eyebrow i{width:28px;height:1px;background:#fff}
+  .cue{position:absolute;right:48px;bottom:48px;z-index:20}
+  .cap{position:absolute;left:48px;bottom:48px;z-index:20;line-height:1.9}
+  .count{position:absolute;right:48px;bottom:48px;z-index:20}
+  h1{position:absolute;left:44px;bottom:112px;font-size:112px;white-space:nowrap;z-index:20;font-style:italic;text-shadow:0 2px 50px rgba(0,16,40,.4)}
+  h1 em{font-style:normal}
+  .proof{position:absolute;left:50px;bottom:44px;z-index:20;line-height:2}
+  .proof b{font-weight:500}
+  .proof .flag{color:#ffb27a}
+  .next{position:absolute;right:48px;bottom:44px;z-index:20}
+
+  body.m h1{left:20px;top:auto;bottom:96px;font-size:58px;white-space:normal}
+  body.m .eyebrow,body.m .cap{left:20px;bottom:40px;font-size:9px}
+  body.m .cue,body.m .count{display:none}
+  body.m .shade{background:linear-gradient(180deg,rgba(2,22,30,.5) 0%,rgba(2,22,30,0) 16%,rgba(2,22,30,0) 60%,rgba(2,16,26,.7) 100%)}
+</style>
+</head>
+<body data-title="A3 · The Bigger Picture" data-dur="14" data-frames="0,.34,.66,1" data-mobile-p=".34">
+
+<div class="stage">
+  <img class="shot" src="../plates/a3-basin.jpg" data-vis="0-.70" data-fade="0"
+       data-cam="0:.50,.765,2.9|.07:.50,.765,2.9|.34:.52,.47,1.22|.66:.5,.5,1.0|.70:.5,.5,1"
+       data-cam-m="0:.655,.56,1.0">
+  <img class="shot" src="../plates/a3-ocean.jpg" data-vis=".70-1" data-fade="0"
+       data-cam=".70:.40,.44,1.6|1:.5,.5,1.0">
+  <div class="shade"></div>
+
+  <nav class="nav mono"><img src="../../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span><span class="menu">Menu</span></nav>
+
+  <div class="eyebrow mono" data-vis="0-.22"><span>Oceânica</span><i></i><span>Engenharia offshore e subsea · desde 1978</span></div>
+  <div class="cue mono" data-vis="0-.1">Role para recuar ↓</div>
+
+  <div class="cap mono" data-vis=".28-.69">Oceanicasub XI · RSV<br><span style="opacity:.7">O que você viu primeiro era o reflexo</span></div>
+  <div class="count mono" data-vis=".28-.69"><span id="cnt">02 / 04</span></div>
+
+  <h1 class="serif" data-vis=".80-1" data-fade=".05"><span class="d-only">Quanto mais longe, maior.</span><span class="m-only">Quanto mais<br>longe, maior.</span></h1>
+  <div class="proof mono" data-vis=".88-1" data-fade=".05"><b>Uma de 18 embarcações</b> · RI, release 1T26, 13/05/2026<br><span class="flag">O site lista 11 · validar antes de publicar</span></div>
+  <div class="next mono" data-vis=".9-1" data-fade=".04">02 — Escala ↓</div>
+</div>
+
+<script>
+  const cnt = document.getElementById('cnt');
+  window.tick = p => { cnt.textContent = p < .5 ? '02 / 04 · A embarcação' : '03 / 04 · O entorno'; };
+</script>
+<script src="../shared/anim.js"></script>
+</body>
+</html>

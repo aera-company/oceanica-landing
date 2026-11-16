@@ -1,0 +1,55 @@
+{
+ "saida": "animatic-v4-final-a.mp4",
+ "total": 25.04,
+ "planos": [
+  {
+   "plano": "claw",
+   "arquivo": "v2-28-claw-macro.mp4",
+   "inicio_no_clipe": 0,
+   "entra": 0,
+   "dur": 3.67
+  },
+  {
+   "plano": "arm",
+   "arquivo": "v2-26-manipulator-macro.mp4",
+   "inicio_no_clipe": 0,
+   "entra": 3.67,
+   "dur": 2.63
+  },
+  {
+   "plano": "pilot",
+   "arquivo": "v2-27-pilot-manipulator.mp4",
+   "inicio_no_clipe": 0,
+   "entra": 6.3,
+   "dur": 2.59
+  },
+  {
+   "plano": "lars",
+   "arquivo": "s60-rov-suspended-lars.mp4",
+   "inicio_no_clipe": 0,
+   "entra": 8.88,
+   "dur": 2.25
+  },
+  {
+   "plano": "water",
+   "arquivo": "s32-rov-entering-water.mp4",
+   "inicio_no_clipe": 0.4,
+   "entra": 11.14,
+   "dur": 3.8
+  },
+  {
+   "plano": "subv",
+   "arquivo": "s34-sub-v-alongside-fpso.mp4",
+   "inicio_no_clipe": 0.2,
+   "entra": 14.94,
+   "dur": 3.7
+  },
+  {
+   "plano": "offshore",
+   "arquivo": "s74-vessel-platform-wide-TEXT.mp4",
+   "inicio_no_clipe": 0,
+   "entra": 18.64,
+   "dur": 6.4
+  }
+ ]
+}

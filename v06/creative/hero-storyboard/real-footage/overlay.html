@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Overlay · hero A2 com imagens reais</title>
+<!-- Camada gráfica da hero A2 renderizada em PNG transparente, um estado por plano. ?s=1..5 · ?m=1 para 720×1280 -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=IBM+Plex+Mono:wght@400;500&display=block');
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:transparent;overflow:hidden}
+  body{width:1920px;height:1080px;position:relative;color:#f4f6f4;font-family:'IBM Plex Mono',monospace;-webkit-font-smoothing:antialiased}
+  body.m{width:720px;height:1280px}
+  .mono{font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  .sheet{position:absolute;inset:26px;border:1px solid rgba(255,255,255,.38)}
+  .nav{position:absolute;left:56px;right:56px;top:26px;height:80px;display:flex;align-items:center;justify-content:space-between}
+  .nav img{height:25px;filter:brightness(0) invert(1)}
+  .nav .links{display:flex;gap:36px;opacity:.88}
+  .nav .cta{border:1px solid rgba(255,255,255,.6);padding:11px 18px;border-radius:2px}
+  h1{position:absolute;right:70px;bottom:58px;font-family:'Big Shoulders Display';font-weight:700;text-transform:uppercase;font-size:150px;line-height:.84;letter-spacing:.005em;white-space:nowrap;text-shadow:0 2px 40px rgba(0,8,14,.35)}
+  .stamp{position:absolute;left:26px;bottom:26px;width:660px;background:rgba(6,16,23,.9);border-top:1px solid rgba(255,255,255,.38);border-right:1px solid rgba(255,255,255,.38);font-size:12px;letter-spacing:.13em;text-transform:uppercase}
+  .r{display:grid;border-bottom:1px solid rgba(255,255,255,.2)}.r:last-child{border-bottom:0}
+  .c{padding:12px 16px;border-right:1px solid rgba(255,255,255,.2);line-height:1.5}.c:last-child{border-right:0}
+  .c small{display:block;font-size:10px;opacity:.6;margin-bottom:3px}
+  .c b{font-weight:500}
+  .r2{grid-template-columns:1.25fr 1fr}.r3{grid-template-columns:1.1fr 1fr 1fr}.r4{grid-template-columns:.9fr 1fr 1fr 1.25fr}
+  .lvl i{display:inline-block;width:22px;height:3px;background:rgba(255,255,255,.28);margin-right:4px;vertical-align:middle}.lvl i.on{background:#fff}
+  .big{font-family:'Big Shoulders Display';font-weight:700;font-size:54px;letter-spacing:0;line-height:1}
+  .alt{color:#ff8a3a}.flag{color:#ff8a3a}
+  .pin{position:absolute;width:0;height:0}
+  .pin .dot{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border:1px solid #fff;border-radius:50%;background:rgba(6,16,23,.5)}
+  .pin .ln{position:absolute;left:0;top:0;height:1px;background:rgba(255,255,255,.9);transform-origin:0 0}
+  .pin .lb{position:absolute;white-space:nowrap;font-size:13px;letter-spacing:.13em;text-transform:uppercase;line-height:1.6;padding:7px 12px;background:rgba(6,16,23,.78);transform:translateY(-50%)}
+  .pin .lb.l{transform:translate(-100%,-50%);text-align:right}
+  .pin .lb small{display:block;opacity:.7;font-size:11px}
+  .note{position:absolute;right:30px;bottom:2px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.55);padding:5px 9px;border-radius:2px;color:rgba(255,255,255,.85)}
+
+  body.m .sheet{inset:12px}
+  body.m .nav{left:30px;right:30px;top:12px;height:70px}body.m .nav .links,body.m .nav .cta{display:none}
+  body.m .nav .menu{display:block}.nav .menu{display:none}
+  body.m h1{left:32px;right:auto;bottom:212px;font-size:104px}
+  body.m .stamp{left:12px;right:12px;bottom:12px;width:auto;border-left:1px solid rgba(255,255,255,.38)}
+  body.m .hide-m,body.m .pin{display:none!important}
+  body.m .r4{grid-template-columns:1fr 1fr 1.25fr}body.m .r4 .c:first-child{display:none}
+  body.m .big{font-size:46px}
+  body.m .note{right:12px;left:12px;bottom:auto;top:84px;text-align:center;font-size:9px}
+</style>
+</head>
+<body>
+<div class="sheet"></div>
+<nav class="nav mono"><img src="../../assets/logo-oceanica.png" alt="Oceânica"><div class="links"><span>A Oceânica</span><span>Soluções</span><span>Ativos</span><span>Investidores</span><span>PT / EN</span></div><span class="cta">Fale com a operação</span><span class="menu">Menu</span></nav>
+<div class="note">Estudo · trechos do vídeo institucional da Oceânica (YouTube, 1080p) · não liberado · cor tratada</div>
+<div id="pins"></div>
+<h1 id="h1">Esta é a parte<br>visível.</h1>
+<div class="stamp">
+  <div class="r" id="proof" style="display:none">
+    <div class="r r4" style="border-bottom:1px solid rgba(255,255,255,.2)">
+      <div class="c"><small>Folha 02</small><b>Escala oceânica</b></div>
+      <div class="c"><small>Frota</small><span class="big">18</span><br>RI · 1T26<br><span class="alt">Site: 11</span></div>
+      <div class="c"><small>ROVs</small><span class="big">55</span><br>RI · 1T26<br><span class="alt">Site: 56</span></div>
+      <div class="c"><small>Pessoas</small><span class="big">2.378</span><br>RI · 1T26<br>Site: “+ 2.300”</div>
+    </div>
+    <div class="c flag">Divergências entre site (16/11/2026) e RI (13/05/2026) · validar antes de publicar</div>
+  </div>
+  <div class="r"><div class="c"><small>Escopo</small>Inspeção, reparo e resposta a emergências · de 0 a 3.000 m · desde 1978</div></div>
+  <div class="r r2 hide-m"><div class="c"><small>Projeto</small><b>Oceânica</b> · Engenharia offshore e subsea</div><div class="c"><small>Folha</small><b id="folha">01 · Presença</b></div></div>
+  <div class="r r3 hide-m"><div class="c"><small>Assunto</small><b id="subj"></b></div><div class="c lvl"><small>Nível</small><span id="lv"><i></i><i></i><i></i><i></i></span> <b id="lvn"></b></div><div class="c"><small>Enquadramento</small><b id="frm"></b></div></div>
+</div>
+<script>
+  const q = new URLSearchParams(location.search), s = +(q.get('s') || 1);
+  if (q.get('m') === '1') document.body.classList.add('m');
+  // [assunto, nível, enquadramento, chamadas: [x, y, dx, dy, texto, lado]]
+  const S = {
+    1: ['ROV Work Class', 1, 'Equipamento', [[1748, 560, -560, -300, 'SWL (surface) · SWL (at depth)<small>Carga de trabalho segura · como impresso no LARS</small>', 'l']]],
+    2: ['ROV · guindaste · equipe', 2, 'Sistema', [[1492, 292, -380, -120, 'Equipe de convés<small>Lançamento e recuperação</small>', 'l']]],
+    3: ['ROV · entrada na água', 3, 'Abaixo da linha', []],
+    4: ['Embarcação e unidade', 4, 'Campo', [[1150, 622, 330, -250, 'Oceanicasub V<small>Nome pintado no costado</small>'], [1640, 300, -300, -90, 'Unidade de produção<small>Embarcação a contrabordo</small>', 'l']]],
+    5: ['Embarcação e unidade', 4, 'Campo', []]
+  }[s];
+  document.getElementById('subj').textContent = S[0];
+  document.getElementById('lvn').textContent = S[1] + '/4';
+  [...document.getElementById('lv').children].forEach((i, k) => i.classList.toggle('on', k < S[1]));
+  document.getElementById('frm').textContent = S[2];
+  for (const [x, y, dx, dy, t, side] of S[3]) {
+    const p = document.createElement('div'); p.className = 'pin'; p.style.left = x + 'px'; p.style.top = y + 'px';
+    p.innerHTML = `<i class="dot"></i><i class="ln" style="width:${Math.hypot(dx, dy)}px;transform:rotate(${Math.atan2(dy, dx)}rad)"></i><div class="lb${side === 'l' ? ' l' : ''}" style="left:${dx}px;top:${dy}px">${t}</div>`;
+    document.getElementById('pins').appendChild(p);
+  }
+  if (s >= 4) document.getElementById('h1').style.display = 'none';
+  if (s === 5) { document.getElementById('proof').style.display = 'block'; document.getElementById('folha').textContent = '02 · Escala →'; }
+</script>
+</body>
+</html>

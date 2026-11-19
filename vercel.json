@@ -1,3 +1,57 @@
 {
-  "framework": "nextjs"
+  "framework": null,
+  "installCommand": "echo 'site estatico: sem instalacao'",
+  "buildCommand": "mkdir -p dist && cp -R ' OCEANICA_FLAGSHIP_RESET/08_hero-production/web/.' dist/ && rm -f dist/server.mjs dist/vercel.json dist/.vercelignore",
+  "outputDirectory": "dist",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/pt",
+      "destination": "/?lang=pt",
+      "permanent": false
+    },
+    {
+      "source": "/en",
+      "destination": "/?lang=en",
+      "permanent": false
+    },
+    {
+      "source": "/pt/(.*)",
+      "destination": "/?lang=pt",
+      "permanent": false
+    },
+    {
+      "source": "/en/(.*)",
+      "destination": "/?lang=en",
+      "permanent": false
+    }
+  ]
 }

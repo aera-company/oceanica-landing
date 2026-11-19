@@ -6,59 +6,73 @@ Atualizado em 19/11/2026.
 
 `https://oceanica-landing.vercel.app` mostra o protótipo do flagship: a hero por scroll e os sete capítulos, em português e inglês. A alternativa com autoplay está em `/autoplay.html`.
 
-Publicado em 19/11/2026, a pedido de Tiago, no projeto `oceanica-landing` da Vercel.
+**Desde 19/11/2026 quem publica é a branch `main`,** por decisão de Tiago. Cada push na `main` republica o link sozinho, pela integração da Vercel com o GitHub.
 
-## Como foi publicado
+## Como funciona
 
-O projeto da Vercel está configurado para o site antigo, em Next.js, que mora na raiz do repositório e é publicado pela branch `main`. O protótipo é um site estático em `08_hero-production/web/`.
+O `vercel.json` da raiz do repositório diz à Vercel para montar um site estático, em vez do app em Next.js:
 
-Para não alterar a `main` nem a configuração do projeto, a publicação foi feita **direto pela linha de comando da Vercel**, a partir de uma cópia só dessa pasta:
+1. **Instalação:** nenhuma.
+2. **Build:** copia `OCEANICA_FLAGSHIP_RESET/08_hero-production/web/` para `dist/` e tira dali o servidor local e os arquivos de configuração.
+3. **Saída:** a pasta `dist/`.
 
-1. `web/vercel.json` diz à Vercel que a pasta é estática, sem build.
-2. `web/.vercelignore` deixa o servidor local (`server.mjs`) de fora.
-3. Uma prévia foi publicada e conferida antes da produção.
+A cópia existe por um motivo: o nome da pasta do workspace começa com um espaço, e apontar a Vercel direto para ela seria arriscado. `dist/` é criada na Vercel durante o build e não fica no repositório.
 
-Para publicar de novo depois de uma mudança:
+O mesmo `vercel.json` traz os cabeçalhos (pedido de não indexação, cache de mídia e de fontes) e os redirecionamentos de `/pt` e `/en`.
 
-```bash
-08_hero-production/deploy.sh          # prévia
-08_hero-production/deploy.sh --prod   # produção
-```
+## Para publicar uma mudança
 
-O script copia `web/` para uma pasta temporária fora do repositório e publica dali. Publicar de dentro do repositório não serve: a Vercel ligaria o projeto à raiz e publicaria o site antigo.
+Alterar os arquivos em `08_hero-production/web/`, commitar e dar push na `main`. Em cerca de um minuto o link público está atualizado.
 
-## O que precisa saber
+Um push em qualquer outra branch gera uma prévia na Vercel, protegida por login, sem mexer no link público.
 
-- **A `main` não mudou.** O site antigo continua lá. **Um push na `main` publica o site antigo de novo e tira o protótipo do ar**, porque a integração com o GitHub continua ativa.
-- **O que está no ar não corresponde a nenhuma branch publicada pela Vercel.** O código está na branch `creative/v06-hero-v4`, mas a Vercel recebeu os arquivos pela linha de comando.
-- **Tornar isso definitivo** exige decidir o destino do site antigo: ou a `main` passa a servir o protótipo, ou o protótipo ganha um projeto próprio na Vercel.
-- **Os endereços antigos `/pt` e `/en`** redirecionam para a página nova no idioma certo.
-- **A página pede aos buscadores que não a indexem,** pela página e pelo cabeçalho. O endereço continua público para quem tiver o link.
-- **O material no ar não está liberado:** imagens de dois vídeos do YouTube, pessoas identificáveis, copy e números ainda sem validação da Oceânica. O rodapé avisa que é um protótipo interno.
+## O que mudou no repositório
 
-## Como voltar atrás
+- **A `main` avançou de `04c8a9a` para a ponta da branch `creative/v06-hero-v4`,** sem commit de merge. Além do flagship, isso levou para a `main` o commit `7f8f69e`, com o trabalho criativo anterior da pasta `v06/` (329 arquivos), que já estava na branch.
+- **O app em Next.js continua no repositório** (`src/`, `package.json`, `public/`), mas **não é mais publicado.** O site antigo saiu do ar.
+- **A branch `creative/v06-hero-v4` e a `main` estão no mesmo ponto.**
 
-A versão que estava no ar antes (site em Next.js, de 13/11/2026) continua guardada na Vercel como `oceanica-landing-altmcxgin-tiagolima-aera-projects.vercel.app`. Para restaurá-la:
+## Como voltar ao site antigo
+
+**No ar, sem mexer no git.** A última publicação do site antigo (13/11/2026) continua guardada na Vercel:
 
 ```bash
 vercel promote oceanica-landing-altmcxgin-tiagolima-aera-projects.vercel.app --scope tiagolima-aera-projects
 ```
 
-Ou, no painel da Vercel, em Deployments, escolher essa publicação e usar "Promote to Production".
+Ou, no painel da Vercel, em Deployments, "Promote to Production" nessa publicação. Atenção: o próximo push na `main` publica o protótipo de novo.
 
-## O que foi verificado no ar
+**De vez.** Voltar o `vercel.json` da raiz para `{ "framework": "nextjs" }` e dar push na `main`.
 
-- A página, os estilos, os scripts, as fontes, os posters, os três vídeos e quadros das três sequências respondem com sucesso; `server.mjs` não é servido.
+## Histórico desta publicação
+
+1. O protótipo foi ao ar primeiro pela linha de comando da Vercel, a partir de uma cópia da pasta `web/`, sem tocar na `main`. Era frágil: um push na `main` republicaria o site antigo.
+2. No mesmo dia, o `vercel.json` da raiz foi trocado e testado em uma prévia gerada pela branch, que serviu o protótipo corretamente.
+3. A `main` recebeu a branch e a Vercel publicou o commit `5e1da48`.
+
+`deploy.sh` e `web/vercel.json` são do passo 1. **Não use `deploy.sh --prod`:** ele publicaria por fora do git e o link deixaria de corresponder à `main`. Sem `--prod`, o script ainda serve para gerar uma prévia avulsa.
+
+## O que foi verificado no ar, na publicação da `main`
+
+- O log da Vercel confirma: branch `main`, commit `5e1da48`.
+- A página, os estilos, os scripts, as fontes, os posters, os vídeos e quadros das três sequências respondem com sucesso. `server.mjs` não é servido.
 - O vídeo atende pedidos de intervalo, que o Safari exige.
-- A página chega comprimida (cerca de 10 KB de HTML).
-- No navegador embutido: os sete capítulos e o rodapé estão presentes, os quadros da hero carregam, a rolagem avança o filme e troca a frase, o scroll suave está ativo, sem erros no console e sem arquivo faltando.
+- `/pt` e `/en` redirecionam para a página nova no idioma certo.
+- O cabeçalho de não indexação está presente.
+- No navegador embutido: os sete capítulos e o rodapé estão presentes, a proa aparece na abertura, a rolagem avança o filme, o scroll suave está ativo, sem erros no console e sem arquivo faltando.
 
 ### Um defeito encontrado no ar e corrigido
 
-Ao abrir o link, a hero apareceu preta por um instante. Causa: quando a janela muda de tamanho e a sequência de quadros troca (de desktop para celular, por exemplo), o canvas vazio cobria o poster até os quadros novos chegarem. Agora o poster volta a aparecer nesse intervalo. Conferido localmente e republicado.
+Na primeira publicação a hero apareceu preta por um instante. Quando a janela muda de tamanho e a sequência de quadros troca, o canvas vazio cobria o poster até os quadros novos chegarem. Agora o poster volta a aparecer nesse intervalo. A correção está no commit `96e7db5` e no ar.
 
 ## O que não foi verificado
 
 - Safari e iPhone real, que continuam sendo o maior risco.
 - A página em movimento, em rede real.
 - Os links externos do capítulo 07, a partir do site publicado.
+
+## O que continua valendo
+
+- **O material no ar não está liberado:** imagens de dois vídeos do YouTube, pessoas identificáveis, copy e números ainda sem validação da Oceânica. O rodapé avisa que é um protótipo interno.
+- **A página pede aos buscadores que não a indexem,** mas o endereço é público para quem tiver o link.
+- **O repositório cresceu** de cerca de 23 MB para cerca de 100 MB, por causa das sequências de quadros, dos vídeos web e das imagens.

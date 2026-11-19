@@ -1,7 +1,8 @@
 #!/bin/zsh
-# Publica o protótipo (pasta web/) no projeto oceanica-landing da Vercel.
-#   ./deploy.sh          prévia
-#   ./deploy.sh --prod   produção (https://oceanica-landing.vercel.app)
+# Gera uma PRÉVIA avulsa do protótipo (pasta web/) no projeto oceanica-landing da Vercel.
+#   ./deploy.sh
+# A publicação do link público é feita pela branch main (ver documentation/DEPLOY.md).
+# NÃO use --prod: publicaria por fora do git e o link deixaria de corresponder à main.
 # Copia web/ para uma pasta temporária FORA do repositório e publica dali: de dentro do repositório,
 # a Vercel ligaria o projeto à raiz e publicaria o site antigo em Next.js. Ver documentation/DEPLOY.md.
 set -e

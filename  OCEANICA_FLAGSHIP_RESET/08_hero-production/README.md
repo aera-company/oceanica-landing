@@ -1,7 +1,7 @@
 # 08 · Hero production
 
 Fase: finalização da hero e primeira implementação web. Data: 17/11/2026.
-Nada foi publicado. Todo o material de vídeo continua **não liberado** para uso público.
+**Publicado em `https://oceanica-landing.vercel.app` desde 19/11/2026,** a pedido de Tiago; como foi feito e como voltar atrás estão em `documentation/DEPLOY.md`. Todo o material de vídeo continua **não liberado** para uso público.
 
 > **Os sete capítulos da página estão no protótipo.** Visão geral, pendências e o que nunca foi verificado: `documentation/PAGE_STATUS.md`.
 

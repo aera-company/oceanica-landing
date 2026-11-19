@@ -114,6 +114,7 @@
     const name = pickSeq(); if (seq && seq.name === name) return;
     const my = ++gen; seq = { name, ...SEQ[name] };
     frames = new Array(seq.count); state = new Array(seq.count).fill(0); drawn = -1;    // 0 pendente · 1 pronto · 2 falhou
+    hero.classList.remove('is-drawn');                                                 // troca de sequência: mostra o poster até o primeiro quadro novo
     const queue = order(seq.count); let active = 0;
     const next = () => {
       if (my !== gen) return;
@@ -139,7 +140,9 @@
     return -1;
   }
   function draw(i) {
-    const k = nearest(i); if (k < 0 || k === drawn) return k;
+    const k = nearest(i);
+    if (k < 0) { hero.classList.remove('is-drawn'); return k; }   // nada pronto: o poster volta a aparecer, em vez de um canvas preto
+    if (k === drawn) return k;
     const img = frames[k], cw = canvas.width, ch = canvas.height, ir = img.naturalWidth / img.naturalHeight, cr = cw / ch;
     let w, h; if (cr > ir) { w = cw; h = cw / ir; } else { h = ch; w = ch * ir; }        // cover-fit
     ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);

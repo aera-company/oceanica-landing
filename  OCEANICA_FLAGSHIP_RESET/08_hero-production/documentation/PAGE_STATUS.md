@@ -1,6 +1,6 @@
 # Estado da página · os sete capítulos
 
-Atualizado em 19/11/2026. Protótipo local em `http://localhost:4173`. Nada publicado, nada commitado.
+Atualizado em 19/11/2026. Protótipo local em `http://localhost:4173` e **publicado em `https://oceanica-landing.vercel.app`** desde 19/11/2026 (ver `DEPLOY.md`). Código na branch `creative/v06-hero-v4`.
 
 **Os sete capítulos estão aprovados por Tiago como protótipo.** A aprovação é de direção e construção; as pendências de publicação abaixo continuam valendo.
 

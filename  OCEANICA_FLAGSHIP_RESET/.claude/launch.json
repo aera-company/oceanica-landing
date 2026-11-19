@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "oceanica-hero",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["08_hero-production/web/server.mjs", "4173"],
+      "port": 4173
+    }
+  ]
+}

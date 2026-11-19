@@ -1,0 +1,8 @@
+file '1_embarcacoes.mp4'
+file '2_mergulhadores.mp4'
+file '3a_rov-agua.mp4'
+file '3b_garra.mp4'
+file '4_tecnologia.mp4'
+file '5a_ferramenta.mp4'
+file '5b_icamento.mp4'
+file '6_fecho.mp4'

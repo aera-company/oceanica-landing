@@ -1,0 +1,66 @@
+/* 03 · Capacidades. Seção escura: um palco fixo, cinco estados conduzidos pela rolagem.
+   Reaproveita .scale__head, .eyebrow, .scale__intro, .scale__title, .scale__lead e .scale__note. */
+
+.caps{position:relative;z-index:2;background:var(--deep);color:#fff;padding:clamp(72px,9vw,168px) 0 clamp(56px,6vw,110px);
+  --rule:rgba(255,255,255,.18);--mute:rgba(255,255,255,.56)}
+.caps__top{padding:0 var(--pad)}
+.caps .scale__lead{color:rgba(255,255,255,.8)}
+.caps .scale__intro{margin-bottom:0}
+.caps__note{padding:0 var(--pad);color:rgba(255,255,255,.5)}
+
+/* Distância de rolagem: uma tela para o palco e 0,7 tela por capacidade */
+.caps__track{position:relative;height:calc(100vh + 350vh);height:calc(100svh + 350svh)}
+.caps__stage{position:sticky;top:0;height:100vh;height:100svh;padding:clamp(84px,7vw,120px) var(--pad) clamp(28px,3vw,56px);display:flex;align-items:center}
+.caps__list{list-style:none;width:41%;padding-left:clamp(18px,1.8vw,34px)}
+.caps__rail{position:absolute;left:var(--pad);top:50%;height:clamp(240px,46vh,460px);width:1px;background:var(--rule);transform:translateY(-50%)}
+.caps__rail i{position:absolute;inset:0;background:#fff;transform:scaleY(var(--cp,0));transform-origin:top}
+
+.cap{border-top:1px solid var(--rule)}
+.cap:last-child{border-bottom:1px solid var(--rule)}
+.cap__name{display:flex;align-items:baseline;gap:clamp(14px,1.4vw,26px);width:100%;text-align:left;padding:clamp(12px,1.25vw,22px) 0;color:#fff;opacity:.38;transition:opacity .45s var(--ease)}
+.cap__name span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.04em;min-width:1.8em}
+.cap__name b{font-size:clamp(24px,2.7vw,54px);font-stretch:108%;font-weight:540;letter-spacing:-.02em;line-height:1;text-transform:uppercase}
+.cap__name:hover{opacity:.7}
+.cap.is-on .cap__name{opacity:1}
+.cap__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.cap__body>div{overflow:hidden;min-height:0;padding-left:calc(1.8em + clamp(14px,1.4vw,26px));opacity:0;transition:opacity .4s var(--ease)}
+.cap.is-on .cap__body{grid-template-rows:1fr}
+.cap.is-on .cap__body>div{opacity:1;transition-delay:.15s}
+.cap__body p{font-size:clamp(15px,1.15vw,20px);line-height:1.45;color:rgba(255,255,255,.86);max-width:38ch}
+.cap__body ul{list-style:none;margin-top:clamp(12px,1.1vw,18px);display:grid;gap:6px}
+.cap__body ul li{font-size:clamp(12px,.86vw,14px);font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.72);display:flex;gap:10px;align-items:baseline}
+.cap__body ul li::before{content:"";width:14px;height:1px;background:currentColor;flex:none;transform:translateY(-.3em)}
+.cap__body small{display:block;margin:clamp(12px,1.1vw,18px) 0 clamp(16px,1.6vw,28px);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.03em;color:var(--mute)}
+
+/* As cinco imagens ocupam o mesmo quadro, à direita do palco */
+.cap__img{position:absolute;right:var(--pad);top:50%;width:calc(52% - var(--pad));aspect-ratio:16/10;max-height:calc(100svh - 150px);margin:0;transform:translateY(-46%);overflow:hidden;background:#101416;
+  opacity:0;clip-path:inset(0 0 0 100%);transition:opacity .01s linear .8s,clip-path .8s var(--ease)}
+.cap__img img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 1.4s var(--ease)}
+.cap.is-on .cap__img{opacity:1;clip-path:inset(0);z-index:1;transition:opacity .01s linear,clip-path .8s var(--ease)}
+.cap.is-on .cap__img img{transform:none}
+.caps__count{position:absolute;right:var(--pad);bottom:clamp(28px,3vw,56px);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;display:flex;gap:8px}
+.caps__count span{color:var(--mute)}
+
+@media (max-height:640px) and (min-width:901px){.cap__name{padding:9px 0}.cap__name b{font-size:clamp(20px,2.2vw,32px)}.cap__body small{margin-bottom:10px}}
+
+/* Telas estreitas: sem palco fixo. Cada capacidade é um bloco, com a sua imagem. */
+@media (max-width:900px){
+  .caps__track{height:auto}
+  .caps__stage{position:static;height:auto;display:block;padding:clamp(40px,8vw,64px) var(--pad) 0}
+  .caps__rail,.caps__count{display:none}
+  .caps__list{width:auto;padding:0}
+  .cap{padding:18px 0 34px}
+  .cap:last-child{border-bottom:0;padding-bottom:10px}
+  .cap__name{opacity:1;padding:0 0 16px;cursor:default}
+  .cap__name b{font-size:clamp(28px,8.2vw,56px)}
+  .cap__body{display:block}
+  .cap__body>div{opacity:1;padding-left:0;overflow:visible}
+  .cap__body p{max-width:44ch;font-size:16px}
+  .cap__body small{margin-bottom:20px}
+  .cap__img{position:static;width:auto;max-height:none;transform:none;opacity:1;clip-path:none}
+  .cap__img img{transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cap__name,.cap__body,.cap__body>div,.cap__img,.cap__img img{transition:none!important}
+}

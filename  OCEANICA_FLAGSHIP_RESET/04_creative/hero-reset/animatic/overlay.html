@@ -1,0 +1,30 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../_shared/kv.css">
+<style>
+html,body{background:transparent!important}
+.stage{--ink:#fff;--rule:rgba(255,255,255,.35);--logo:brightness(0) invert(1);width:1920px;height:1080px}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,7,9,.5) 0%,rgba(4,7,9,0) 18%,rgba(4,7,9,0) 52%,rgba(4,7,9,.8) 100%)}
+.tag{position:absolute;top:52px;left:50%;transform:translateX(-50%);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.5;white-space:nowrap}
+.pillars span.on{opacity:1}
+h1,.line{font-family:"Instrument Serif",serif;font-weight:400;letter-spacing:-.012em;text-shadow:0 2px 40px rgba(0,0,0,.45)}
+h1{font-size:117px;line-height:.94}
+.l,.r{position:absolute;top:47.5%;width:538px}.l{right:1277px;text-align:right}.r{left:1296px}
+.l .sub{margin:42px 100px 0 auto;max-width:365px;text-shadow:0 1px 18px rgba(0,0,0,.6)}
+.line{position:absolute;left:65px;bottom:150px;font-size:76px;line-height:1;max-width:1100px}
+.nums{position:absolute;left:65px;bottom:92px;font-size:19px;font-weight:500;letter-spacing:.04em;opacity:.9}
+.nums b{font-weight:600;margin-right:.35em}.nums span{margin-right:2.2em}
+.line.fin{bottom:176px;font-size:117px}
+</style></head><body><main class="stage" id="s"></main>
+<script>
+const q=new URLSearchParams(location.search),act=+q.get('act'),layer=q.get('layer');
+const P=["Embarcações","Mergulhadores","ROVs","Tecnologia","Engenharia"];
+const T={
+ 1:`<div class="l"><h1>Grande na<br>superfície.</h1><p class="sub">Dezoito embarcações, 55 ROVs e 2.378 pessoas em operação offshore e submarina, de 0 a 3.000 metros.</p></div><div class="r"><h1>Maior<br><i>abaixo dela.</i></h1></div>`,
+ 2:`<p class="line">Ninguém desce sozinho.</p>`,
+ 3:`<p class="line">Onde o corpo para,<br>a máquina continua.</p>`,
+ 4:`<p class="line">A mão que trabalha a 3.000 metros<br>está aqui em cima.</p>`,
+ 5:`<p class="line">Nada disso é improviso.</p>`,
+ 6:`<p class="line fin">Maior <i>abaixo dela.</i></p><p class="nums"><span><b>18</b>embarcações</span><span><b>55</b>ROVs</span><span><b>2.378</b>pessoas</span><span style="opacity:.55">RI 1T26 · validar</span></p>`};
+const s=document.getElementById('s');
+if(layer==='ui'){s.innerHTML=`<div class="shade"></div><header class="nav"><img src="../_shared/logo-oceanica.png"><ul><li>Operações</li><li>Frota</li><li>Tecnologia</li><li>Pessoas</li><li>Contato</li><li class="lang">PT / EN</li></ul></header><p class="tag">Animatic · material não liberado</p><nav class="pillars">`+P.map((x,i)=>`<span class="${act===6||i+1===act?'on':''}"><b>0${i+1}</b>${x}</span>`).join('')+`</nav>`}
+else s.innerHTML=T[act];
+</script></body></html>

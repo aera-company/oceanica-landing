@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../_shared/fonts/fonts.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html,body{background:transparent;width:1920px;height:1080px;overflow:hidden}
+body{font-family:Archivo,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,8,10,.38) 0%,rgba(5,8,10,0) 16%,rgba(5,8,10,0) 50%,rgba(5,8,10,.66) 100%)}
+.logo{position:absolute;left:72px;top:58px;height:25px;filter:brightness(0) invert(1)}
+.tag{position:absolute;right:72px;top:64px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
+.t{position:absolute;left:72px;bottom:84px;text-transform:uppercase;font-stretch:108%;font-weight:560;letter-spacing:-.012em;line-height:.98;text-shadow:0 2px 36px rgba(0,0,0,.4)}
+.open{font-size:94px}.mid{font-size:74px}
+.close b{display:block;font-size:168px;font-weight:680;letter-spacing:-.03em;line-height:.9;margin-left:-8px}
+.close span{display:block;margin-top:26px;font-size:41px;font-weight:520;letter-spacing:.045em}
+</style></head><body><script>
+const q=new URLSearchParams(location.search),k=q.get('k'),en=q.get('lang')==='en';
+const T={open:en?'Engineering the<br>offshore future.':'Engenharia para<br>o futuro offshore.',
+ mid:en?'Human expertise.<br>Advanced technology.':'Expertise humana.<br>Tecnologia avançada.',
+ close:'<b>Oceânica</b><span>'+(en?'From surface to subsea.':'Da superfície às grandes profundidades.')+'</span>'};
+document.body.innerHTML = k==='ui' ? '<div class="shade"></div><img class="logo" src="../_shared/logo-oceanica.png"><p class="tag">Animatic · material não liberado</p>' : `<div class="t ${k}">${T[k]}</div>`;
+</script></body></html>

@@ -1,0 +1,21 @@
+# Fora do git de propósito. Tudo abaixo continua no disco.
+
+# Vídeos originais baixados do YouTube: não liberados, e um deles passa do limite de 100 MB do GitHub.
+/videos/
+
+# Masters, intermediários e animatics: pesados e refeitos pelos scripts a partir de /videos/.
+#   08_hero-production/source/build-film.sh
+#   04_creative/hero-reset/animatic/build.sh
+#   04_creative/hero-reset/animatic-v2-directors-cut/build.sh
+/08_hero-production/source/seg/
+/08_hero-production/source/build.log
+/08_hero-production/final-video/*.mp4
+/08_hero-production/mobile/*.mp4
+/04_creative/hero-reset/animatic/**/*.mp4
+/04_creative/hero-reset/animatic-v2-directors-cut/**/*.mp4
+
+# Capturas de teste: refeitas por documentation/capture.mjs e capture-scroll.mjs. As pranchas ficam em design/.
+/08_hero-production/documentation/screens/
+/08_hero-production/documentation/screens-scroll/
+
+.DS_Store

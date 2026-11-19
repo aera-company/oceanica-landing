@@ -1,0 +1,59 @@
+/* 05 · Soluções. Catálogo tipográfico das três frentes, sobre fundo escuro.
+   Reaproveita .scale__head, .eyebrow, .scale__intro, .scale__title, .scale__lead e .scale__note. */
+
+.sol{position:relative;z-index:2;background:#0b1114;color:#fff;padding:clamp(72px,9vw,168px) var(--pad) clamp(56px,6vw,110px);
+  --rule:rgba(255,255,255,.16);--mute:rgba(255,255,255,.54)}
+.sol .scale__lead{color:rgba(255,255,255,.8)}
+.sol .scale__intro{margin-bottom:clamp(48px,6vw,112px)}
+.sol .scale__note{color:rgba(255,255,255,.5)}
+
+.sol__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #fff}
+.front{display:flex;flex-direction:column;padding:clamp(18px,1.8vw,30px) clamp(18px,2.2vw,44px) clamp(22px,2.2vw,40px);border-right:1px solid var(--rule)}
+.front:first-child{padding-left:0}
+.front:last-child{border-right:0;padding-right:0}
+.front__n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.04em;color:var(--mute)}
+.front h3{margin-top:clamp(28px,3.4vw,64px);font-size:clamp(20px,2.02vw,42px);font-stretch:108%;font-weight:540;letter-spacing:-.022em;line-height:1;text-transform:uppercase;overflow-wrap:anywhere}
+.front__lead{margin-top:clamp(14px,1.3vw,22px);font-size:clamp(15px,1.1vw,18px);line-height:1.5;color:rgba(255,255,255,.8);min-height:4.5em}
+.front details{margin-top:clamp(22px,2.4vw,44px)}
+.front summary{list-style:none;display:flex;align-items:center;justify-content:space-between;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding-bottom:12px;cursor:default}
+.front summary::-webkit-details-marker{display:none}
+.front ul{list-style:none}
+.front li{padding:clamp(11px,.95vw,15px) 0;border-top:1px solid var(--rule);font-size:clamp(14px,1.02vw,17px);line-height:1.35;color:rgba(255,255,255,.92)}
+.front__go{margin-top:auto;padding-top:clamp(24px,2.4vw,44px);display:inline-flex;align-items:center;gap:12px;align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.front__go span{padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,.5);transition:border-color .3s var(--ease)}
+.front__go b{font-weight:400;font-size:15px;transition:transform .35s var(--ease)}
+.front__go:hover span{border-color:#fff}
+.front__go:hover b{transform:translateY(-4px)}
+
+.sol__assets{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,1.6vw,32px);align-items:baseline;border-top:1px solid #fff;border-bottom:1px solid var(--rule);padding:clamp(20px,2vw,36px) 0;margin-top:0}
+.sol__assets-t{grid-column:1 / span 3;display:flex;align-items:baseline;gap:clamp(14px,1.4vw,26px)}
+.sol__assets-t span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.04em;color:var(--mute)}
+.sol__assets-t b{font-size:clamp(20px,1.7vw,32px);font-stretch:108%;font-weight:540;letter-spacing:-.02em;text-transform:uppercase}
+.sol__assets-d{grid-column:4 / span 3;font-size:clamp(14px,1.02vw,17px);line-height:1.45;color:rgba(255,255,255,.72)}
+.sol__assets ul{grid-column:8 / span 5;list-style:none;display:grid;gap:8px}
+.sol__assets li{font-size:clamp(14px,1.02vw,17px);color:rgba(255,255,255,.92);display:flex;gap:12px;align-items:baseline}
+.sol__assets li::before{content:"";width:14px;height:1px;background:currentColor;flex:none;transform:translateY(-.3em)}
+.sol .scale__note{margin-top:clamp(24px,2.4vw,40px)}
+
+/* Entrada: as três colunas sobem em sequência, uma vez */
+.js-s5 .front,.js-s5 .sol__assets{opacity:0;transform:translate3d(0,26px,0);transition:opacity .8s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--i,0) * 90ms)}
+.js-s5 .front.in,.js-s5 .sol__assets.in{opacity:1;transform:none}
+.freeze.js-s5 .front,.freeze.js-s5 .sol__assets{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .sol__grid{grid-template-columns:1fr}
+  .front{padding:18px 0 26px;border-right:0;border-bottom:1px solid var(--rule)}
+  .front:last-child{border-bottom:0}
+  .front h3{margin-top:18px;font-size:clamp(22px,7.2vw,48px)}
+  .front__lead{min-height:0;font-size:16px}
+  .front details{margin-top:20px}
+  .front summary{cursor:pointer;padding:14px 0;border-top:1px solid var(--rule);color:#fff}
+  .front summary::after{content:"+";font-family:"Archivo",sans-serif;font-size:20px;line-height:1;font-weight:300}
+  .front details[open] summary::after{content:"\2013"}
+  .front li{font-size:15px}
+  .front__go{margin-top:0;padding-top:22px}
+  .sol__assets{display:block}
+  .sol__assets-d{margin:12px 0 16px}
+}
+
+@media (prefers-reduced-motion:reduce){.js-s5 .front,.js-s5 .sol__assets{opacity:1;transform:none;transition:none}}
